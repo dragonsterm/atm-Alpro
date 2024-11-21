@@ -1,50 +1,11 @@
 #include <iostream>
 using namespace std;
-
-void cekSaldo(int saldo)
-{
-    cout << "Saldo Anda saat ini adalah Rp. " << saldo << endl;
-}
-void setorSaldo(int &saldo, int transaksi[], int &indexTransaksi)
-{
-    int jumlah;
-    cout << "Masukkan jumlah saldo yang ingin ditransfer : ";
-    cin >> jumlah;
-    saldo += jumlah;
-    transaksi[indexTransaksi++] = jumlah;
-}
-void tarikSaldo(int &saldo, int transaksi[], int &indexTransaksi)
-{
-    int jumlah;
-    cout << "Masukkan jumlah saldo yang ingin ditarik : ";
-    cin >> jumlah;
-    if (saldo < jumlah)
-    {
-        cout << "Saldo Anda belum mencukupi untuk melakukan penarikan.\n";
-    }
-    else
-    {
-        saldo -= jumlah;
-        cout << "Saldo anda saat ini tersisa : " << saldo << endl;
-    }
-
-    transaksi[indexTransaksi++] = -jumlah;
-}
-void riwayatTransaksi(int transaksi[], int indexTransaksi)
-{
-    cout << "Riwayat Transaksi:\n";
-    for (int i = 0; i < indexTransaksi; i++)
-    {
-        if (transaksi[i] > 0)
-        {
-            cout << i + 1 << ". Setor: Rp" << transaksi[i] << endl;
-        }
-        else
-        {
-            cout << i + 1 << ". Tarik: Rp" << -transaksi[i] << endl;
-        }
-    }
-}
+// Declare Function
+void login();
+void cekSaldo(int saldo);
+void setorSaldo(int &saldo, int transaksi[], int &indexTransaksi);
+void tarikSaldo(int &saldo, int transaksi[], int &indexTransaksi);
+void riwayatTransaksi(int transaksi[], int indexTransaksi);
 
 int main()
 {
@@ -126,4 +87,54 @@ int main()
         }
     } while (choice != 5);
     return 0;
+}
+// Fungsi Login
+
+// Function Pengecekan Saldo
+void cekSaldo(int saldo)
+{
+    cout << "Saldo Anda saat ini adalah Rp. " << saldo << endl;
+}
+// Function Setor Saldo
+void setorSaldo(int &saldo, int transaksi[], int &indexTransaksi)
+{
+    int jumlah;
+    cout << "Masukkan jumlah saldo yang ingin ditransfer : ";
+    cin >> jumlah;
+    saldo += jumlah;
+    transaksi[indexTransaksi++] = jumlah;
+}
+// Function Tarik Saldo
+void tarikSaldo(int &saldo, int transaksi[], int &indexTransaksi)
+{
+    int jumlah;
+    cout << "Masukkan jumlah saldo yang ingin ditarik : ";
+    cin >> jumlah;
+    if (saldo < jumlah)
+    {
+        cout << "Saldo Anda belum mencukupi untuk melakukan penarikan.\n";
+    }
+    else
+    {
+        saldo -= jumlah;
+        cout << "Saldo anda saat ini tersisa : " << saldo << endl;
+    }
+
+    transaksi[indexTransaksi++] = -jumlah;
+}
+// Function Riwayat Transaksi
+void riwayatTransaksi(int transaksi[], int indexTransaksi)
+{
+    cout << "Riwayat Transaksi:\n";
+    for (int i = 0; i < indexTransaksi; i++)
+    {
+        if (transaksi[i] > 0)
+        {
+            cout << i + 1 << ". Setor: Rp" << transaksi[i] << endl;
+        }
+        else
+        {
+            cout << i + 1 << ". Tarik: Rp" << -transaksi[i] << endl;
+        }
+    }
 }
