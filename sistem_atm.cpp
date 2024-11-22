@@ -1,18 +1,21 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 // Declare Function
 void login();
 void cekSaldo(int saldo);
 void setorSaldo(int &saldo, int transaksi[], int &indexTransaksi);
 void tarikSaldo(int &saldo, int transaksi[], int &indexTransaksi);
+void transferRekening(int &saldo, int transaksi[], int &indexTransaksi);
 void riwayatTransaksi(int transaksi[], int indexTransaksi);
+void Pause();
 
 int main()
 {
-    string username;
-    string password;
-    string correct_usn = "ZakaKecil";
-    string correct_pass = "Halo123";
+    int nomor_rek;
+    int password_rek;
+    int correct_nmr = 12345678;
+    int correct_pass = 123456;
     const int max_chance = 3;
     int chance = 0;
     int transaksi[100];
@@ -21,31 +24,35 @@ int main()
     int choice;
     do
     {
-        cout << "Input username : ";
-        getline(cin >> ws, username);
-        cout << "Input password : ";
-        getline(cin >> ws, password);
+        cout << "Masukkan Nomor Rekening (8 Digit)\n";
+        cout << ">> ";
+        cin >> nomor_rek;
+        cout << "Masukkan Password Rekening (6 Digit)\n";
+        cout << ">> ";
+        cin >> password_rek;
 
-        if ((username == correct_usn) && (password == correct_pass))
+        if (nomor_rek == correct_nmr && password_rek == correct_pass)
         {
-            cout << "Username dan password yang dimasukkan benar.\n";
+            cout << "Detail yang anda masukkan benar.\n";
+            Pause();
             break;
         }
-        else if (username != correct_usn)
+        else if (nomor_rek != correct_nmr && password_rek != correct_pass)
         {
             chance++;
-            cout << "Username yang dimasukkan salah !\n";
+            cout << "Nomor Rekening dan Password Rekening yang dimasukkan salah!\n";
             cout << "Kesempatan Anda tersisa " << (max_chance - chance) << endl;
         }
-        else if (password != correct_pass)
+        else if (nomor_rek != correct_nmr)
         {
             chance++;
-            cout << "Password yang dimasukkan salah\n";
+            cout << "Nomor Rekening yang dimasukkan salah!\n";
             cout << "Kesempatan Anda tersisa " << (max_chance - chance) << endl;
         }
-        else if ((username != correct_usn) && (password != correct_pass))
+        else if (password_rek != correct_pass)
         {
-            cout << "Username dan Password yang dimasukkan salah\n";
+            chance++;
+            cout << "Password Rekening yang dimasukkan salah!\n";
             cout << "Kesempatan Anda tersisa " << (max_chance - chance) << endl;
         }
     } while (chance < max_chance);
@@ -56,13 +63,12 @@ int main()
     }
     do
     {
-        cout << "\t\tSistem ATM\n";
-        cout << "1. Cek Saldo\n";
-        cout << "2. Setor Saldo\n";
-        cout << "3. Tarik Saldo\n";
-        cout << "4. Riwayat Transaksi\n";
-        cout << "5. Keluar\n";
-        cout << "Masukkan pilihan : ";
+        system("cls");
+        cout << "\t\t<<< Menu ATM >>>\n";
+        cout << "1> Cek Saldo\t\t\t     Transfer Rekening <4\n";
+        cout << "2> Setor Saldo\t\t\t     Riwayat Transaksi <5\n";
+        cout << "3> Tarik Saldo\t\t\t     Exit              <6\n";
+        cout << "Masukkan pilihan >> ";
         cin >> choice;
         switch (choice)
         {
@@ -76,13 +82,17 @@ int main()
             tarikSaldo(saldo, transaksi, indexTransaksi);
             break;
         case 4:
-            riwayatTransaksi(transaksi, indexTransaksi);
+            transferRekening(saldo, transaksi, indexTransaksi);
             break;
         case 5:
+            riwayatTransaksi(transaksi, indexTransaksi);
+            break;
+        case 6:
             cout << "Terimakasih telah menggunakan ATM ini, Anda kena hack wkwkwk 😂😂😂😂😂😂😂😂😂😍😍😍😍😍😍😍😘😘🤣🤣🤣🤣" << endl;
             return 0;
             break;
         default:
+            cout << "Pilihan yang Anda masukkan salah\n";
             break;
         }
     } while (choice != 5);
@@ -94,21 +104,25 @@ int main()
 void cekSaldo(int saldo)
 {
     cout << "Saldo Anda saat ini adalah Rp. " << saldo << endl;
+    Pause();
 }
 // Function Setor Saldo
 void setorSaldo(int &saldo, int transaksi[], int &indexTransaksi)
 {
     int jumlah;
-    cout << "Masukkan jumlah saldo yang ingin ditransfer : ";
+    cout << "Masukkan jumlah saldo yang ingin ditransfer\n";
+    cout << ">> ";
     cin >> jumlah;
     saldo += jumlah;
     transaksi[indexTransaksi++] = jumlah;
+    Pause();
 }
 // Function Tarik Saldo
 void tarikSaldo(int &saldo, int transaksi[], int &indexTransaksi)
 {
     int jumlah;
-    cout << "Masukkan jumlah saldo yang ingin ditarik : ";
+    cout << "Masukkan jumlah saldo yang ingin ditarik\n";
+    cout << ">> ";
     cin >> jumlah;
     if (saldo < jumlah)
     {
@@ -121,6 +135,39 @@ void tarikSaldo(int &saldo, int transaksi[], int &indexTransaksi)
     }
 
     transaksi[indexTransaksi++] = -jumlah;
+    Pause();
+}
+// Function Transfer Rekening
+void transferRekening(int &saldo, int transaksi[], int &indexTransaksi)
+{
+    int rekening_tujuan;
+    int jumlah;
+    do
+    {
+        cout << "Masukkan Nomor Rekening tujuan anda (8 digit)\n";
+        cout << ">> ";
+        cin >> rekening_tujuan;
+        if (rekening_tujuan < 10000000 || rekening_tujuan > 99999999)
+        {
+            cout << "Nomor Rekening yang Anda Masukkan tidak valid\n";
+        }
+    } while (rekening_tujuan < 10000000 || rekening_tujuan > 99999999);
+
+    cout << "Masukkan jumlah Saldo yang ingin ditransfer\n";
+    cout << ">> ";
+    cin >> jumlah;
+    if (saldo < jumlah)
+    {
+        cout << "Saldo Anda tidak mencukupi\n";
+    }
+    else
+    {
+        saldo -= jumlah;
+        transaksi[indexTransaksi++] = -jumlah;
+        cout << "Transfer berhasil ke rekening " << rekening_tujuan << "\n";
+        cout << "Saldo anda saat ini tersisa : " << saldo << endl;
+    }
+    Pause();
 }
 // Function Riwayat Transaksi
 void riwayatTransaksi(int transaksi[], int indexTransaksi)
@@ -130,11 +177,18 @@ void riwayatTransaksi(int transaksi[], int indexTransaksi)
     {
         if (transaksi[i] > 0)
         {
-            cout << i + 1 << ". Setor: Rp" << transaksi[i] << endl;
+            cout << i + 1 << ". Masuk: Rp" << transaksi[i] << endl;
         }
         else
         {
-            cout << i + 1 << ". Tarik: Rp" << -transaksi[i] << endl;
+            cout << i + 1 << ". Keluar: Rp" << -transaksi[i] << endl;
         }
     }
+    Pause();
+}
+void Pause()
+{
+    cout << "\nTekan Enter untuk melanjutkan...\n";
+    cin.ignore();
+    cin.get();
 }
