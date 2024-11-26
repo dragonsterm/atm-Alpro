@@ -4,6 +4,9 @@ using namespace std;
 
 // >> Global Var Init
 bool mainMenuLoop = false;
+// Inisialisasi Global Array (Wajib Ada)
+nasabah dataNasabah[100]; // menyimpan 100 data 100 nasabah
+int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
 // >> Struct Init
 struct histori
 {
@@ -21,17 +24,14 @@ struct nasabah
       int jumlahTrans;
       histori historiNasabah[100];
 };
-// >> Inisialisasi Global Array (Wajib Ada)
-nasabah dataNasabah[100]; // menyimpan 100 data 100 nasabah
-int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
 // >> Decklare Funtion
 // Error handling Func (Overload)
 void inputHandling(string question, string &var, short lineOr); // Untuk String
 void inputHandling(string question, int &var);                  // untuk int
 void inputHandling(string question, float &var);                // untuk float
 void inputHandling(string question, short &var);                // untuk short
-// CRUD Data Nasabah
-// -(OTW)
+// Init Data Nasabah
+void inisialisasiData();
 // Main Feature
 void login();
 void cekSaldo(int saldo);
@@ -159,5 +159,22 @@ void inputHandling(string question, short &var)
             }
       } while (statLoop == true);
 };
+// Data Init Function
+void inisialisasiData()
+{
+      dataNasabah[jumlahNasabah++] =
+          {12345678, "admin", "Rio Meidi A", 2000000, 3,
+           {// Inisialisasi langsung historiNasabah
+            {1, 500000, 87654321},
+            {2, 300000, 87654322},
+            {3, 200000, 87654323}}};
+      dataNasabah[jumlahNasabah++] =
+          {12215678, "admin", "Tony Antonio", 7000000, 3,
+           {// Inisialisasi langsung historiNasabah
+            {1, 500000, 87654321},
+            {2, 300000, 87654322},
+            {3, 200000, 87654323}}};
+      // Kalau Kurang silahkan di tambah sendiri
+}
 // Main Feature Funct Desc
 // (Jauza)
