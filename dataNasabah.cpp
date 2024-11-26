@@ -23,16 +23,16 @@ nasabah dataNasabah[100];
 int jumlahNasabah = 0; // Total Jumlah Data yang dimiliki
 // >> init Fungsi
 // Error Handling Function
-void inputHandling(string question, string &var, short lineOr);
-void inputHandling(string question, int &var);
-void inputHandling(string question, float &var);
-void inputHandling(string question, short &var);
+void inputHandling(string question, string &var, short lineOr); // Untuk String
+void inputHandling(string question, int &var);                  // untuk int
+void inputHandling(string question, float &var);                // untuk float
+void inputHandling(string question, short &var);                // untuk short
 // Main Function
-void tampilDataNasabah(int noRekIn);
 void inisialisasiData();
+void tampilDataNasabah(int noRekIn);
 void inputNasabah();
 void delNasabah();
-void test();
+// void test(); // Function Test
 // File Testing
 int main()
 {
@@ -206,9 +206,9 @@ void inputNasabah()
       cout << "\n\nHallo Nasabah Baru!!";
       cout << "\n Data Nasabah:" << endl;
       inputHandling("\nNo Rek  : ", dataNasabah[jumlahNasabah].noRek);
-      inputHandling("\nPass  : ", dataNasabah[jumlahNasabah].pass, 1);
-      inputHandling("\nNama  : ", dataNasabah[jumlahNasabah].nama, 2);
-      inputHandling("\nSaldo  : ", dataNasabah[jumlahNasabah].saldo);
+      inputHandling("\nPass    : ", dataNasabah[jumlahNasabah].pass, 1);
+      inputHandling("\nNama    : ", dataNasabah[jumlahNasabah].nama, 2);
+      inputHandling("\nSaldo   : ", dataNasabah[jumlahNasabah].saldo);
       dataNasabah[jumlahNasabah].jumlahTrans = 0; // Nasabah Baru Tidak Memiliki Histori Transaksi
 }
 // Fungsi untuk delete data nasabah
