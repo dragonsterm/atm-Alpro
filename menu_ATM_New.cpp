@@ -1,11 +1,18 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
-// Global Var Init
+// >> Global Var Init
 bool mainMenuLoop = false;
-// Decklare Funtion
-// Error handling Func
-void ifCinError();
+// >> Struct Init
+// -(OTW)
+// >> Decklare Funtion
+// Error handling Func (Overload)
+void inputHandling(string question, string &var); // Untuk String
+void inputHandling(string question, int &var);    // Untuk Integer
+void inputHandling(string question, float &var);  // Untuk Float
+void inputHandling(string question, short &var);  // Untuk short
+// CRUD Data Nasabah
+// -(OTW)
 // Main Feature
 void login();
 void cekSaldo(int saldo);
@@ -35,22 +42,71 @@ int main()
             // Input User
             cout << "\nNasabah Mau Yang Mana?: ";
             cin >> opt;
-            ifCinError();
       } while (mainMenuLoop = false);
-
       return 0;
 }
-// Error Handling Func
-void ifCinError()
+// Error Handling Funct
+void inputHandling(string question, string &var)
 {
-      if (cin.fail())
+      bool statLoop = false;
+      do
       {
-            cin.clear();          // Menghapus Semua Fail Flag
-            cin.ignore(30, '\n'); // Mengabaikan Input
-            cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
-      }
+            cout << question;
+            cin >> var;
+            if (cin.fail())
+            {
+                  cin.clear();          // Menghapus Semua Fail Flag
+                  cin.ignore(30, '\n'); // Mengabaikan Input
+                  cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
+                  statLoop = true;
+            }
+            else
+            {
+                  statLoop = false;
+            }
+      } while (statLoop == true);
 };
-// Main Feature
+void inputHandling(string question, int &var)
+{
+      bool statLoop = false;
+      do
+      {
+            cout << question;
+            cin >> var;
+            if (cin.fail())
+            {
+                  cin.clear();          // Menghapus Semua Fail Flag
+                  cin.ignore(30, '\n'); // Mengabaikan Input
+                  cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
+                  statLoop = true;
+            }
+            else
+            {
+                  statLoop = false;
+            }
+      } while (statLoop == true);
+};
+void inputHandling(string question, float &var)
+{
+      cout << question;
+      bool statLoop = false;
+      do
+      {
+            cin >> var;
+            if (cin.fail())
+            {
+                  cin.clear();          // Menghapus Semua Fail Flag
+                  cin.ignore(30, '\n'); // Mengabaikan Input
+                  cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
+                  statLoop = true;
+            }
+            else
+            {
+                  statLoop = false;
+            }
+      } while (statLoop == true);
+};
+// Main Feature Funct Desc
 void login()
 {
 }

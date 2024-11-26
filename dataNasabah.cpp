@@ -1,44 +1,150 @@
 #include <iostream>
-#include <map>
 using namespace std;
-struct identitas
+
+struct histori
+{
+      int idTrans;
+      int nominal;
+      int noRektuj;
+};
+
+struct nasabah
 {
       int noRek;
       string pass;
       string nama;
       int saldo;
-      int history[100][3] = {}; //{idTrans,nominal,noRekTuj}
+      int jumlahTrans;
+      histori historiNasabah[100];
 };
+// Inisialisasi Global Array
+nasabah dataNasabah[100];
+int jumlahNasabah = 0; // Total Jumlah Data yang dimiliki
+// init Fungsi
+void listHistori(int tampil);
+void inputNasabah();
+void inisialisasiData();
+void test();
+// Overloading Funct untuk Error Handling Pengguna
+void inputHandling(string question, string &var)
+{
+      bool statLoop = false;
+      do
+      {
+            cout << question;
+            cin >> var;
+            if (cin.fail())
+            {
+                  cin.clear();          // Menghapus Semua Fail Flag
+                  cin.ignore(30, '\n'); // Mengabaikan Input
+                  cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
+                  statLoop = true;
+            }
+            else
+            {
+                  statLoop = false;
+            }
+      } while (statLoop == true);
+};
+void inputHandling(string question, int &var)
+{
+      bool statLoop = false;
+      do
+      {
+            cout << question;
+            cin >> var;
+            if (cin.fail())
+            {
+                  cin.clear();          // Menghapus Semua Fail Flag
+                  cin.ignore(30, '\n'); // Mengabaikan Input
+                  cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
+                  statLoop = true;
+            }
+            else
+            {
+                  statLoop = false;
+            }
+      } while (statLoop == true);
+};
+void inputHandling(string question, float &var)
+{
+      cout << question;
+      bool statLoop = false;
+      do
+      {
+            cin >> var;
+            if (cin.fail())
+            {
+                  cin.clear();          // Menghapus Semua Fail Flag
+                  cin.ignore(30, '\n'); // Mengabaikan Input
+                  cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
+                  statLoop = true;
+            }
+            else
+            {
+                  statLoop = false;
+            }
+      } while (statLoop == true);
+};
+
+// File Testing
 int main()
 {
-      map<int, identitas> data;
-      identitas id;
-      data[12345678] = {123345678, "Wahyu Syalalala", "Rio Meidi A", 200000, {{630000, 20000, 123456798}}};
-
-      auto it = data.find(12345678);
-      if (it != data.end())
+      // inisialisasiData();
+      inputNasabah();
+      listHistori(1);
+      return 0;
+}
+// Fungsi Untuk Inisialisasi Data Lama
+void inisialisasiData()
+{
+      dataNasabah[jumlahNasabah++] =
+          {12345678, "admin", "Rio Meidi A", 2000000, 3,
+           {// Inisialisasi langsung historiNasabah
+            {1, 500000, 87654321},
+            {2, 300000, 87654322},
+            {3, 200000, 87654323}}};
+      dataNasabah[jumlahNasabah++] =
+          {12215678, "admin", "Tony Antonio", 7000000, 3,
+           {// Inisialisasi langsung historiNasabah
+            {1, 500000, 87654321},
+            {2, 300000, 87654322},
+            {3, 200000, 87654323}}};
+}
+// Fungsi Untuk Menampilkan Data Nasabah
+void listHistori(int tampil)
+{
+      cout << "Nasabah:" << endl;
+      cout << "\n Data Nasabah:" << endl;
+      cout << "No Rek  : " << dataNasabah[tampil].noRek << endl;
+      cout << "Nama    : " << dataNasabah[tampil].nama << endl;
+      cout << "Saldo   : " << dataNasabah[tampil].saldo << endl;
+      cout << "\nHistori Transaksi:" << endl;
+      for (int i = 0; i < dataNasabah[tampil].jumlahTrans; ++i)
       {
-            // Mencetak key dan value
-            cout << "Key: " << it->first << "\n"; // Key (nomor rekening)
-            cout << "Nomor Rekening: " << it->second.noRek << "\n";
-            cout << "Nama: " << it->second.nama << "\n";
-            cout << "Saldo: " << it->second.saldo << "\n";
-
-            // Mencetak histori transaksi
-            cout << "Histori Transaksi:\n";
-            for (int i = 0; i < 100; ++i)
+            cout << "ID Trans : " << dataNasabah[tampil].historiNasabah[i].idTrans << endl;
+            cout << "Nominal  : " << dataNasabah[tampil].historiNasabah[i].nominal << endl;
+            cout << "No Rek T : " << dataNasabah[tampil].historiNasabah[i].noRektuj << endl;
+            cout << endl;
+            // Pemberhentian Jika Array Mencapai Akhir
+            if (dataNasabah[tampil].historiNasabah[i].idTrans == 0)
             {
-                  if (it->second.history[i][0] != 0)
-                  {
-                        cout << "  ID Transaksi: " << it->second.history[i][0]
-                             << ", Nominal: " << it->second.history[i][1]
-                             << ", Rekening Tujuan: " << it->second.history[i][2] << "\n";
-                  }
+                  break;
             }
       }
-      else
-      {
-            cout << "Data tidak ditemukan.\n";
-      }
-      return 0;
+}
+// Funct Untuk Input Nasabah
+void inputNasabah()
+{
+      int noRekIn, saldoIn;
+      string passIn, namaIn;
+      jumlahNasabah++;
+      cout << "\n\n\t>-Menu Input Nasabah Baru-<\n";
+      cout << "\n\nHallo Nasabah Baru!!";
+      cout << "\n Data Nasabah:" << endl;
+      inputHandling("\nNo Rek  : ", dataNasabah[jumlahNasabah].noRek);
+      inputHandling("\nPass  : ", dataNasabah[jumlahNasabah].pass);
+      inputHandling("\nNama  : ", dataNasabah[jumlahNasabah].nama);
+      inputHandling("\nSaldo  : ", dataNasabah[jumlahNasabah].saldo);
+      dataNasabah[jumlahNasabah].jumlahTrans = 0; // Nasabah Baru Tidak Memiliki Histori Transaksi
 }
