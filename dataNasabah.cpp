@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 struct histori
@@ -17,22 +18,49 @@ struct nasabah
       int jumlahTrans;
       histori historiNasabah[100];
 };
-// Inisialisasi Global Array
+// >> Inisialisasi Global Array
 nasabah dataNasabah[100];
 int jumlahNasabah = 0; // Total Jumlah Data yang dimiliki
-// init Fungsi
-void listHistori(int tampil);
-void inputNasabah();
+// >> init Fungsi
+// Error Handling Function
+void inputHandling(string question, string &var, short lineOr);
+void inputHandling(string question, int &var);
+void inputHandling(string question, float &var);
+void inputHandling(string question, short &var);
+// Main Function
+void tampilDataNasabah(int noRekIn);
 void inisialisasiData();
+void inputNasabah();
+void delNasabah();
 void test();
+// File Testing
+int main()
+{
+      inisialisasiData();
+      // inputNasabah();
+      tampilDataNasabah(123456888);
+      // delNasabah();
+      // tampilDataNasabah(0);
+      return 0;
+}
+// Desc Function
 // Overloading Funct untuk Error Handling Pengguna
-void inputHandling(string question, string &var)
+void inputHandling(string question, string &var, short lineOr)
 {
       bool statLoop = false;
       do
       {
             cout << question;
-            cin >> var;
+            // Jika 1 maka Spasi dianggap kesalahan
+            if (lineOr == 1)
+            {
+                  cin >> var;
+            }
+            // Jika 2 maka spasi akan dibaca
+            else if (lineOr == 2)
+            {
+                  getline(cin, var);
+            }
             if (cin.fail())
             {
                   cin.clear();          // Menghapus Semua Fail Flag
@@ -46,6 +74,7 @@ void inputHandling(string question, string &var)
             }
       } while (statLoop == true);
 };
+// Untuk Variabel Integer
 void inputHandling(string question, int &var)
 {
       bool statLoop = false;
@@ -66,6 +95,7 @@ void inputHandling(string question, int &var)
             }
       } while (statLoop == true);
 };
+// Untuk Variabel FLoat
 void inputHandling(string question, float &var)
 {
       cout << question;
@@ -86,15 +116,27 @@ void inputHandling(string question, float &var)
             }
       } while (statLoop == true);
 };
-
-// File Testing
-int main()
+// Short
+void inputHandling(string question, short &var)
 {
-      // inisialisasiData();
-      inputNasabah();
-      listHistori(1);
-      return 0;
-}
+      cout << question;
+      bool statLoop = false;
+      do
+      {
+            cin >> var;
+            if (cin.fail())
+            {
+                  cin.clear();          // Menghapus Semua Fail Flag
+                  cin.ignore(30, '\n'); // Mengabaikan Input
+                  cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
+                  statLoop = true;
+            }
+            else
+            {
+                  statLoop = false;
+            }
+      } while (statLoop == true);
+};
 // Fungsi Untuk Inisialisasi Data Lama
 void inisialisasiData()
 {
@@ -111,40 +153,106 @@ void inisialisasiData()
             {2, 300000, 87654322},
             {3, 200000, 87654323}}};
 }
-// Fungsi Untuk Menampilkan Data Nasabah
-void listHistori(int tampil)
+// Funtioon Inti
+// Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
+void tampilDataNasabah(int noRekIn)
 {
-      cout << "Nasabah:" << endl;
-      cout << "\n Data Nasabah:" << endl;
-      cout << "No Rek  : " << dataNasabah[tampil].noRek << endl;
-      cout << "Nama    : " << dataNasabah[tampil].nama << endl;
-      cout << "Saldo   : " << dataNasabah[tampil].saldo << endl;
-      cout << "\nHistori Transaksi:" << endl;
-      for (int i = 0; i < dataNasabah[tampil].jumlahTrans; ++i)
+      bool find = false;
+      for (int i = 0; i < jumlahNasabah; i++)
       {
-            cout << "ID Trans : " << dataNasabah[tampil].historiNasabah[i].idTrans << endl;
-            cout << "Nominal  : " << dataNasabah[tampil].historiNasabah[i].nominal << endl;
-            cout << "No Rek T : " << dataNasabah[tampil].historiNasabah[i].noRektuj << endl;
-            cout << endl;
-            // Pemberhentian Jika Array Mencapai Akhir
-            if (dataNasabah[tampil].historiNasabah[i].idTrans == 0)
+            if (noRekIn == dataNasabah[i].noRek)
             {
-                  break;
+                  find = true;
+                  cout << "\n\t<Lihat Data Dan Histori>\n"
+                       << endl;
+                  cout << "Nasabah:" << endl;
+                  cout << "\n Data Nasabah:" << endl;
+                  cout << "No Rek  : " << dataNasabah[i].noRek << endl;
+                  cout << "Nama    : " << dataNasabah[i].nama << endl;
+                  cout << "Saldo   : " << dataNasabah[i].saldo << endl;
+                  cout << "\nHistori Transaksi:" << endl;
+                  if (dataNasabah[i].historiNasabah[0].idTrans > 0)
+                  {
+                        for (int j = 0; j < dataNasabah[i].jumlahTrans; ++j)
+                        {
+                              cout << "ID Trans : " << dataNasabah[i].historiNasabah[j].idTrans << endl;
+                              cout << "Nominal  : " << dataNasabah[i].historiNasabah[j].nominal << endl;
+                              cout << "No Rek T : " << dataNasabah[i].historiNasabah[j].noRektuj << endl;
+                              cout << endl;
+                              // Pemberhentian Jika Array Mencapai Akhir
+                              if (dataNasabah[i].historiNasabah[j].idTrans == 0)
+                              {
+                                    break;
+                              }
+                        }
+                  }
+                  else
+                  {
+                        cout << "\n [Empty Set]\n";
+                  }
+            }
+            else
+            {
+                  find = false;
             }
       }
+      find == false ? cout << "\n [Error Tag]- Rekening Tak ditemukan\n" : cout << "\n <Data Tertampil Semua>";
 }
 // Funct Untuk Input Nasabah
 void inputNasabah()
 {
-      int noRekIn, saldoIn;
-      string passIn, namaIn;
       jumlahNasabah++;
       cout << "\n\n\t>-Menu Input Nasabah Baru-<\n";
       cout << "\n\nHallo Nasabah Baru!!";
       cout << "\n Data Nasabah:" << endl;
       inputHandling("\nNo Rek  : ", dataNasabah[jumlahNasabah].noRek);
-      inputHandling("\nPass  : ", dataNasabah[jumlahNasabah].pass);
-      inputHandling("\nNama  : ", dataNasabah[jumlahNasabah].nama);
+      inputHandling("\nPass  : ", dataNasabah[jumlahNasabah].pass, 1);
+      inputHandling("\nNama  : ", dataNasabah[jumlahNasabah].nama, 2);
       inputHandling("\nSaldo  : ", dataNasabah[jumlahNasabah].saldo);
       dataNasabah[jumlahNasabah].jumlahTrans = 0; // Nasabah Baru Tidak Memiliki Histori Transaksi
+}
+// Fungsi untuk delete data nasabah
+void delNasabah()
+{
+      int noRekIn;
+      short opt;
+      bool find = true;
+      do
+      {
+            inputHandling("Berapa Nomor Rekeningnya?: ", noRekIn);
+            for (int i = 0; i < jumlahNasabah; i++)
+            {
+                  if (noRekIn == dataNasabah[i].noRek)
+                  {
+                        find = true;
+                        cout << "\nSuccess Delete Data user {" << dataNasabah[i].nama << "} ";
+                        dataNasabah[i] = {
+                            0,
+                            "",
+                            "",
+                            0,
+                            0,
+                            {}}; // Code Pengosongan Data Nasabah
+                        break;
+                  }
+                  else
+                  {
+                        find = false;
+                  }
+            }
+            if (find == false)
+            {
+                  cout << "\n[Error Tag] - Input Not Found - Wah ini gaada nih gimana dong?\n";
+                  inputHandling("\n(1)Ulang or (2)Keluar?: ", opt);
+                  if (opt == 1)
+                  {
+                        find = false;
+                  }
+                  else
+                  {
+                        find = true;
+                        cout << "\n Hapus No Rek <" << noRekIn << "> Dibatalkan";
+                  }
+            }
+      } while (find == false);
 }
