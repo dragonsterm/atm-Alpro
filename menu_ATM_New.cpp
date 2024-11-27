@@ -45,8 +45,8 @@ void inisialisasiData();
 void login();
 void cekSaldo();
 void setorSaldo();
-void tarikSaldo(int &saldo, int transaksi[], string deskripsi[], int idTransaksi[], int &indexTransaksi);
-void transferRekening(int &saldo, int transaksi[], string deskripsi[], int idTransaksi[], int &indexTransaksi);
+void tarikSaldo();
+void transferDeposito();
 void riwayatTransaksi(int transaksi[], string deskripsi[], int idTransaksi[], int indexTransaksi);
 void Pause();
 // Function untuk Pause
@@ -92,14 +92,14 @@ int main()
                   Pause();
                   setorSaldo();
                   break;
-            // case 3:
-            //       Pause();
-            //       transferRekening(saldo, transaksi, deskripsi, idTransaksi, indexTransaksi);
-            //       break;
-            // case 4:
-            //       Pause();
-            //       tarikSaldo(saldo, transaksi, deskripsi, idTransaksi, indexTransaksi);
-            //       break;
+            case 3:
+                  Pause();
+                  transferDeposito();
+                  break;
+            case 4:
+                  Pause();
+                  tarikSaldo();
+                  break;
             // case 5:
             //       Pause();
             //       riwayatTransaksi(transaksi, deskripsi, idTransaksi, indexTransaksi);
@@ -298,7 +298,7 @@ void cekSaldo()
 void setorSaldo()
 {
       int jumlah;
-      int pilihan;
+      short pilihan;
       do
       {
             cout << "\n <= Setor Saldo =>\n\n";
@@ -343,19 +343,16 @@ void setorSaldo()
       } while (pilihan != 1 && pilihan != 2);
 }
 // Function Tarik Saldo
-void tarikSaldo(int &saldo, int transaksi[], string deskripsi[], int idTransaksi[], int &indexTransaksi)
+void tarikSaldo()
 {
       int jumlah;
-      string namaPem = "Admin Test";
-      int noRek = 12345678;
-      int pilihan;
+      short pilihan;
       do
       {
             cout << "\n <= Tarik Tunai =>\n\n";
             cout << "Data Rekening :" << endl;
-            cout << setw(10) << "A.N." << setw(5) << ": " << namaPem << endl;
-            cout << setw(10) << "No.Rek" << setw(5) << " : " << noRek << endl;
-
+            cout << setw(10) << "A.N." << setw(5) << ": " << dataNasabah[indexNasabah].nama << endl;
+            cout << setw(10) << "No.Rek" << setw(5) << " : " << dataNasabah[indexNasabah].noRek << endl;
             cout << "Nominal" << setw(5) << ": Rp";
             inputHandling("", jumlah);
             cout << endl;
@@ -365,7 +362,7 @@ void tarikSaldo(int &saldo, int transaksi[], string deskripsi[], int idTransaksi
 
             if (pilihan == 1)
             {
-                  if (saldo < jumlah)
+                  if (dataNasabah[indexNasabah].saldo < jumlah)
                   {
                         cout << "\nSystem is ";
                         SlowType("processing", 100);
@@ -379,11 +376,12 @@ void tarikSaldo(int &saldo, int transaksi[], string deskripsi[], int idTransaksi
                   }
                   else
                   {
-                        saldo -= jumlah;
-                        transaksi[indexTransaksi] = -jumlah;
-                        deskripsi[indexTransaksi] = "Tarik Saldo";
-                        idTransaksi[indexTransaksi] = rand() % 90000000 + 10000000;
-                        indexTransaksi++;
+                        dataNasabah[indexNasabah].saldo -= jumlah;
+                        dataNasabah[indexNasabah].jumlahTrans++;
+                        dataNasabah[indexNasabah].historiNasabah[dataNasabah[indexNasabah].jumlahTrans].nominal = jumlah;
+                        dataNasabah[indexNasabah].historiNasabah[dataNasabah[indexNasabah].jumlahTrans].idTrans = rand() % 90000000 + 10000000; // nomor Id Acak
+                        dataNasabah[indexNasabah].historiNasabah[dataNasabah[indexNasabah].jumlahTrans].noRektuj = dataNasabah[indexNasabah].noRek;
+                        dataNasabah[indexNasabah].historiNasabah[dataNasabah[indexNasabah].jumlahTrans].deskripsi = "Tarik Saldo";
                         cout << "\nSystem is ";
                         SlowType("processing", 100);
                         this_thread::sleep_for(chrono::seconds(1));
@@ -408,27 +406,39 @@ void tarikSaldo(int &saldo, int transaksi[], string deskripsi[], int idTransaksi
       } while (pilihan != 1 && pilihan != 2);
 }
 // Function Transfer Rekening
-void transferRekening(int &saldo, int transaksi[], string deskripsi[], int idTransaksi[], int &indexTransaksi)
+void transferDeposito()
 {
-      int rekening_tujuan;
-      int jumlah;
-      string namaPem = "Admin Test";
-      int noRek = 12345678;
-      int pilihan;
+      int rekening_tujuan, jumlah, indexFound;
+      short pilihan;
+      bool find = false;
       do
       {
-            cout << "\n <= Tarik Tunai =>\n\n";
-            cout << "Data Rekening :" << endl;
-            cout << setw(10) << "A.N." << setw(5) << ": " << namaPem << endl;
-            cout << setw(10) << "No.Rek" << setw(5) << " : " << noRek << endl;
             do
             {
                   inputHandling("\nMasukkan Nomor Rekening tujuan (8 digit) : ", rekening_tujuan);
-                  if (rekening_tujuan < 10000000 || rekening_tujuan > 99999999)
+                  for (int i = 0; i < jumlahNasabah; i++)
                   {
-                        cout << "Nomor Rekening yang Anda Masukkan tidak valid\n";
+                        if (dataNasabah[i].noRek == rekening_tujuan)
+                        {
+                              find = true;
+                              indexFound = i;
+                              break;
+                        }
+                        else
+                              find = false;
                   }
-            } while (rekening_tujuan < 10000000 || rekening_tujuan > 99999999);
+                  if (find == true)
+                  {
+                        cout << "\n <= Transfer Deposito =>\n\n";
+                        cout << "Data Rekening :" << endl;
+                        cout << setw(10) << "A.N." << setw(5) << " : " << dataNasabah[indexFound].nama << endl;
+                        cout << setw(10) << "No.Rek" << setw(5) << " : " << dataNasabah[indexFound].noRek << endl;
+                  }
+                  else
+                  {
+                        cout << "\nNomor Rekening yang Anda Masukkan tidak valid\n";
+                  }
+            } while (find == false);
             cout << "Nominal" << setw(5) << ": Rp";
             inputHandling("", jumlah);
             cout << endl;
@@ -437,7 +447,7 @@ void transferRekening(int &saldo, int transaksi[], string deskripsi[], int idTra
             inputHandling("\n>> ", pilihan);
             if (pilihan == 1)
             {
-                  if (saldo < jumlah)
+                  if (dataNasabah[indexNasabah].saldo < jumlah)
                   {
                         cout << "\nSystem is ";
                         SlowType("processing", 100);
@@ -451,11 +461,20 @@ void transferRekening(int &saldo, int transaksi[], string deskripsi[], int idTra
                   }
                   else
                   {
-                        saldo -= jumlah;
-                        transaksi[indexTransaksi] = -jumlah;
-                        deskripsi[indexTransaksi] = "Transfer";
-                        idTransaksi[indexTransaksi] = rand() % 90000000 + 10000000;
-                        indexTransaksi++;
+                        // Update Data Nasabah Pengirim
+                        dataNasabah[indexNasabah].saldo -= jumlah;
+                        dataNasabah[indexNasabah].jumlahTrans++;
+                        dataNasabah[indexNasabah].historiNasabah[dataNasabah[indexNasabah].jumlahTrans].nominal = 0 - jumlah;
+                        dataNasabah[indexNasabah].historiNasabah[dataNasabah[indexNasabah].jumlahTrans].idTrans = rand() % 90000000 + 10000000; // nomor Id Acak
+                        dataNasabah[indexNasabah].historiNasabah[dataNasabah[indexNasabah].jumlahTrans].noRektuj = dataNasabah[indexNasabah].noRek;
+                        dataNasabah[indexNasabah].historiNasabah[dataNasabah[indexNasabah].jumlahTrans].deskripsi = "Tarik Saldo";
+                        // Update Data Nasabah Penerima
+                        dataNasabah[indexFound].jumlahTrans++;
+                        dataNasabah[indexFound].saldo += jumlah;
+                        dataNasabah[indexFound].historiNasabah[dataNasabah[indexFound].jumlahTrans].nominal = jumlah;
+                        dataNasabah[indexFound].historiNasabah[dataNasabah[indexFound].jumlahTrans].idTrans = rand() % 90000000 + 10000000; // nomor Id Acak
+                        dataNasabah[indexFound].historiNasabah[dataNasabah[indexFound].jumlahTrans].noRektuj = dataNasabah[indexFound].noRek;
+                        dataNasabah[indexFound].historiNasabah[dataNasabah[indexFound].jumlahTrans].deskripsi = "Menerima Saldo";
                         cout << "\nSystem is ";
                         SlowType("processing", 100);
                         this_thread::sleep_for(chrono::seconds(1));
