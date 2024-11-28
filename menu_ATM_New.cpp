@@ -243,23 +243,84 @@ void inisialisasiData()
       dataNasabah[jumlahNasabah++] =
           {459777345, "admin", "Sosok Asli Admin", 9999999, 0, {}}; // Sosok Asli Admin
       dataNasabah[jumlahNasabah++] =
-          {12345678, "admin", "Rio Meidi A", 2000000, 9,
-           {// Inisialisasi langsung historiNasabah
-            {1, 500000, 87654321, "makan"},
-            {2, 300000, 87654322, "Woy"},
-            {123, 200000, 87654323, "Hiyahiya"},
-            {1234, 200000, 87654323, "Hiyahiya"},
-            {1293912, 200000, 87654323, "Hiyahiya"},
-            {123, 200000, 87654323, "Hiyahiya"},
-            {123, 200000, 87654323, "Hiyahiya"},
-            {12312, 200000, 87654323, "Hiyahiya"},
-            {12010, 200000, 87654323, "Hiyahiya"}}};
-      dataNasabah[jumlahNasabah++] =
-          {12345687, "admin", "Tony Antonio", 7000000, 3,
+          {23240144, "admin123", "Zaka Ahmad Ghofari", 2500000, 12,
            {// biar spasi
-            {1, 500000, 87654321, "makan"},
-            {2, 300000, 87654322, "Woy"},
-            {3, 200000, 87654323, "Hiyahiya"}}};
+            {51, 50000, 87654326, "Qris"},
+            {61, 900000, 87654327, "Top Up Dana"},
+            {71, 200000, 87654318, "Virtual Acc"},
+            {52, 400000, 87654328, "Qris"},
+            {62, 75000, 87654353, "Top UP Dana"},
+            {72, 800000, 87654328, "Virtual Acc"},
+            {73, 960000, 87654330, "Virtual Acc"},
+            {53, 115000, 87654402, "Qris"},
+            {63, 120000, 87654560, "Top Up Dana"},
+            {64, 980000, 87654975, "Top Up Gopay"},
+            {90, 650000, 87650642, "Transfer"},
+            {74, 850000, 87654340, "Virtual Acc"}}};
+      dataNasabah[jumlahNasabah++] =
+          {23240159, "admin321", "Dimas Hafid Fathoni", 6500000, 12,
+           {// biar spasi
+            {51, 50000, 87654326, "Qris"},
+            {61, 900000, 87654327, "Top Up Dana"},
+            {71, 200000, 87654318, "Virtual Acc"},
+            {52, 400000, 87654328, "Qris"},
+            {62, 75000, 87654353, "Top UP Dana"},
+            {72, 800000, 87654328, "Virtual Acc"},
+            {73, 960000, 87654330, "Virtual Acc"},
+            {53, 115000, 87654402, "Qris"},
+            {63, 120000, 87654560, "Top Up Dana"},
+            {64, 980000, 87654975, "Top Up Gopay"},
+            {90, 650000, 87650642, "Transfer"},
+            {74, 850000, 87654340, "Virtual Acc"}}};
+      dataNasabah[jumlahNasabah++] =
+          {23240173, "admin3221", "Erlan Rifqi Davin D", 5000000, 12,
+           {// biar spasi
+            {51, 50000, 87654326, "Qris"},
+            {61, 900000, 87654327, "Top Up Dana"},
+            {71, 200000, 87654318, "Virtual Acc"},
+            {52, 400000, 87654328, "Qris"},
+            {62, 75000, 87654353, "Top UP Dana"},
+            {72, 800000, 87654328, "Virtual Acc"},
+            {73, 960000, 87654330, "Virtual Acc"},
+            {53, 115000, 87654402, "Qris"},
+            {63, 120000, 87654560, "Top Up Dana"},
+            {64, 980000, 87654975, "Top Up Gopay"},
+            {90, 650000, 87650642, "Transfer"},
+            {74, 850000, 87654340, "Virtual Acc"}}};
+      dataNasabah[jumlahNasabah++] =
+          {23240174, "admin3214", "Jauza Ilham Mahardika P", 10000000, 12,
+           {// biar spasi
+            {51, 50000, 87654326, "Qris"},
+            {61, 900000, 87654327, "Top Up Dana"},
+            {71, 200000, 87654318, "Virtual Acc"},
+            {52, 400000, 87654328, "Qris"},
+            {62, 75000, 87654353, "Top UP Dana"},
+            {72, 800000, 87654328, "Virtual Acc"},
+            {73, 960000, 87654330, "Virtual Acc"},
+            {53, 115000, 87654402, "Qris"},
+            {63, 120000, 87654560, "Top Up Dana"},
+            {64, 980000, 87654975, "Top Up Gopay"},
+            {90, 650000, 87650642, "Transfer"},
+            {74, 850000, 87654340, "Virtual Acc"}}};
+      dataNasabah[jumlahNasabah++] =
+          {23240175, "admin3215", "Rio Meidi A", 9000000, 12,
+           {// biar spasi
+            {51, 50000, 87654326, "Qris"},
+            {61, 900000, 87654327, "Top Up Dana"},
+            {71, 200000, 87654318, "Virtual Acc"},
+            {52, 400000, 87654328, "Qris"},
+            {62, 75000, 87654353, "Top UP Dana"},
+            {72, 800000, 87654328, "Virtual Acc"},
+            {73, 960000, 87654330, "Virtual Acc"},
+            {53, 115000, 87654402, "Qris"},
+            {63, 120000, 87654560, "Top Up Dana"},
+            {64, 980000, 87654975, "Top Up Gopay"},
+            {90, 650000, 87650642, "Transfer"},
+            {74, 850000, 87654340, "Virtual Acc"}}};
+      dataNasabah[jumlahNasabah++] =
+          {23240111, "admin123", "Test Empty Set", 0, 0, {
+                                                             // biar spasi
+                                                         }};
       // Kalau Kurang silahkan di tambah sendiri
 }
 // CRUD Funct
@@ -360,7 +421,7 @@ void delNasabah()
             if (find == false)
             {
                   cout << "\n[Error Tag] - Input Not Found - Wah ini gaada nih gimana dong?\n";
-                  inputHandling("\n(1)Ulang or (2)Keluar?: ", opt);
+                  inputHandling("\n(1)Ulang or (2)Kembali?: ", opt);
                   if (opt == 1)
                   {
                         find = false;
@@ -467,7 +528,7 @@ void setorSaldo()
             inputHandling("", jumlah);
             cout << endl;
             cout << setw(15) << "Konfirmasi <1" << endl;
-            cout << setw(15) << "keluar <2" << endl;
+            cout << setw(15) << "Kembali <2" << endl;
             inputHandling("\n>> ", pilihan);
             if (pilihan == 1)
             {
@@ -515,7 +576,7 @@ void tarikSaldo()
             inputHandling("", jumlah);
             cout << endl;
             cout << setw(15) << "Konfirmasi <1" << endl;
-            cout << setw(15) << "keluar <2" << endl;
+            cout << setw(15) << "Kembali <2" << endl;
             inputHandling("\n>> ", pilihan);
 
             if (pilihan == 1)
@@ -602,7 +663,7 @@ void transferDeposito()
             inputHandling("", jumlah);
             cout << endl;
             cout << setw(15) << "Konfirmasi <1" << endl;
-            cout << setw(15) << "keluar <2" << endl;
+            cout << setw(15) << "Kembali <2" << endl;
             inputHandling("\n>> ", pilihan);
             if (pilihan == 1)
             {
@@ -687,7 +748,7 @@ void riwayatTransaksi()
                  << setfill(' ') << endl;
             cout << setw(84) << "Next Page     1<\n";
             cout << setw(84) << "Previous Page 2<\n";
-            cout << setw(84) << "Keluar        3<\n";
+            cout << setw(84) << "Kembali        3<\n";
             inputHandling("\n>> ", pilihan);
             if (pilihan == 1)
             {
