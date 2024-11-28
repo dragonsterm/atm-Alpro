@@ -1,11 +1,10 @@
 #include <iostream>
-#include <iomanip> //
+#include <iomanip>
 #include <cstdlib> // untuk menggunakan system("cls")
 #include <ctime>   // untuk mengatur seed pada fungsi rand()
 #include <thread>  // untuk menggunakan fungsi multithreading cnth sleep_for
 #include <chrono>  // untuk menangani waktu dengan tepat sangat penting karena untuk penggunaan sleep_for yang membutuhkan parameter bertipe durasi
 using namespace std;
-
 // >> Struct Init
 // Struct untuk Histori
 struct histori
@@ -26,10 +25,8 @@ struct nasabah
       histori historiNasabah[100];
 };
 // >> Global Var Init
-bool mainMenuLoop = false;
-bool loginStat = false;
+bool mainMenuLoop = true, loginStat = false, adminStat = false;
 int indexNasabah = -1;
-
 // Inisialisasi Global Array (Wajib Ada)
 nasabah dataNasabah[100]; // menyimpan 100 data 100 nasabah
 int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
@@ -41,6 +38,10 @@ void inputHandling(string question, float &var);                // untuk float
 void inputHandling(string question, short &var);                // untuk short
 // Init Data Nasabah
 void inisialisasiData();
+// CRUD Funct Data Nasabah
+void tampilDataNasabah();
+void inputNasabah();
+void delNasabah();
 // Main Feature
 void login();
 void cekSaldo();
@@ -55,12 +56,7 @@ void DeleteText(int count, int delay);
 // Execution Funct
 int main()
 {
-      int saldo = 0;
-      int transaksi[100];
-      int idTransaksi[100];
-      int indexTransaksi = 0;
-      string deskripsi[100];
-      int opt;
+      short opt;
       // Identitas Pembuat
       cout << "\n<Selamat Datang di ATM Program ATM> \nKarya: "
            << " \t\n1. Zaka Ahmad Ghofari             (123240144)"
@@ -74,47 +70,76 @@ int main()
       login();
       do
       {
-            // Penampil Menu Utama
-            system("cls");
-            cout << "\t\t <<Menu ATM>>\n";
-            cout << left << setw(25) << "1> Cek Saldo" << right << setw(25) << "Tarik Tunai <4\n\n";
-            cout << left << setw(25) << "2> Deposit Saldo" << right << setw(25) << "Riwayat Transaksi <5\n\n";
-            cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
-            // Input User
-            inputHandling("\nNasabah Mau Yang Mana?: ", opt);
-            switch (opt)
+            if (adminStat == true)
             {
-            case 1:
-                  Pause();
-                  cekSaldo();
-                  break;
-            case 2:
-                  Pause();
-                  setorSaldo();
-                  break;
-            case 3:
-                  Pause();
-                  transferDeposito();
-                  break;
-            case 4:
-                  Pause();
-                  tarikSaldo();
-                  break;
-            case 5:
-                  Pause();
-                  riwayatTransaksi();
-                  break;
-            case 6:
-                  cout << "\nTerimakasih telah menggunakan ATM ini\n";
-                  Pause();
-                  indexNasabah = -1;
-                  mainMenuLoop = true;
-                  break;
-            default:
-                  cout << "Pilihan yang Anda masukkan salah\n";
+                  system("cls");
+                  cout << "\t\t <<Menu Admin>>\n\n";
+                  cout << "1> Input Nasabah\n\n";
+                  cout << "2> Delete Nasabah\n\n";
+                  cout << "3> Tampil Nasabah\n\n";
+                  inputHandling("\n Admin Mau Yang Mana?: ", opt);
+                  switch (opt)
+                  {
+                  case 1:
+                        Pause();
+                        inputNasabah();
+                        break;
+                  case 2:
+                        Pause();
+                        delNasabah();
+                        break;
+                  case 3:
+                        Pause();
+                        tampilDataNasabah();
+                        break;
+                  default:
+                        cout << "\nTerimakasih telah menggunakan ATM ini Mas Admin\n";
+                        Pause();
+                        mainMenuLoop = false;
+                  }
             }
-      } while (!mainMenuLoop);
-
+            else
+            {
+                  // Penampil Menu Utama
+                  system("cls");
+                  cout << "\t\t <<Menu ATM>>\n";
+                  cout << left << setw(25) << "1> Cek Saldo" << right << setw(25) << "Tarik Tunai <4\n\n";
+                  cout << left << setw(25) << "2> Deposit Saldo" << right << setw(25) << "Riwayat Transaksi <5\n\n";
+                  cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
+                  // Input User
+                  inputHandling("\nNasabah Mau Yang Mana?: ", opt);
+                  switch (opt)
+                  {
+                  case 1:
+                        Pause();
+                        cekSaldo();
+                        break;
+                  case 2:
+                        Pause();
+                        setorSaldo();
+                        break;
+                  case 3:
+                        Pause();
+                        transferDeposito();
+                        break;
+                  case 4:
+                        Pause();
+                        tarikSaldo();
+                        break;
+                  case 5:
+                        Pause();
+                        riwayatTransaksi();
+                        break;
+                  case 6:
+                        cout << "\nTerimakasih telah menggunakan ATM ini\n";
+                        Pause();
+                        mainMenuLoop = false;
+                        break;
+                  default:
+                        cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
+                  }
+            }
+      } while (mainMenuLoop == true);
       return 0;
 }
 // >> Desc Function
@@ -140,7 +165,7 @@ void inputHandling(string question, string &var, short lineOr)
             {
                   cin.clear();          // Menghapus Semua Fail Flag
                   cin.ignore(30, '\n'); // Mengabaikan Input
-                  cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
+                  cout << "\n[ERROR CIN,not str] -" << "Input Tidak Sesuai\n";
                   statLoop = true;
             }
             else
@@ -161,7 +186,7 @@ void inputHandling(string question, int &var)
             {
                   cin.clear();          // Menghapus Semua Fail Flag
                   cin.ignore(30, '\n'); // Mengabaikan Input
-                  cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
+                  cout << "\n[ERROR CIN,not int] -" << "Input Tidak Sesuai\n";
                   statLoop = true;
             }
             else
@@ -182,7 +207,7 @@ void inputHandling(string question, float &var)
             {
                   cin.clear();          // Menghapus Semua Fail Flag
                   cin.ignore(30, '\n'); // Mengabaikan Input
-                  cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
+                  cout << "\n[ERROR CIN,not float] -" << "Input Tidak Sesuai\n";
                   statLoop = true;
             }
             else
@@ -203,7 +228,7 @@ void inputHandling(string question, short &var)
             {
                   cin.clear();          // Menghapus Semua Fail Flag
                   cin.ignore(30, '\n'); // Mengabaikan Input
-                  cout << "\n[Error Tag] -" << "Walah Mas Nginput apa njenengan\n";
+                  cout << "\n[ERROR CIN,not shortInt] -" << "Input Tidak Sesuai\n";
                   statLoop = true;
             }
             else
@@ -215,6 +240,8 @@ void inputHandling(string question, short &var)
 // Data Init Function
 void inisialisasiData()
 {
+      dataNasabah[jumlahNasabah++] =
+          {459777345, "admin", "Sosok Asli Admin", 9999999, 0, {}}; // Sosok Asli Admin
       dataNasabah[jumlahNasabah++] =
           {12345678, "admin", "Rio Meidi A", 2000000, 9,
            {// Inisialisasi langsung historiNasabah
@@ -235,6 +262,117 @@ void inisialisasiData()
             {3, 200000, 87654323, "Hiyahiya"}}};
       // Kalau Kurang silahkan di tambah sendiri
 }
+// CRUD Funct
+// Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
+void tampilDataNasabah()
+{
+      system("cls");
+      bool find = false;
+      int noRekIn = 0;
+      cout << "\n\t>- Menu Tampil Data Nasabah -<\n\n";
+      Pause();
+      inputHandling("Berapa Nomor Rekeningnya?: ", noRekIn);
+      for (int i = 0; i < jumlahNasabah; i++)
+      {
+            if (noRekIn == dataNasabah[i].noRek)
+            {
+                  find = true;
+                  cout << "\n\t<Lihat Data Dan Histori>\n"
+                       << endl;
+                  cout << "Nasabah:" << endl;
+                  cout << "\n Data Nasabah:" << endl;
+                  cout << "No Rek  : " << dataNasabah[i].noRek << endl;
+                  cout << "Nama    : " << dataNasabah[i].nama << endl;
+                  cout << "Saldo   : " << dataNasabah[i].saldo << endl;
+                  cout << "\nHistori Transaksi:" << endl;
+                  if (dataNasabah[i].historiNasabah[0].idTrans > 0)
+                  {
+                        for (int j = 0; j < dataNasabah[i].jumlahTrans; ++j)
+                        {
+                              cout << "Nomor     : " << j + 1 << endl;
+                              cout << "ID Trans  : " << dataNasabah[i].historiNasabah[j].idTrans << endl;
+                              cout << "Nominal   : " << dataNasabah[i].historiNasabah[j].nominal << endl;
+                              cout << "No Rek T  : " << dataNasabah[i].historiNasabah[j].noRektuj << endl;
+                              cout << "Deskripsi : " << dataNasabah[i].historiNasabah[j].deskripsi << endl;
+                              cout << endl;
+                        }
+                  }
+                  else
+                  {
+                        cout << "\n [Empty Set] - Belum Memiliki Riwayat Transaksi\n";
+                  }
+                  break;
+            }
+            else
+            {
+                  find = false;
+            }
+      }
+      find == false ? cout << "\n [Error Tag]- Rekening Tak ditemukan\n" : cout << "\n <Data Tertampil Semua>";
+}
+// Funct Untuk Input Nasabah
+void inputNasabah()
+{
+      system("cls");
+      Pause();
+      jumlahNasabah++;
+      cout << "\n\n\t>-Menu Input Nasabah Baru-<\n";
+      cout << "\n\nHallo Nasabah Baru!!";
+      cout << "\n Data Nasabah:" << endl;
+      inputHandling("\nNo Rek  : ", dataNasabah[jumlahNasabah].noRek);
+      inputHandling("\nPass    : ", dataNasabah[jumlahNasabah].pass, 1);
+      inputHandling("\nNama    : ", dataNasabah[jumlahNasabah].nama, 2);
+      inputHandling("\nSaldo   : ", dataNasabah[jumlahNasabah].saldo);
+      dataNasabah[jumlahNasabah].jumlahTrans = 0; // Nasabah Baru Tidak Memiliki Histori Transaksi
+}
+// Fungsi untuk delete data nasabah
+void delNasabah()
+{
+      cout << "\n\n\t>-Menu Delete Data Nasabah-<\n";
+      system("cls");
+      Pause();
+      int noRekIn;
+      short opt;
+      bool find = true;
+      do
+      {
+            inputHandling("Berapa Nomor Rekeningnya?: ", noRekIn);
+            for (int i = 0; i < jumlahNasabah; i++)
+            {
+                  if (noRekIn == dataNasabah[i].noRek)
+                  {
+                        find = true;
+                        cout << "\nSuccess Delete Data user {" << dataNasabah[i].nama << "} ";
+                        dataNasabah[i] = {
+                            0,
+                            "",
+                            "",
+                            0,
+                            0,
+                            {}}; // Code Pengosongan Data Nasabah
+                        break;
+                  }
+                  else
+                  {
+                        find = false;
+                  }
+            }
+            if (find == false)
+            {
+                  cout << "\n[Error Tag] - Input Not Found - Wah ini gaada nih gimana dong?\n";
+                  inputHandling("\n(1)Ulang or (2)Keluar?: ", opt);
+                  if (opt == 1)
+                  {
+                        find = false;
+                  }
+                  else
+                  {
+                        find = true;
+                        cout << "\n Hapus No Rek <" << noRekIn << "> Dibatalkan";
+                  }
+            }
+      } while (find == false);
+}
 // >> Main Feature Funct Desc
 // Fungsi Login
 void login()
@@ -250,8 +388,16 @@ void login()
             {
                   if (noRekIn == dataNasabah[i].noRek && passIn == dataNasabah[i].pass)
                   {
-                        loginStat = true;
-                        indexNasabah = i; // Memasukkan noRekLogin kedalam list on admin
+                        if (dataNasabah[i].noRek == 459777345)
+                        {
+                              adminStat = true;
+                              loginStat = true;
+                        }
+                        else
+                        {
+                              loginStat = true;
+                              indexNasabah = i; // Memasukkan noRekLogin kedalam list on admin
+                        }
                         break;
                   }
             }
@@ -268,7 +414,7 @@ void login()
             }
             else
             {
-                  cout << "\nLogin gagal. Kesempatan Anda tersisa " << (--max_chance) << endl;
+                  cout << "\n[Login gagal] - Kesempatan Anda tersisa " << (--max_chance) << endl;
             }
       } while (max_chance > 0);
       if (max_chance == 0)
@@ -301,7 +447,7 @@ void cekSaldo()
             }
             else
             {
-                  cout << "\nInput tidak valid\n";
+                  cout << "\n[ERROR] - Input tidak valid\n";
             }
       } while (pilihan != 1 && pilihan != 2);
 }
@@ -323,7 +469,6 @@ void setorSaldo()
             cout << setw(15) << "Konfirmasi <1" << endl;
             cout << setw(15) << "keluar <2" << endl;
             inputHandling("\n>> ", pilihan);
-
             if (pilihan == 1)
             {
                   dataNasabah[indexNasabah].saldo += jumlah;
@@ -350,7 +495,7 @@ void setorSaldo()
             }
             else
             {
-                  cout << "\nInput tidak valid\n";
+                  cout << "\n[ERROR] - Input tidak valid\n";
             }
       } while (pilihan != 1 && pilihan != 2);
 }
@@ -414,7 +559,7 @@ void tarikSaldo()
             }
             else
             {
-                  cout << "\nInput tidak valid\n";
+                  cout << "\n[ERROR] - Input tidak valid\n";
             }
       } while (pilihan != 1 && pilihan != 2);
 }
@@ -502,13 +647,13 @@ void transferDeposito()
             }
             else if (pilihan == 2)
             {
-                  cout << "\nTransfer dibatalkan\n";
+                  cout << "\n[Transfer dibatalkan]\n";
                   Pause();
                   return;
             }
             else
             {
-                  cout << "\nInput tidak valid\n";
+                  cout << "\n[ERROR] - Input tidak valid\n";
             }
       } while (pilihan != 1 && pilihan != 2);
 }
@@ -564,7 +709,7 @@ void riwayatTransaksi()
             }
             else
             {
-                  cout << "pilihan yang Anda masukkan salah\n";
+                  cout << "[ERROR INPUT] - pilihan yang Anda masukkan salah\n";
                   Pause();
             }
       } while (!exit);
