@@ -47,7 +47,7 @@ void login();
 void cekSaldo();
 void setorSaldo();
 void tarikSaldo();
-void transferDeposito();
+void transferRekening();
 void riwayatTransaksi();
 void Pause();
 // Function untuk Pause
@@ -67,79 +67,84 @@ int main()
       // Inisialisasi Data awal
       inisialisasiData();
       // Login Masuk Rekening
-      login();
       do
       {
-            if (adminStat == true)
+            loginStat = false;
+            login();
+            do
             {
-                  system("cls");
-                  cout << "\t\t <<Menu Admin>>\n\n";
-                  cout << "1> Input Nasabah\n\n";
-                  cout << "2> Delete Nasabah\n\n";
-                  cout << "3> Tampil Nasabah\n\n";
-                  inputHandling("\n Admin Mau Yang Mana?: ", opt);
-                  switch (opt)
+                  if (adminStat == true)
                   {
-                  case 1:
-                        Pause();
-                        inputNasabah();
-                        break;
-                  case 2:
-                        Pause();
-                        delNasabah();
-                        break;
-                  case 3:
-                        Pause();
-                        tampilDataNasabah();
-                        break;
-                  default:
-                        cout << "\nTerimakasih telah menggunakan ATM ini Mas Admin\n";
-                        Pause();
-                        mainMenuLoop = false;
+                        system("cls");
+                        cout << "\t\t <<Menu Admin>>\n\n";
+                        cout << "1> Input Nasabah\n\n";
+                        cout << "2> Delete Nasabah\n\n";
+                        cout << "3> Tampil Nasabah\n\n";
+                        inputHandling("\n Admin Mau Yang Mana?: ", opt);
+                        switch (opt)
+                        {
+                        case 1:
+                              Pause();
+                              inputNasabah();
+                              break;
+                        case 2:
+                              Pause();
+                              delNasabah();
+                              break;
+                        case 3:
+                              Pause();
+                              tampilDataNasabah();
+                              break;
+                        default:
+                              cout << "\nTerimakasih telah menggunakan ATM ini Mas Admin\n";
+                              Pause();
+                              mainMenuLoop = false;
+                        }
                   }
-            }
-            else
-            {
-                  // Penampil Menu Utama
-                  system("cls");
-                  cout << "\t\t <<Menu ATM>>\n";
-                  cout << left << setw(25) << "1> Cek Saldo" << right << setw(25) << "Tarik Tunai <4\n\n";
-                  cout << left << setw(25) << "2> Deposit Saldo" << right << setw(25) << "Riwayat Transaksi <5\n\n";
-                  cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
-                  // Input User
-                  inputHandling("\nNasabah Mau Yang Mana?: ", opt);
-                  switch (opt)
+                  else
                   {
-                  case 1:
-                        Pause();
-                        cekSaldo();
-                        break;
-                  case 2:
-                        Pause();
-                        setorSaldo();
-                        break;
-                  case 3:
-                        Pause();
-                        transferDeposito();
-                        break;
-                  case 4:
-                        Pause();
-                        tarikSaldo();
-                        break;
-                  case 5:
-                        Pause();
-                        riwayatTransaksi();
-                        break;
-                  case 6:
-                        cout << "\nTerimakasih telah menggunakan ATM ini\n";
-                        Pause();
-                        mainMenuLoop = false;
-                        break;
-                  default:
-                        cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
+                        // Penampil Menu Utama
+                        system("cls");
+                        cout << "\t\t <<Menu ATM>>\n";
+                        cout << left << setw(25) << "1> Cek Saldo" << right << setw(25) << "Tarik Tunai <4\n\n";
+                        cout << left << setw(25) << "2> Deposit Saldo" << right << setw(25) << "Riwayat Transaksi <5\n\n";
+                        cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
+                        // Input User
+                        inputHandling("\nNasabah Mau Yang Mana?: ", opt);
+                        switch (opt)
+                        {
+                        case 1:
+                              Pause();
+                              cekSaldo();
+                              break;
+                        case 2:
+                              Pause();
+                              setorSaldo();
+                              break;
+                        case 3:
+                              Pause();
+                              transferRekening();
+                              break;
+                        case 4:
+                              Pause();
+                              tarikSaldo();
+                              break;
+                        case 5:
+                              Pause();
+                              riwayatTransaksi();
+                              break;
+                        case 6:
+                              cout << "\nTerimakasih telah menggunakan ATM ini\n";
+                              Pause();
+                              mainMenuLoop = false;
+                              loginStat = false;
+                              break;
+                        default:
+                              cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
+                        }
                   }
-            }
-      } while (mainMenuLoop == true);
+            } while (mainMenuLoop == true);
+      } while (loginStat == false);
       return 0;
 }
 // >> Desc Function
@@ -256,7 +261,7 @@ void inisialisasiData()
             {63, 120000, 87654560, "Top Up Dana"},
             {64, 980000, 87654975, "Top Up Gopay"},
             {90, 650000, 87650642, "Transfer"},
-            {74, 850000, 87654340, "Virtual Acc"}}};
+            {74, 850000, 87654340, "Transfer Saldo"}}};
       dataNasabah[jumlahNasabah++] =
           {23240159, "admin321", "Dimas Hafid Fathoni", 6500000, 12,
            {// biar spasi
@@ -625,7 +630,7 @@ void tarikSaldo()
       } while (pilihan != 1 && pilihan != 2);
 }
 // Function Transfer Rekening
-void transferDeposito()
+void transferRekening()
 {
       int rekening_tujuan, jumlah, indexFound;
       short pilihan;
@@ -773,7 +778,7 @@ void riwayatTransaksi()
                   cout << "[ERROR INPUT] - pilihan yang Anda masukkan salah\n";
                   Pause();
             }
-      } while (!exit);
+      } while (exit == false);
       Pause();
 }
 // Function pause dilengkapi cls
