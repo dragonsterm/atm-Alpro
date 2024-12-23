@@ -49,6 +49,7 @@ void setorSaldo();
 void tarikSaldo();
 void transferRekening();
 void riwayatTransaksi();
+// Pause Function
 void Pause();
 // Function untuk Pause
 void SlowType(const string &kata, int delay);
@@ -164,6 +165,7 @@ void inputHandling(string question, string &var, short lineOr)
             // Jika 2 maka spasi akan dibaca
             else if (lineOr == 2)
             {
+                  cin.ignore(30, '\n'); // Mengabaikan Input
                   getline(cin, var);
             }
             if (cin.fail())
@@ -338,7 +340,7 @@ void tampilDataNasabah()
       cout << "\n\t>- Menu Tampil Data Nasabah -<\n\n";
       Pause();
       inputHandling("Berapa Nomor Rekeningnya?: ", noRekIn);
-      for (int i = 0; i < jumlahNasabah; i++)
+      for (int i = 0; i <= jumlahNasabah; i++)
       {
             if (noRekIn == dataNasabah[i].noRek)
             {
@@ -375,6 +377,9 @@ void tampilDataNasabah()
             }
       }
       find == false ? cout << "\n [Error Tag]- Rekening Tak ditemukan\n" : cout << "\n <Data Tertampil Semua>";
+      cout << "\nTekan karakter apapun untuk melanjutkan...";
+      cin.ignore(1000, '\n');
+      cin.get();
 }
 // Funct Untuk Input Nasabah
 void inputNasabah()
@@ -403,7 +408,7 @@ void delNasabah()
       do
       {
             inputHandling("Berapa Nomor Rekeningnya?: ", noRekIn);
-            for (int i = 0; i < jumlahNasabah; i++)
+            for (int i = 0; i <= jumlahNasabah; i++)
             {
                   if (noRekIn == dataNasabah[i].noRek)
                   {
@@ -438,6 +443,8 @@ void delNasabah()
                   }
             }
       } while (find == false);
+      cin.ignore(1000, '\n');
+      cin.get();
 }
 // >> Main Feature Funct Desc
 // Fungsi Login
