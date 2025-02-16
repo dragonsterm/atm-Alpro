@@ -1006,7 +1006,7 @@ void Snake()
               this_thread::sleep_for(chrono::milliseconds(100));
           }
           system("cls");
-          cout << "\n\t<< Snake Game Over >>\n\n";
+          cout << "\n\t<< Game over  >>\n\n";
           cout << left << setw(30) << "1> Play Again" << "\n";
           cout << left << setw(30) << "2> Exit to Main Menu" << "\n";
           cout << "\n>> ";
@@ -1019,7 +1019,7 @@ void TitleSnake()
       cout << "\n\n";
       cout << "###############################################\n";
       cout << "#                                             #\n";
-      cout << "#                 SNAKE GAME                  #\n";
+      cout << "#                 Ular Senyum                 #\n";
       cout << "#                                             #\n";
       cout << "#        Press any key to start the game      #\n";
       cout << "#                                             #\n";
