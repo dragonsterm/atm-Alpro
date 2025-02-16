@@ -129,7 +129,7 @@ int main()
                         cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
                         // Input User
                         inputHandling("\nNasabah Mau Yang Mana?: ", opt);
-                        if(opt == 9999) {
+                        if(opt == 24) {
                               Snake();
                               Pause();
                               continue;
@@ -902,7 +902,7 @@ void InputSnake()
                   return;
             }
             lastkey = key;
-            // menyegah bertabrakan dengan arah yang berlawanan
+            // mencegah bertabrakan dengan arah yang berlawanan
             switch (key) {
                 case 'a': 
                 case 'A':
@@ -1016,10 +1016,18 @@ void Snake()
 void TitleSnake() 
 {
       system("cls");
+      cout << "\nSystem is ";
+      SlowType("Rebooting", 100);
+      this_thread::sleep_for(chrono::seconds(1));
+      DeleteText(20, 100);
+      SlowType("Ular_Senyum OS V 0.24 started", 300);
+      cout << endl;
+      this_thread::sleep_for(chrono::seconds(1));
+      system("cls");
       cout << "\n\n";
       cout << "###############################################\n";
       cout << "#                                             #\n";
-      cout << "#                 Ular Senyum                 #\n";
+      cout << "#                 Ular Senyum OS              #\n";
       cout << "#                                             #\n";
       cout << "#        Press any key to start the game      #\n";
       cout << "#                                             #\n";
