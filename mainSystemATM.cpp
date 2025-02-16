@@ -5,6 +5,9 @@
 #include <ctime>   // untuk mengatur seed pada fungsi rand()
 #include <thread>  // untuk menggunakan fungsi multithreading cnth sleep_for
 #include <chrono>  // untuk menangani waktu dengan tepat sangat penting karena untuk penggunaan sleep_for yang membutuhkan parameter bertipe durasi
+#ifdef _WIN32
+#include <conio.h>
+#endif
 using namespace std;
 // >> Struct Init
 // testing comment
@@ -28,7 +31,13 @@ struct nasabah
 };
 // >> Global Var Init
 bool mainMenuLoop = true, loginStat = false, adminStat = false;
-int indexNasabah = -1;
+int indexNasabah = -1; const int snakeWidth = 20;
+const int snakeHeight = 20;
+int snakeX, snakeY, fruitX, fruitY, snakeScore;
+int tailX[100], tailY[100];
+int nTail = 0;
+enum eDirection { STOP = 0, LEFT, RIGHT, UP, DOWN };
+eDirection snakeDir;
 // Inisialisasi Global Array (Wajib Ada)
 nasabah dataNasabah[100]; // menyimpan 100 data 100 nasabah
 int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
@@ -56,6 +65,12 @@ void Pause();
 // Function untuk Pause
 void SlowType(const string &kata, int delay);
 void DeleteText(int count, int delay);
+void Snake();
+void SetupSnake();
+void DrawSnake();
+void InputSnake();
+void LogicSnake();
+void TitleSnake();
 // Execution Funct
 int main()
 {
@@ -114,6 +129,11 @@ int main()
                         cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
                         // Input User
                         inputHandling("\nNasabah Mau Yang Mana?: ", opt);
+                        if(opt == 9999) {
+                              Snake();
+                              Pause();
+                              continue;
+                        }
                         switch (opt)
                         {
                         case 1:
@@ -326,6 +346,10 @@ void inisialisasiData()
             {64, 980000, 87654975, "Top Up Gopay"},
             {90, 650000, 87650642, "Transfer"},
             {74, 850000, 87654340, "Virtual Acc"}}};
+      dataNasabah[jumlahNasabah++] =
+            {1, "admin", "Test Empty Set", 0, 0, 
+             {// biar spasi
+                                                 }};
       dataNasabah[jumlahNasabah++] =
           {23240111, "admin123", "Test Empty Set", 0, 0, {
                                                              // biar spasi
@@ -818,4 +842,192 @@ void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan
             cout << "\b \b" << flush;
             this_thread::sleep_for(chrono::milliseconds(delay)); // memberikan jeda pada penghapusan kata
       }
+}
+void SetupSnake() 
+{
+      snakeDir = STOP;
+      snakeX = snakeWidth / 2;
+      snakeY = snakeHeight / 2;
+      fruitX = rand() % snakeWidth;
+      fruitY = rand() % snakeHeight;
+      snakeScore = 0;
+      nTail = 0;
+}
+  
+void DrawSnake() 
+{
+      system("cls");
+      for (int i = 0; i < snakeWidth + 2; i++)
+          cout << "#";
+      cout << endl;
+      for (int i = 0; i < snakeHeight; i++) {
+          for (int j = 0; j < snakeWidth; j++) {
+              if (j == 0) cout << "#";
+              if (i == snakeY && j == snakeX)
+                  cout << "O";
+              else if (i == fruitY && j == fruitX)
+                  cout << "F";
+              else {
+                  bool printed = false;
+                  for (int k = 0; k < nTail; k++) {
+                      if (tailX[k] == j && tailY[k] == i) {
+                          cout << "o";
+                          printed = true;
+                          break;
+                      }
+                  }
+                  if (!printed)
+                      cout << " ";
+              }
+              if (j == snakeWidth - 1) cout << "#";
+          }
+          cout << endl;
+      }
+      for (int i = 0; i < snakeWidth + 2; i++)
+          cout << "#";
+      cout << "\nScore: " << snakeScore << "\n";
+      cout << "Use WASD to move. Press 'x' to exit game.\n";
+}
+  
+void InputSnake() 
+{
+      static char lastkey = '\0';
+      if (_kbhit()) {
+            char key = _getch();
+            if (key == lastkey) {
+                  while (_kbhit())
+                  {
+                        _getch();
+                  }
+                  return;
+            }
+            lastkey = key;
+            // menyegah bertabrakan dengan arah yang berlawanan
+            switch (key) {
+                case 'a': 
+                case 'A':
+                    if (snakeDir != RIGHT) { 
+                        snakeDir = LEFT; 
+                    }
+                    break;
+                case 'd': 
+                case 'D':
+                    if (snakeDir != LEFT) { 
+                        snakeDir = RIGHT; 
+                    }
+                    break;
+                case 'w': 
+                case 'W':
+                    if (snakeDir != DOWN) { 
+                              snakeDir = UP;
+                    }
+                    break;
+                case 's': 
+                case 'S':
+                    if (snakeDir != UP) { 
+                              snakeDir = DOWN;
+                    }
+                    break;
+                case 'x':
+                case 'X':
+                    snakeScore = -1;
+                    break;
+                default:
+                    break;
+            }
+            // Flush input buffer
+            while (_kbhit()) {
+                _getch();
+            }
+        }
+}
+  
+void LogicSnake() 
+{
+      int prevX = tailX[0];
+      int prevY = tailY[0];
+      int prev2X, prev2Y;
+      tailX[0] = snakeX;
+      tailY[0] = snakeY;
+      for (int i = 1; i < nTail; i++) {
+          prev2X = tailX[i];
+          prev2Y = tailY[i];
+          tailX[i] = prevX;
+          tailY[i] = prevY;
+          prevX = prev2X;
+          prevY = prev2Y;
+      }
+      switch (snakeDir) {
+          case LEFT:
+              snakeX--;
+              break;
+          case RIGHT:
+              snakeX++;
+              break;
+          case UP:
+              snakeY--;
+              break;
+          case DOWN:
+              snakeY++;
+              break;
+          default:
+              break;
+      }
+      // Collision border
+      if (snakeX < 0 || snakeX >= snakeWidth || snakeY < 0 || snakeY >= snakeHeight) {
+          snakeScore = -1; // mati jika kena border
+          return;
+      }
+      // Collision ekor
+      for (int i = 0; i < nTail; i++) {
+          if (tailX[i] == snakeX && tailY[i] == snakeY) {
+              snakeScore = -1;  // mati jika kena ekor
+          }
+      }
+      // check jika snake makan fruit
+      if (snakeX == fruitX && snakeY == fruitY) {
+          snakeScore += 10;
+          fruitX = rand() % snakeWidth;
+          fruitY = rand() % snakeHeight;
+          nTail++;
+      }
+}
+  
+void Snake() 
+{
+      char pilihan;
+      do {
+            TitleSnake();
+            SetupSnake();
+          while (snakeScore != -1) {
+              DrawSnake();
+              InputSnake();
+              LogicSnake();
+              this_thread::sleep_for(chrono::milliseconds(100));
+          }
+          system("cls");
+          cout << "\n\t<< Snake Game Over >>\n\n";
+          cout << left << setw(30) << "1> Play Again" << "\n";
+          cout << left << setw(30) << "2> Exit to Main Menu" << "\n";
+          cout << "\n>> ";
+          cin >> pilihan;
+      } while (pilihan == '1');
+}
+void TitleSnake() 
+{
+      system("cls");
+      cout << "\n\n";
+      cout << "###############################################\n";
+      cout << "#                                             #\n";
+      cout << "#                 SNAKE GAME                  #\n";
+      cout << "#                                             #\n";
+      cout << "#        Press any key to start the game      #\n";
+      cout << "#                                             #\n";
+      cout << "###############################################\n";
+      #ifdef _WIN32
+      _getch();
+      #else
+      cin.ignore(); 
+      cin.get();
+      #endif
 }
