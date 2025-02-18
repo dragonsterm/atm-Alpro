@@ -7,11 +7,7 @@
 #include <chrono>  // untuk menangani waktu dengan tepat sangat penting karena untuk penggunaan sleep_for yang membutuhkan parameter bertipe durasi
 using namespace std;
 //  >> Struct Init
-//  Struct untuk Histori
-//  TODO - Struct multifile in
-//  TODO - Struct multifile in
-//  >> Struct
-//    Struct untuk Histori
+//   Struct untuk Histori
 struct histori
 {
       int idTrans;
@@ -513,6 +509,8 @@ void login()
             {
                   cout << "\n<Login berhasil>\n";
                   Pause();
+                  // REVIEW - yang ini juga
+                  system("cls");
                   // REVIEW - yang
                   system("cls");
                   cout << "\n <= Selamat Datang " << dataNasabah[indexNasabah].nama << " =>\n\n";
