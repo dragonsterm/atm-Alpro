@@ -6,6 +6,7 @@
 #include <thread>  // untuk menggunakan fungsi multithreading cnth sleep_for
 #include <chrono>  // untuk menangani waktu dengan tepat sangat penting karena untuk penggunaan sleep_for yang membutuhkan parameter bertipe durasi
 using namespace std;
+// TODO - Ini Pindah Multifile
 //  >> Struct Init
 //   Struct untuk Histori
 struct histori
@@ -36,17 +37,20 @@ int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
 void loopMenu();
 void menuAdmin();
 void menuUtama();
+// TODO - Inputhandling pindah Multifile
 // Error handling Func (Overload)
 void inputHandling(string question, string &var, short lineOr); // Untuk String
 void inputHandling(string question, int &var);                  // untuk int
 void inputHandling(string question, float &var);                // untuk float
-void inputHandling(string question, short &var);                // untuk short
-// Init Data Nasabah
+void inputHandling(string question, short &var);                // untuk short]
+// TODO - Init Data Juga Pindah Multifile
+//  Init Data Nasabah
 void inisialisasiData();
 // CRUD Funct Data Nasabah
 void tampilDataNasabah();
 void inputNasabah();
 void delNasabah();
+// TODO - Pindah Multifile kalau Memungkin kan
 // Main Feature
 void login();
 void cekSaldo();
@@ -54,6 +58,7 @@ void setorSaldo();
 void tarikSaldo();
 void transferRekening();
 void riwayatTransaksi();
+// TODO - Animasi Pindah Multifile
 // Pause Function
 void Pause();
 // Function untuk Pause
@@ -80,7 +85,6 @@ void loopMenu()
 {
       // Login dan Masuk Main Menu
       loopMenu();
-      return 0;
 }
 // Menu Admin dan Menu Utama
 void loopMenu()
@@ -511,22 +515,11 @@ void login()
                   Pause();
                   // REVIEW - yang ini juga
                   system("cls");
-                  // REVIEW - yang
-                  system("cls");
                   cout << "\n <= Selamat Datang " << dataNasabah[indexNasabah].nama << " =>\n\n";
                   cout << "Data Rekening :" << endl;
                   cout << setw(10) << "A.N." << setw(5) << ": " << dataNasabah[indexNasabah].nama << endl;
                   cout << setw(10) << "No.Rek" << setw(5) << " : " << dataNasabah[indexNasabah].noRek << endl;
                   Pause();
-                  // REVIEW - ini sementara biar terlihat rekening siapa tolong setelah rampung di benerin lagi
-                  cout << "\nSystem is ";
-                  SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
-                  this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-                  DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
-                  SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
-                  cout << endl;
-                  this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-                  system("cls");
                   // REVIEW - ini sementara biar terlihat rekening siapa tolong setelah rampung di benerin lagi
                   cout << "\nSystem is ";
                   SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
@@ -845,15 +838,6 @@ void riwayatTransaksi()
 // Function pause dilengkapi cls
 void Pause()
 {
-      // REVIEW - Developing Mode ini di Deactivate dulu yaaa
-      // cout << "\nSystem is ";
-      // SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
-      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-      // DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
-      // SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
-      // cout << endl;
-      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-      // system("cls");
       // REVIEW - Developing Mode ini di Deactivate dulu yaaa
       // cout << "\nSystem is ";
       // SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
