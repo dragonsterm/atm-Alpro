@@ -7,7 +7,6 @@
 #include <chrono>  // untuk menangani waktu dengan tepat sangat penting karena untuk penggunaan sleep_for yang membutuhkan parameter bertipe durasi
 using namespace std;
 // >> Struct Init
-// testing comment
 // Struct untuk Histori
 struct histori
 {
@@ -56,7 +55,7 @@ void Pause();
 // Function untuk Pause
 void SlowType(const string &kata, int delay);
 void DeleteText(int count, int delay);
-// Execution Funct
+// SECTION Execution Funct
 int main()
 {
       short opt;
@@ -150,7 +149,8 @@ int main()
       } while (loginStat == false);
       return 0;
 }
-// >> Desc Function
+// !SECTION
+// SECTION - Desc Function
 // Error Handling Funct
 // Overloading Funct untuk Error Handling Pengguna
 void inputHandling(string question, string &var, short lineOr)
@@ -246,7 +246,7 @@ void inputHandling(string question, short &var)
             }
       } while (statLoop == true);
 };
-// Data Init Function
+// SECTION - Database Initial Insert
 void inisialisasiData()
 {
       dataNasabah[jumlahNasabah++] =
@@ -332,6 +332,7 @@ void inisialisasiData()
                                                          }};
       // Kalau Kurang silahkan di tambah sendiri
 }
+// !SECTION
 // CRUD Funct
 // Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
 void tampilDataNasabah()
@@ -790,6 +791,7 @@ void riwayatTransaksi()
       } while (exit == false);
       Pause();
 }
+// SECTION - Animation Funct
 // Function pause dilengkapi cls
 void Pause()
 {
@@ -819,3 +821,5 @@ void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan
             this_thread::sleep_for(chrono::milliseconds(delay)); // memberikan jeda pada penghapusan kata
       }
 }
+// !SECTION
+// !SECTION
