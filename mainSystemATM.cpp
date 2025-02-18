@@ -6,7 +6,7 @@
 #include <thread>  // untuk menggunakan fungsi multithreading cnth sleep_for
 #include <chrono>  // untuk menangani waktu dengan tepat sangat penting karena untuk penggunaan sleep_for yang membutuhkan parameter bertipe durasi
 using namespace std;
-//  >> Struct Init
+//  >> Struct
 //  Struct untuk Histori
 struct histori
 {
@@ -351,6 +351,7 @@ void inisialisasiData()
                                                              // biar spasi
                                                          }};
       // Kalau Kurang silahkan di tambah sendiri
+      // yoi
 }
 // !SECTION
 // CRUD Funct
