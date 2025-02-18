@@ -7,8 +7,9 @@
 #include <chrono>  // untuk menangani waktu dengan tepat sangat penting karena untuk penggunaan sleep_for yang membutuhkan parameter bertipe durasi
 using namespace std;
 //  TODO - Struct multifile in
+//  TODO - Struct multifile in
 //  >> Struct
-//   Struct untuk Histori
+//    Struct untuk Histori
 struct histori
 {
       int idTrans;
@@ -38,6 +39,7 @@ void loopMenu();
 void menuAdmin();
 void menuUtama();
 // TODO - input handling juga di containerin
+// TODO - input handling juga di containerin
 // Error handling Func (Overload)
 void inputHandling(string question, string &var, short lineOr); // Untuk String
 void inputHandling(string question, int &var);                  // untuk int
@@ -45,6 +47,8 @@ void inputHandling(string question, float &var);                // untuk float
 void inputHandling(string question, short &var);                // untuk short
 // Init Data Nasabah
 void inisialisasiData();
+// TODO - CRUD di Pisah juga
+// TODO - CRUD diselesain
 // TODO - CRUD di Pisah juga
 // TODO - CRUD diselesain
 // CRUD Funct Data Nasabah
