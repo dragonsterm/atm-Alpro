@@ -61,7 +61,7 @@ void Pause();
 void SlowType(const string &kata, int delay);
 void DeleteText(int count, int delay);
 // NOTE - function Main tetap disini ciha
-// SECTION Execution Funct
+
 int main()
 {
       short opt;
@@ -155,8 +155,6 @@ int main()
       } while (loginStat == false);
       return 0;
 }
-// !SECTION
-// SECTION - Desc Function
 // Error Handling Funct
 // Overloading Funct untuk Error Handling Pengguna
 void inputHandling(string question, string &var, short lineOr)
@@ -252,7 +250,6 @@ void inputHandling(string question, short &var)
             }
       } while (statLoop == true);
 };
-// SECTION - Database Initial Insert
 void inisialisasiData()
 {
       dataNasabah[jumlahNasabah++] =
@@ -797,7 +794,6 @@ void riwayatTransaksi()
       } while (exit == false);
       Pause();
 }
-// SECTION - Animation Funct
 // Function pause dilengkapi cls
 void Pause()
 {
@@ -827,5 +823,3 @@ void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan
             this_thread::sleep_for(chrono::milliseconds(delay)); // memberikan jeda pada penghapusan kata
       }
 }
-// !SECTION
-// !SECTION
