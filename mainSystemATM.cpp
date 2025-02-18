@@ -6,8 +6,8 @@
 #include <thread>  // untuk menggunakan fungsi multithreading cnth sleep_for
 #include <chrono>  // untuk menangani waktu dengan tepat sangat penting karena untuk penggunaan sleep_for yang membutuhkan parameter bertipe durasi
 using namespace std;
-// >> Struct Init
-// Struct untuk Histori
+//  >> Struct Init
+//  Struct untuk Histori
 struct histori
 {
       int idTrans;
@@ -32,6 +32,10 @@ int indexNasabah = -1;
 nasabah dataNasabah[100]; // menyimpan 100 data 100 nasabah
 int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
 // >> Decklare Funtion
+// >> Menu
+void loopMenu();
+void menuAdmin();
+void menuUtama();
 // Error handling Func (Overload)
 void inputHandling(string question, string &var, short lineOr); // Untuk String
 void inputHandling(string question, int &var);                  // untuk int
@@ -55,7 +59,6 @@ void Pause();
 // Function untuk Pause
 void SlowType(const string &kata, int delay);
 void DeleteText(int count, int delay);
-// SECTION Execution Funct
 int main()
 {
       short opt;
@@ -68,7 +71,13 @@ int main()
            << " \t\n5. Rio Meidi Ataurrahman          (123240175)\n\n";
       // Inisialisasi Data awal
       inisialisasiData();
-      // Login Masuk Rekening
+      // Login dan Masuk Main Menu
+      loopMenu();
+      return 0;
+}
+// Menu Admin dan Menu Utama
+void loopMenu()
+{
       do
       {
             loginStat = false;
@@ -77,81 +86,92 @@ int main()
             {
                   if (adminStat == true)
                   {
-                        system("cls");
-                        cout << "\t\t <<Menu Admin>>\n\n";
-                        cout << "1> Input Nasabah\n\n";
-                        cout << "2> Delete Nasabah\n\n";
-                        cout << "3> Tampil Nasabah\n\n";
-                        inputHandling("\n Admin Mau Yang Mana?: ", opt);
-                        switch (opt)
-                        {
-                        case 1:
-                              Pause();
-                              inputNasabah();
-                              break;
-                        case 2:
-                              Pause();
-                              delNasabah();
-                              break;
-                        case 3:
-                              Pause();
-                              tampilDataNasabah();
-                              break;
-                        default:
-                              cout << "\nTerimakasih telah menggunakan ATM ini Mas Admin\n";
-                              Pause();
-                              mainMenuLoop = false;
-                        }
+                        menuAdmin();
                   }
                   else
                   {
-                        // Penampil Menu Utama
-                        system("cls");
-                        cout << "\t\t <<Menu ATM>>\n";
-                        cout << left << setw(25) << "1> Cek Saldo" << right << setw(25) << "Tarik Tunai <4\n\n";
-                        cout << left << setw(25) << "2> Deposit Saldo" << right << setw(25) << "Riwayat Transaksi <5\n\n";
-                        cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
-                        // Input User
-                        inputHandling("\nNasabah Mau Yang Mana?: ", opt);
-                        switch (opt)
-                        {
-                        case 1:
-                              Pause();
-                              cekSaldo();
-                              break;
-                        case 2:
-                              Pause();
-                              setorSaldo();
-                              break;
-                        case 3:
-                              Pause();
-                              transferRekening();
-                              break;
-                        case 4:
-                              Pause();
-                              tarikSaldo();
-                              break;
-                        case 5:
-                              Pause();
-                              riwayatTransaksi();
-                              break;
-                        case 6:
-                              cout << "\nTerimakasih telah menggunakan ATM ini\n";
-                              Pause();
-                              mainMenuLoop = false;
-                              loginStat = false;
-                              break;
-                        default:
-                              cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
-                        }
+                        menuUtama();
                   }
             } while (mainMenuLoop == true);
       } while (loginStat == false);
-      return 0;
 }
-// !SECTION
-// SECTION - Desc Function
-// Error Handling Funct
+void menuAdmin()
+{
+      short opt;
+      system("cls");
+      cout << "\t\t <<Menu Admin>>\n\n";
+      cout << left << setw(25) << "1> Input Nasabah" << right << setw(25) << "\n\n";
+      cout << left << setw(25) << "2> Delete Nasabah" << right << setw(25) << "\n\n";
+      cout << left << setw(25) << "3> Tampil Nasabah" << right << setw(25) << "Exit Admin <4\n\n";
+      inputHandling("\n Admin Mau Yang Mana?: ", opt);
+      switch (opt)
+      {
+      case 1:
+            Pause();
+            inputNasabah();
+            break;
+      case 2:
+            Pause();
+            delNasabah();
+            break;
+      case 3:
+            Pause();
+            tampilDataNasabah();
+            break;
+      case 4:
+            cout << "\nTerima kasih telah menggunakan ATM ini Mas Admin\n";
+            loopMenu();
+            break;
+      default:
+            Pause();
+            cout << "[error System] - Jane Ngopo si?" << endl;
+            break;
+      }
+}
+void menuUtama()
+{
+      short opt;
+      // Penampil Menu Utama
+      system("cls");
+      cout << "\t\t <<Menu ATM>>\n";
+      cout << left << setw(25) << "1> Cek Saldo" << right << setw(25) << "Tarik Tunai <4\n\n";
+      cout << left << setw(25) << "2> Deposit Saldo" << right << setw(25) << "Riwayat Transaksi <5\n\n";
+      cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
+      // Input User
+      inputHandling("\nNasabah Mau Yang Mana?: ", opt);
+      switch (opt)
+      {
+      case 1:
+            Pause();
+            cekSaldo();
+            break;
+      case 2:
+            Pause();
+            setorSaldo();
+            break;
+      case 3:
+            Pause();
+            transferRekening();
+            break;
+      case 4:
+            Pause();
+            tarikSaldo();
+            break;
+      case 5:
+            Pause();
+            riwayatTransaksi();
+            break;
+      case 6:
+            cout << "\nTerimakasih telah menggunakan ATM ini\n";
+            Pause();
+            mainMenuLoop = false;
+            loginStat = false;
+            break;
+      default:
+            cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
+      }
+}
+// NOTE - Error Handling Funct
 // Overloading Funct untuk Error Handling Pengguna
 void inputHandling(string question, string &var, short lineOr)
 {
@@ -246,7 +266,7 @@ void inputHandling(string question, short &var)
             }
       } while (statLoop == true);
 };
-// SECTION - Database Initial Insert
+
 void inisialisasiData()
 {
       dataNasabah[jumlahNasabah++] =
@@ -481,11 +501,22 @@ void login()
             {
                   cout << "\n<Login berhasil>\n";
                   Pause();
+                  // REVIEW - yang ini juga
+                  system("cls");
                   cout << "\n <= Selamat Datang " << dataNasabah[indexNasabah].nama << " =>\n\n";
                   cout << "Data Rekening :" << endl;
                   cout << setw(10) << "A.N." << setw(5) << ": " << dataNasabah[indexNasabah].nama << endl;
                   cout << setw(10) << "No.Rek" << setw(5) << " : " << dataNasabah[indexNasabah].noRek << endl;
                   Pause();
+                  // REVIEW - ini sementara biar terlihat rekening siapa tolong setelah rampung di benerin lagi
+                  cout << "\nSystem is ";
+                  SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
+                  this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
+                  DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
+                  SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
+                  cout << endl;
+                  this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
+                  system("cls");
                   break;
             }
             else
@@ -791,18 +822,19 @@ void riwayatTransaksi()
       } while (exit == false);
       Pause();
 }
-// SECTION - Animation Funct
+
 // Function pause dilengkapi cls
 void Pause()
 {
-      cout << "\nSystem is ";
-      SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
-      this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-      DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
-      SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
-      cout << endl;
-      this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-      system("cls");
+      // REVIEW - Developing Mode ini di Deactivate dulu yaaa
+      // cout << "\nSystem is ";
+      // SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
+      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
+      // DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
+      // SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
+      // cout << endl;
+      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
+      // system("cls");
 }
 // Animasi untuk pause
 void SlowType(const string &kata, int delay) // menampilkan kata satu per satu dengan jeda waktu
@@ -821,5 +853,3 @@ void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan
             this_thread::sleep_for(chrono::milliseconds(delay)); // memberikan jeda pada penghapusan kata
       }
 }
-// !SECTION
-// !SECTION
