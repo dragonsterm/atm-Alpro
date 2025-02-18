@@ -6,8 +6,9 @@
 #include <thread>  // untuk menggunakan fungsi multithreading cnth sleep_for
 #include <chrono>  // untuk menangani waktu dengan tepat sangat penting karena untuk penggunaan sleep_for yang membutuhkan parameter bertipe durasi
 using namespace std;
-// >> Struct Init
-// Struct untuk Histori
+// TODO - Struct multifile in
+//  >> Struct Init
+//  Struct untuk Histori
 struct histori
 {
       int idTrans;
@@ -32,6 +33,7 @@ int indexNasabah = -1;
 nasabah dataNasabah[100]; // menyimpan 100 data 100 nasabah
 int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
 // >> Decklare Funtion
+// TODO - input handling juga di containerin
 // Error handling Func (Overload)
 void inputHandling(string question, string &var, short lineOr); // Untuk String
 void inputHandling(string question, int &var);                  // untuk int
@@ -39,6 +41,8 @@ void inputHandling(string question, float &var);                // untuk float
 void inputHandling(string question, short &var);                // untuk short
 // Init Data Nasabah
 void inisialisasiData();
+// TODO - CRUD di Pisah juga
+// TODO - CRUD diselesain
 // CRUD Funct Data Nasabah
 void tampilDataNasabah();
 void inputNasabah();
@@ -50,11 +54,13 @@ void setorSaldo();
 void tarikSaldo();
 void transferRekening();
 void riwayatTransaksi();
+// TODO - Animation juga di multifile in
 // Pause Function
 void Pause();
 // Function untuk Pause
 void SlowType(const string &kata, int delay);
 void DeleteText(int count, int delay);
+// NOTE - function Main tetap disini ciha
 // SECTION Execution Funct
 int main()
 {
