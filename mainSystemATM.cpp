@@ -69,6 +69,7 @@ void Pause();
 void SlowType(const string &kata, int delay);
 void DeleteText(int count, int delay);
 // NOTE - function Main tetap disini ciha
+
 int main()
 {
       short opt;
@@ -96,92 +97,79 @@ void loopMenu()
             {
                   if (adminStat == true)
                   {
-                        menuAdmin();
+                        system("cls");
+                        cout << "\t\t <<Menu Admin>>\n\n";
+                        cout << "1> Input Nasabah\n\n";
+                        cout << "2> Delete Nasabah\n\n";
+                        cout << "3> Tampil Nasabah\n\n";
+                        inputHandling("\n Admin Mau Yang Mana?: ", opt);
+                        switch (opt)
+                        {
+                        case 1:
+                              Pause();
+                              inputNasabah();
+                              break;
+                        case 2:
+                              Pause();
+                              delNasabah();
+                              break;
+                        case 3:
+                              Pause();
+                              tampilDataNasabah();
+                              break;
+                        default:
+                              cout << "\nTerimakasih telah menggunakan ATM ini Mas Admin\n";
+                              Pause();
+                              mainMenuLoop = false;
+                        }
                   }
                   else
                   {
-                        menuUtama();
+                        // Penampil Menu Utama
+                        system("cls");
+                        cout << "\t\t <<Menu ATM>>\n";
+                        cout << left << setw(25) << "1> Cek Saldo" << right << setw(25) << "Tarik Tunai <4\n\n";
+                        cout << left << setw(25) << "2> Deposit Saldo" << right << setw(25) << "Riwayat Transaksi <5\n\n";
+                        cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
+                        // Input User
+                        inputHandling("\nNasabah Mau Yang Mana?: ", opt);
+                        switch (opt)
+                        {
+                        case 1:
+                              Pause();
+                              cekSaldo();
+                              break;
+                        case 2:
+                              Pause();
+                              setorSaldo();
+                              break;
+                        case 3:
+                              Pause();
+                              transferRekening();
+                              break;
+                        case 4:
+                              Pause();
+                              tarikSaldo();
+                              break;
+                        case 5:
+                              Pause();
+                              riwayatTransaksi();
+                              break;
+                        case 6:
+                              cout << "\nTerimakasih telah menggunakan ATM ini\n";
+                              Pause();
+                              mainMenuLoop = false;
+                              loginStat = false;
+                              break;
+                        default:
+                              cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
+                        }
                   }
             } while (mainMenuLoop == true);
       } while (loginStat == false);
+      return 0;
 }
-void menuAdmin()
-{
-      short opt;
-      system("cls");
-      cout << "\t\t <<Menu Admin>>\n\n";
-      cout << left << setw(25) << "1> Input Nasabah" << right << setw(25) << "\n\n";
-      cout << left << setw(25) << "2> Delete Nasabah" << right << setw(25) << "\n\n";
-      cout << left << setw(25) << "3> Tampil Nasabah" << right << setw(25) << "Exit Admin <4\n\n";
-      inputHandling("\n Admin Mau Yang Mana?: ", opt);
-      switch (opt)
-      {
-      case 1:
-            Pause();
-            inputNasabah();
-            break;
-      case 2:
-            Pause();
-            delNasabah();
-            break;
-      case 3:
-            Pause();
-            tampilDataNasabah();
-            break;
-      case 4:
-            cout << "\nTerima kasih telah menggunakan ATM ini Mas Admin\n";
-            loopMenu();
-            break;
-      default:
-            Pause();
-            cout << "[error System] - Jane Ngopo si?" << endl;
-            break;
-      }
-}
-void menuUtama()
-{
-      short opt;
-      // Penampil Menu Utama
-      system("cls");
-      cout << "\t\t <<Menu ATM>>\n";
-      cout << left << setw(25) << "1> Cek Saldo" << right << setw(25) << "Tarik Tunai <4\n\n";
-      cout << left << setw(25) << "2> Deposit Saldo" << right << setw(25) << "Riwayat Transaksi <5\n\n";
-      cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
-      // Input User
-      inputHandling("\nNasabah Mau Yang Mana?: ", opt);
-      switch (opt)
-      {
-      case 1:
-            Pause();
-            cekSaldo();
-            break;
-      case 2:
-            Pause();
-            setorSaldo();
-            break;
-      case 3:
-            Pause();
-            transferRekening();
-            break;
-      case 4:
-            Pause();
-            tarikSaldo();
-            break;
-      case 5:
-            Pause();
-            riwayatTransaksi();
-            break;
-      case 6:
-            cout << "\nTerimakasih telah menggunakan ATM ini\n";
-            Pause();
-            mainMenuLoop = false;
-            loginStat = false;
-            break;
-      default:
-            cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
-      }
-}
-// NOTE - Error Handling Funct
+// Error Handling Funct
 // Overloading Funct untuk Error Handling Pengguna
 void inputHandling(string question, string &var, short lineOr)
 {
@@ -276,7 +264,6 @@ void inputHandling(string question, short &var)
             }
       } while (statLoop == true);
 };
-
 void inisialisasiData()
 {
       dataNasabah[jumlahNasabah++] =
@@ -833,7 +820,6 @@ void riwayatTransaksi()
       } while (exit == false);
       Pause();
 }
-
 // Function pause dilengkapi cls
 void Pause()
 {
