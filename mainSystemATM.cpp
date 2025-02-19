@@ -9,9 +9,8 @@
 #include <conio.h>
 #endif
 using namespace std;
-// >> Struct Init
-// testing comment
-// Struct untuk Histori
+//  >> Struct
+//  Struct untuk Histori
 struct histori
 {
       int idTrans;
@@ -31,17 +30,29 @@ struct nasabah
 };
 // >> Global Var Init
 bool mainMenuLoop = true, loginStat = false, adminStat = false;
-int indexNasabah = -1; const int snakeWidth = 20;
+int indexNasabah = -1;
+const int snakeWidth = 20;
 const int snakeHeight = 20;
 int snakeX, snakeY, fruitX, fruitY, snakeScore;
 int tailX[100], tailY[100];
 int nTail = 0;
-enum eDirection { STOP = 0, LEFT, RIGHT, UP, DOWN };
+enum eDirection
+{
+      STOP = 0,
+      LEFT,
+      RIGHT,
+      UP,
+      DOWN
+};
 eDirection snakeDir;
 // Inisialisasi Global Array (Wajib Ada)
 nasabah dataNasabah[100]; // menyimpan 100 data 100 nasabah
 int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
 // >> Decklare Funtion
+// >> Menu
+void loopMenu();
+void menuAdmin();
+void menuUtama();
 // Error handling Func (Overload)
 void inputHandling(string question, string &var, short lineOr); // Untuk String
 void inputHandling(string question, int &var);                  // untuk int
@@ -55,6 +66,7 @@ void inputNasabah();
 void delNasabah();
 // Main Feature
 void login();
+void loginAttempt(int Attempts); // Login Rekursif
 void cekSaldo();
 void setorSaldo();
 void tarikSaldo();
@@ -65,13 +77,15 @@ void Pause();
 // Function untuk Pause
 void SlowType(const string &kata, int delay);
 void DeleteText(int count, int delay);
+// Function untuk SnakeGame
 void Snake();
 void SetupSnake();
 void DrawSnake();
 void InputSnake();
 void LogicSnake();
 void TitleSnake();
-// Execution Funct
+
+// Main Program
 int main()
 {
       short opt;
@@ -84,7 +98,13 @@ int main()
            << " \t\n5. Rio Meidi Ataurrahman          (123240175)\n\n";
       // Inisialisasi Data awal
       inisialisasiData();
-      // Login Masuk Rekening
+      // Login dan Masuk Main Menu
+      loopMenu();
+      return 0;
+}
+// Menu Admin dan Menu Utama
+void loopMenu()
+{
       do
       {
             loginStat = false;
@@ -93,85 +113,96 @@ int main()
             {
                   if (adminStat == true)
                   {
-                        system("cls");
-                        cout << "\t\t <<Menu Admin>>\n\n";
-                        cout << "1> Input Nasabah\n\n";
-                        cout << "2> Delete Nasabah\n\n";
-                        cout << "3> Tampil Nasabah\n\n";
-                        inputHandling("\n Admin Mau Yang Mana?: ", opt);
-                        switch (opt)
-                        {
-                        case 1:
-                              Pause();
-                              inputNasabah();
-                              break;
-                        case 2:
-                              Pause();
-                              delNasabah();
-                              break;
-                        case 3:
-                              Pause();
-                              tampilDataNasabah();
-                              break;
-                        default:
-                              cout << "\nTerimakasih telah menggunakan ATM ini Mas Admin\n";
-                              Pause();
-                              mainMenuLoop = false;
-                        }
+                        menuAdmin();
                   }
                   else
                   {
-                        // Penampil Menu Utama
-                        system("cls");
-                        cout << "\t\t <<Menu ATM>>\n";
-                        cout << left << setw(25) << "1> Cek Saldo" << right << setw(25) << "Tarik Tunai <4\n\n";
-                        cout << left << setw(25) << "2> Deposit Saldo" << right << setw(25) << "Riwayat Transaksi <5\n\n";
-                        cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
-                        // Input User
-                        inputHandling("\nNasabah Mau Yang Mana?: ", opt);
-                        if(opt == 24) {
-                              Snake();
-                              Pause();
-                              continue;
-                        }
-                        switch (opt)
-                        {
-                        case 1:
-                              Pause();
-                              cekSaldo();
-                              break;
-                        case 2:
-                              Pause();
-                              setorSaldo();
-                              break;
-                        case 3:
-                              Pause();
-                              transferRekening();
-                              break;
-                        case 4:
-                              Pause();
-                              tarikSaldo();
-                              break;
-                        case 5:
-                              Pause();
-                              riwayatTransaksi();
-                              break;
-                        case 6:
-                              cout << "\nTerimakasih telah menggunakan ATM ini\n";
-                              Pause();
-                              mainMenuLoop = false;
-                              loginStat = false;
-                              break;
-                        default:
-                              cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
-                        }
+                        menuUtama();
                   }
             } while (mainMenuLoop == true);
       } while (loginStat == false);
-      return 0;
 }
-// >> Desc Function
-// Error Handling Funct
+void menuAdmin()
+{
+      short opt;
+      system("cls");
+      cout << "\t\t <<Menu Admin>>\n\n";
+      cout << left << setw(25) << "1> Input Nasabah" << right << setw(25) << "\n\n";
+      cout << left << setw(25) << "2> Delete Nasabah" << right << setw(25) << "\n\n";
+      cout << left << setw(25) << "3> Tampil Nasabah" << right << setw(25) << "Exit Admin <4\n\n";
+      inputHandling("\n Admin Mau Yang Mana?: ", opt);
+      switch (opt)
+      {
+      case 1:
+            Pause();
+            inputNasabah();
+            break;
+      case 2:
+            Pause();
+            delNasabah();
+            break;
+      case 3:
+            Pause();
+            tampilDataNasabah();
+            break;
+      case 4:
+            cout << "\nTerima kasih telah menggunakan ATM ini Mas Admin\n";
+            loopMenu();
+            break;
+      default:
+            Pause();
+            cout << "[error System] - Jane Ngopo si?" << endl;
+            break;
+      }
+}
+void menuUtama()
+{
+      short opt;
+      // Penampil Menu Utama
+      system("cls");
+      cout << "\t\t <<Menu ATM>>\n";
+      cout << left << setw(25) << "1> Cek Saldo" << right << setw(25) << "Tarik Tunai <4\n\n";
+      cout << left << setw(25) << "2> Deposit Saldo" << right << setw(25) << "Riwayat Transaksi <5\n\n";
+      cout << left << setw(25) << "3> Transfer Rekening" << right << setw(25) << "Exit <6\n\n";
+      // Input User
+      inputHandling("\nNasabah Mau Yang Mana?: ", opt);
+      switch (opt)
+      {
+      case 1:
+            Pause();
+            cekSaldo();
+            break;
+      case 2:
+            Pause();
+            setorSaldo();
+            break;
+      case 3:
+            Pause();
+            transferRekening();
+            break;
+      case 4:
+            Pause();
+            tarikSaldo();
+            break;
+      case 5:
+            Pause();
+            riwayatTransaksi();
+            break;
+      case 6:
+            cout << "\nTerimakasih telah menggunakan ATM ini\n";
+            Pause();
+            mainMenuLoop = false;
+            loginStat = false;
+            break;
+      case 24:
+            Pause();
+            Snake();
+            break;
+      default:
+            cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
+      }
+}
+// NOTE - Error Handling Funct
 // Overloading Funct untuk Error Handling Pengguna
 void inputHandling(string question, string &var, short lineOr)
 {
@@ -266,7 +297,7 @@ void inputHandling(string question, short &var)
             }
       } while (statLoop == true);
 };
-// Data Init Function
+
 void inisialisasiData()
 {
       dataNasabah[jumlahNasabah++] =
@@ -347,15 +378,17 @@ void inisialisasiData()
             {90, 650000, 87650642, "Transfer"},
             {74, 850000, 87654340, "Virtual Acc"}}};
       dataNasabah[jumlahNasabah++] =
-            {1, "admin", "Test Empty Set", 0, 0, 
-             {// biar spasi
-                                                 }};
+          {1, "admin", "Test Empty Set", 0, 0, {
+                                                   // biar spasi
+                                               }};
       dataNasabah[jumlahNasabah++] =
           {23240111, "admin123", "Test Empty Set", 0, 0, {
                                                              // biar spasi
                                                          }};
       // Kalau Kurang silahkan di tambah sendiri
+      // yoi
 }
+// !SECTION
 // CRUD Funct
 // Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
 void tampilDataNasabah()
@@ -473,54 +506,60 @@ void delNasabah()
       cin.get();
 }
 // >> Main Feature Funct Desc
-// Fungsi Login
-void login()
+// Fungsi Login Rekursif
+void loginAttempt(int Attempts)
 {
+      if (Attempts <= 0)
+      {
+            cout << "<Maaf Kesempatan Anda Habis. Silahkan Hubungi Costumer Service jika ada masalah.>" << endl;
+            exit(0);
+      }
+
       int noRekIn;
       string passIn;
-      int max_chance = 3;
-      do
+      inputHandling("\nMasukkan Nomor Rekening (8 Digit)\n>> ", noRekIn);
+      inputHandling("\nMasukkan Password Rekening\n>> ", passIn, 1);
+
+      for (int i = 0; i < jumlahNasabah; i++)
       {
-            inputHandling("\nMasukkan Nomor Rekening (8 Digit)\n>> ", noRekIn);
-            inputHandling("\nMasukkan Password Rekening\n>> ", passIn, 1);
-            for (int i = 0; i <= jumlahNasabah; i++)
+            if (noRekIn == dataNasabah[i].noRek && passIn == dataNasabah[i].pass)
             {
-                  if (noRekIn == dataNasabah[i].noRek && passIn == dataNasabah[i].pass)
+                  if (dataNasabah[i].noRek == 459777345)
                   {
-                        if (dataNasabah[i].noRek == 459777345)
-                        {
-                              adminStat = true;
-                              loginStat = true;
-                        }
-                        else
-                        {
-                              loginStat = true;
-                              indexNasabah = i; // Memasukkan noRekLogin kedalam list on admin
-                        }
-                        break;
+                        adminStat = true;
+                        loginStat = true;
                   }
-            }
-            if (loginStat == true)
-            {
+                  else
+                  {
+                        loginStat = true;
+                        indexNasabah = i;
+                  }
                   cout << "\n<Login berhasil>\n";
                   Pause();
+                  system("cls");
                   cout << "\n <= Selamat Datang " << dataNasabah[indexNasabah].nama << " =>\n\n";
                   cout << "Data Rekening :" << endl;
                   cout << setw(10) << "A.N." << setw(5) << ": " << dataNasabah[indexNasabah].nama << endl;
                   cout << setw(10) << "No.Rek" << setw(5) << " : " << dataNasabah[indexNasabah].noRek << endl;
                   Pause();
-                  break;
+                  cout << "\nSystem is ";
+                  SlowType("processing", 100);
+                  this_thread::sleep_for(chrono::seconds(1));
+                  DeleteText(10, 100);
+                  SlowType("completed", 100);
+                  cout << endl;
+                  this_thread::sleep_for(chrono::seconds(1));
+                  system("cls");
+                  return;
             }
-            else
-            {
-                  cout << "\n[Login gagal] - Kesempatan Anda tersisa " << (--max_chance) << endl;
-            }
-      } while (max_chance > 0);
-      if (max_chance == 0)
-      {
-            cout << "<Kesempatan Anda habis. Program akan keluar.>";
-            exit(0);
       }
+      cout << "\n[Login Gagal] - Kesempatan Anda Tersisa " << (Attempts - 1) << endl;
+      loginAttempt(Attempts - 1);
+}
+// Fungsi Login
+void login()
+{
+      loginAttempt(3);
 }
 // Fungsi Cek Saldo
 void cekSaldo()
@@ -541,7 +580,7 @@ void cekSaldo()
             {
                   cout << "\n[ERROR] - Input tidak valid\n";
             }
-      } while (pilihan != 1 && pilihan != 2);
+      } while (pilihan != 1);
 }
 // Function Setor Saldo
 void setorSaldo()
@@ -807,17 +846,19 @@ void riwayatTransaksi()
       } while (exit == false);
       Pause();
 }
+
 // Function pause dilengkapi cls
 void Pause()
 {
-      cout << "\nSystem is ";
-      SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
-      this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-      DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
-      SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
-      cout << endl;
-      this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-      system("cls");
+      // REVIEW - Developing Mode ini di Deactivate dulu yaaa
+      // cout << "\nSystem is ";
+      // SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
+      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
+      // DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
+      // SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
+      // cout << endl;
+      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
+      // system("cls");
 }
 // Animasi untuk pause
 void SlowType(const string &kata, int delay) // menampilkan kata satu per satu dengan jeda waktu
@@ -836,7 +877,8 @@ void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan
             this_thread::sleep_for(chrono::milliseconds(delay)); // memberikan jeda pada penghapusan kata
       }
 }
-void SetupSnake() 
+// Function Game Ular
+void SetupSnake()
 {
       snakeDir = STOP;
       snakeX = snakeWidth / 2;
@@ -846,48 +888,57 @@ void SetupSnake()
       snakeScore = 0;
       nTail = 0;
 }
-  
-void DrawSnake() 
+
+void DrawSnake()
 {
       system("cls");
       for (int i = 0; i < snakeWidth + 2; i++)
-          cout << "#";
+            cout << "#";
       cout << endl;
-      for (int i = 0; i < snakeHeight; i++) {
-          for (int j = 0; j < snakeWidth; j++) {
-              if (j == 0) cout << "#";
-              if (i == snakeY && j == snakeX)
-                  cout << "O";
-              else if (i == fruitY && j == fruitX)
-                  cout << "F";
-              else {
-                  bool printed = false;
-                  for (int k = 0; k < nTail; k++) {
-                      if (tailX[k] == j && tailY[k] == i) {
-                          cout << "o";
-                          printed = true;
-                          break;
-                      }
+      for (int i = 0; i < snakeHeight; i++)
+      {
+            for (int j = 0; j < snakeWidth; j++)
+            {
+                  if (j == 0)
+                        cout << "#";
+                  if (i == snakeY && j == snakeX)
+                        cout << "O";
+                  else if (i == fruitY && j == fruitX)
+                        cout << "F";
+                  else
+                  {
+                        bool printed = false;
+                        for (int k = 0; k < nTail; k++)
+                        {
+                              if (tailX[k] == j && tailY[k] == i)
+                              {
+                                    cout << "o";
+                                    printed = true;
+                                    break;
+                              }
+                        }
+                        if (!printed)
+                              cout << " ";
                   }
-                  if (!printed)
-                      cout << " ";
-              }
-              if (j == snakeWidth - 1) cout << "#";
-          }
-          cout << endl;
+                  if (j == snakeWidth - 1)
+                        cout << "#";
+            }
+            cout << endl;
       }
       for (int i = 0; i < snakeWidth + 2; i++)
-          cout << "#";
+            cout << "#";
       cout << "\nScore: " << snakeScore << "\n";
       cout << "Use WASD to move. Press 'x' to exit game.\n";
 }
-  
-void InputSnake() 
+
+void InputSnake()
 {
       static char lastkey = '\0';
-      if (_kbhit()) {
+      if (_kbhit())
+      {
             char key = _getch();
-            if (key == lastkey) {
+            if (key == lastkey)
+            {
                   while (_kbhit())
                   {
                         _getch();
@@ -896,124 +947,143 @@ void InputSnake()
             }
             lastkey = key;
             // mencegah bertabrakan dengan arah yang berlawanan
-            switch (key) {
-                case 'a': 
-                case 'A':
-                    if (snakeDir != RIGHT) { 
-                        snakeDir = LEFT; 
-                    }
-                    break;
-                case 'd': 
-                case 'D':
-                    if (snakeDir != LEFT) { 
-                        snakeDir = RIGHT; 
-                    }
-                    break;
-                case 'w': 
-                case 'W':
-                    if (snakeDir != DOWN) { 
-                              snakeDir = UP;
-                    }
-                    break;
-                case 's': 
-                case 'S':
-                    if (snakeDir != UP) { 
-                              snakeDir = DOWN;
-                    }
-                    break;
-                case 'x':
-                case 'X':
-                    snakeScore = -1;
-                    break;
-                default:
-                    break;
+            switch (key)
+            {
+            case 'a':
+            case 'A':
+                  if (snakeDir != RIGHT)
+                  {
+                        snakeDir = LEFT;
+                  }
+                  break;
+            case 'd':
+            case 'D':
+                  if (snakeDir != LEFT)
+                  {
+                        snakeDir = RIGHT;
+                  }
+                  break;
+            case 'w':
+            case 'W':
+                  if (snakeDir != DOWN)
+                  {
+                        snakeDir = UP;
+                  }
+                  break;
+            case 's':
+            case 'S':
+                  if (snakeDir != UP)
+                  {
+                        snakeDir = DOWN;
+                  }
+                  break;
+            case 'x':
+            case 'X':
+                  snakeScore = -1;
+                  break;
+            default:
+                  break;
             }
             // Flush input buffer
-            while (_kbhit()) {
-                _getch();
+            while (_kbhit())
+            {
+                  _getch();
             }
-        }
+      }
 }
-  
-void LogicSnake() 
+
+void LogicSnake()
 {
       int prevX = tailX[0];
       int prevY = tailY[0];
       int prev2X, prev2Y;
       tailX[0] = snakeX;
       tailY[0] = snakeY;
-      for (int i = 1; i < nTail; i++) {
-          prev2X = tailX[i];
-          prev2Y = tailY[i];
-          tailX[i] = prevX;
-          tailY[i] = prevY;
-          prevX = prev2X;
-          prevY = prev2Y;
+      for (int i = 1; i < nTail; i++)
+      {
+            prev2X = tailX[i];
+            prev2Y = tailY[i];
+            tailX[i] = prevX;
+            tailY[i] = prevY;
+            prevX = prev2X;
+            prevY = prev2Y;
       }
-      switch (snakeDir) {
-          case LEFT:
-              snakeX--;
-              break;
-          case RIGHT:
-              snakeX++;
-              break;
-          case UP:
-              snakeY--;
-              break;
-          case DOWN:
-              snakeY++;
-              break;
-          default:
-              break;
+      switch (snakeDir)
+      {
+      case LEFT:
+            snakeX--;
+            break;
+      case RIGHT:
+            snakeX++;
+            break;
+      case UP:
+            snakeY--;
+            break;
+      case DOWN:
+            snakeY++;
+            break;
+      default:
+            break;
       }
       // Collision border
-      if (snakeX < 0 || snakeX >= snakeWidth || snakeY < 0 || snakeY >= snakeHeight) {
-          snakeScore = -1; // mati jika kena border
-          return;
+      if (snakeX < 0 || snakeX >= snakeWidth || snakeY < 0 || snakeY >= snakeHeight)
+      {
+            snakeScore = -1; // mati jika kena border
+            return;
       }
       // Collision ekor
-      for (int i = 0; i < nTail; i++) {
-          if (tailX[i] == snakeX && tailY[i] == snakeY) {
-              snakeScore = -1;  // mati jika kena ekor
-          }
+      for (int i = 0; i < nTail; i++)
+      {
+            if (tailX[i] == snakeX && tailY[i] == snakeY)
+            {
+                  snakeScore = -1; // mati jika kena ekor
+            }
       }
       // check jika snake makan fruit
-      if (snakeX == fruitX && snakeY == fruitY) {
-          snakeScore += 10;
-          fruitX = rand() % snakeWidth;
-          fruitY = rand() % snakeHeight;
-          nTail++;
+      if (snakeX == fruitX && snakeY == fruitY)
+      {
+            snakeScore += 10;
+            fruitX = rand() % snakeWidth;
+            fruitY = rand() % snakeHeight;
+            nTail++;
       }
 }
-  
-void Snake() 
+
+void Snake()
 {
-      char pilihan;
-      do {
-            TitleSnake();
+      int pilihan;
+      static bool firstRun = true;
+      do
+      {
+            if (firstRun)
+            {
+                  TitleSnake();
+                  firstRun = false;
+            }
             SetupSnake();
-          while (snakeScore != -1) {
-              DrawSnake();
-              InputSnake();
-              LogicSnake();
-              this_thread::sleep_for(chrono::milliseconds(100));
-          }
-          system("cls");
-          cout << "\n\t<< Game over  >>\n\n";
-          cout << left << setw(30) << "1> Play Again" << "\n";
-          cout << left << setw(30) << "2> Exit to Main Menu" << "\n";
-          cout << "\n>> ";
-          cin >> pilihan;
-      } while (pilihan == '1');
+            while (snakeScore != -1)
+            {
+                  DrawSnake();
+                  InputSnake();
+                  LogicSnake();
+                  this_thread::sleep_for(chrono::milliseconds(100));
+            }
+            system("cls");
+            cout << "\n\t<< Game over  >>\n\n";
+            cout << left << setw(30) << "1> Play Again" << "\n";
+            cout << left << setw(30) << "2> Exit to Main Menu" << "\n";
+            cout << "\n>> ";
+            cin >> pilihan;
+      } while (pilihan == 1);
 }
-void TitleSnake() 
+void TitleSnake()
 {
       system("cls");
       cout << "\nSystem is ";
       SlowType("Rebooting", 100);
       this_thread::sleep_for(chrono::seconds(1));
       DeleteText(20, 100);
-      SlowType("Ular_Senyum OS V 0.24 started", 300);
+      SlowType("Ular_Senyum OS V 0.24 started", 150);
       cout << endl;
       this_thread::sleep_for(chrono::seconds(1));
       system("cls");
@@ -1025,10 +1095,10 @@ void TitleSnake()
       cout << "#        Press any key to start the game      #\n";
       cout << "#                                             #\n";
       cout << "###############################################\n";
-      #ifdef _WIN32
+#ifdef _WIN32
       _getch();
-      #else
-      cin.ignore(); 
+#else
+      cin.ignore();
       cin.get();
-      #endif
+#endif
 }
