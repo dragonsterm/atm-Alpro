@@ -11,6 +11,8 @@
 using namespace std;
 //  >> Struct
 //  Struct untuk Histori
+//  >> Struct
+//  Struct untuk Histori
 struct histori
 {
       int idTrans;
@@ -49,6 +51,10 @@ eDirection snakeDir;
 nasabah dataNasabah[100]; // menyimpan 100 data 100 nasabah
 int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
 // >> Decklare Funtion
+// >> Menu
+void loopMenu();
+void menuAdmin();
+void menuUtama();
 // >> Menu
 void loopMenu();
 void menuAdmin();
@@ -98,6 +104,13 @@ int main()
            << " \t\n5. Rio Meidi Ataurrahman          (123240175)\n\n";
       // Inisialisasi Data awal
       inisialisasiData();
+      // Login dan Masuk Main Menu
+      loopMenu();
+      return 0;
+}
+// Menu Admin dan Menu Utama
+void loopMenu()
+{
       // Login dan Masuk Main Menu
       loopMenu();
       return 0;
@@ -387,7 +400,9 @@ void inisialisasiData()
                                                          }};
       // Kalau Kurang silahkan di tambah sendiri
       // yoi
+      // yoi
 }
+// !SECTION
 // !SECTION
 // CRUD Funct
 // Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
@@ -851,6 +866,15 @@ void riwayatTransaksi()
 // Function pause dilengkapi cls
 void Pause()
 {
+      // REVIEW - Developing Mode ini di Deactivate dulu yaaa
+      // cout << "\nSystem is ";
+      // SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
+      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
+      // DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
+      // SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
+      // cout << endl;
+      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
+      // system("cls");
       // REVIEW - Developing Mode ini di Deactivate dulu yaaa
       // cout << "\nSystem is ";
       // SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
