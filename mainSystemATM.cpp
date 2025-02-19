@@ -531,18 +531,11 @@ void cekSaldo()
             cout << "\nSaldo Anda: \n";
             cout << "\tRp" << fixed << dataNasabah[indexNasabah].saldo << ",00" << endl;
             cout << "\n\t\t Kembali <1";
-            cout << "\n\t\t Keluar  <2\n";
             inputHandling("\n>> ", pilihan);
             if (pilihan == 1)
             {
                   Pause();
                   return;
-            }
-            else if (pilihan == 2)
-            {
-                  cout << "\nTerima Kasih telah menggunakan ATM ini\n";
-                  Pause();
-                  exit(0);
             }
             else
             {
