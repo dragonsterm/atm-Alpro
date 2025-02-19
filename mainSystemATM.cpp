@@ -11,7 +11,7 @@
 using namespace std;
 // TODO - Ini Pindah Multifile
 //  >> Struct Init
-//   Struct untuk Histori
+//  Struct untuk Histori
 struct histori
 {
       int idTrans;
@@ -32,6 +32,8 @@ struct nasabah
 // >> Global Var Init
 bool mainMenuLoop = true, loginStat = false, adminStat = false;
 int indexNasabah = -1;
+// TODO - Nanti Di Multifile in
+// NOTE - Ini bagian Snake
 const int snakeWidth = 20;
 const int snakeHeight = 20;
 int snakeX, snakeY, fruitX, fruitY, snakeScore;
@@ -46,6 +48,7 @@ enum eDirection
       DOWN
 };
 eDirection snakeDir;
+
 // Inisialisasi Global Array (Wajib Ada)
 nasabah dataNasabah[100]; // menyimpan 100 data 100 nasabah
 int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
@@ -889,6 +892,7 @@ void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan
             this_thread::sleep_for(chrono::milliseconds(delay)); // memberikan jeda pada penghapusan kata
       }
 }
+// TODO - Ini Nanti Di Multifile in
 // Function Game Ular
 void SetupSnake()
 {
