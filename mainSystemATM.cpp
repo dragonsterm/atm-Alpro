@@ -396,7 +396,6 @@ void inisialisasiData()
       // Kalau Kurang silahkan di tambah sendiri
       // yoi
 }
-// !SECTION
 // CRUD Funct
 // Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
 void tampilDataNasabah()
@@ -898,7 +897,6 @@ void SetupSnake()
       snakeScore = 0;
       nTail = 0;
 }
-
 void DrawSnake()
 {
       system("cls");
@@ -1058,7 +1056,6 @@ void LogicSnake()
             nTail++;
       }
 }
-
 void Snake()
 {
       int pilihan;
