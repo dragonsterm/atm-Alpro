@@ -11,8 +11,6 @@
 using namespace std;
 //  >> Struct
 //  Struct untuk Histori
-//  >> Struct
-//  Struct untuk Histori
 struct histori
 {
       int idTrans;
@@ -55,13 +53,6 @@ int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
 void loopMenu();
 void menuAdmin();
 void menuUtama();
-<<<<<<< HEAD
-== == == =
-             // >> Menu
-    void loopMenu();
-void menuAdmin();
-void menuUtama();
->>>>>>> pr/dragonsterm/14
 // Error handling Func (Overload)
 void inputHandling(string question, string &var, short lineOr); // Untuk String
 void inputHandling(string question, int &var);                  // untuk int
@@ -86,10 +77,8 @@ void Pause();
 // Function untuk Pause
 void SlowType(const string &kata, int delay);
 void DeleteText(int count, int delay);
-<<<<<<< HEAD
-== == == =
-             // Function untuk SnakeGame
-    void Snake();
+// Function untuk SnakeGame
+void Snake();
 void SetupSnake();
 void DrawSnake();
 void InputSnake();
@@ -97,7 +86,6 @@ void LogicSnake();
 void TitleSnake();
 
 // Main Program
->>>>>>> pr/dragonsterm/14
 int main()
 {
       short opt;
@@ -117,16 +105,6 @@ int main()
 // Menu Admin dan Menu Utama
 void loopMenu()
 {
-<<<<<<< HEAD
-      == == == =
-                   // Login dan Masuk Main Menu
-          loopMenu();
-      return 0;
-}
-// Menu Admin dan Menu Utama
-void loopMenu()
-{
->>>>>>> pr/dragonsterm/14
       do
       {
             loginStat = false;
@@ -216,13 +194,10 @@ void menuUtama()
             mainMenuLoop = false;
             loginStat = false;
             break;
-<<<<<<< HEAD
-      == == == =
-                   case 24:
+      case 24:
             Pause();
             Snake();
             break;
->>>>>>> pr/dragonsterm/14
       default:
             cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
       }
@@ -412,15 +387,8 @@ void inisialisasiData()
                                                          }};
       // Kalau Kurang silahkan di tambah sendiri
       // yoi
-<<<<<<< HEAD
 }
 // !SECTION
-== == == =
-// yoi
-}
-// !SECTION
-// !SECTION
->>>>>>> pr/dragonsterm/14
 // CRUD Funct
 // Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
 void tampilDataNasabah()
@@ -569,29 +537,13 @@ void loginAttempt(int Attempts)
                   }
                   cout << "\n<Login berhasil>\n";
                   Pause();
-<<<<<<< HEAD
-                  // REVIEW - yang ini juga
-                  == == == =
->>>>>>> pr/dragonsterm/14
-                               system("cls");
+                  system("cls");
                   cout << "\n <= Selamat Datang " << dataNasabah[indexNasabah].nama << " =>\n\n";
                   cout << "Data Rekening :" << endl;
                   cout << setw(10) << "A.N." << setw(5) << ": " << dataNasabah[indexNasabah].nama << endl;
                   cout << setw(10) << "No.Rek" << setw(5) << " : " << dataNasabah[indexNasabah].noRek << endl;
                   Pause();
-<<<<<<< HEAD
-                  // REVIEW - ini sementara biar terlihat rekening siapa tolong setelah rampung di benerin lagi
                   cout << "\nSystem is ";
-                  SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
-                  this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-                  DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
-                  SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
-                  cout << endl;
-                  this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-                  system("cls");
-                  break;
-                  == == == =
-                               cout << "\nSystem is ";
                   SlowType("processing", 100);
                   this_thread::sleep_for(chrono::seconds(1));
                   DeleteText(10, 100);
@@ -600,7 +552,6 @@ void loginAttempt(int Attempts)
                   this_thread::sleep_for(chrono::seconds(1));
                   system("cls");
                   return;
->>>>>>> pr/dragonsterm/14
             }
       }
       cout << "\n[Login Gagal] - Kesempatan Anda Tersisa " << (Attempts - 1) << endl;
@@ -909,18 +860,6 @@ void Pause()
       // cout << endl;
       // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
       // system("cls");
-<<<<<<< HEAD
-      == == == =
-      // REVIEW - Developing Mode ini di Deactivate dulu yaaa
-      // cout << "\nSystem is ";
-      // SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
-      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-      // DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
-      // SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
-      // cout << endl;
-      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-      // system("cls");
->>>>>>> pr/dragonsterm/14
 }
 // Animasi untuk pause
 void SlowType(const string &kata, int delay) // menampilkan kata satu per satu dengan jeda waktu
@@ -938,8 +877,6 @@ void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan
             cout << "\b \b" << flush;
             this_thread::sleep_for(chrono::milliseconds(delay)); // memberikan jeda pada penghapusan kata
       }
-<<<<<<< HEAD
-      == == == =
 }
 // Function Game Ular
 void SetupSnake()
@@ -1165,5 +1102,4 @@ void TitleSnake()
       cin.ignore();
       cin.get();
 #endif
-      >>>>>>> pr / dragonsterm / 14
 }
