@@ -528,6 +528,7 @@ void loginAttempt(int Attempts)
                   {
                         adminStat = true;
                         loginStat = true;
+                        indexNasabah = i;
                   }
                   else
                   {
