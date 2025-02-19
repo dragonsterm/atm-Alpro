@@ -210,6 +210,63 @@ void menuUtama()
             cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
       }
 }
+// Fungsi Login Rekursif
+void loginAttempt(int Attempts)
+{
+      if (Attempts <= 0)
+      {
+            cout << "<Maaf Kesempatan Anda Habis. Silahkan Hubungi Costumer Service jika ada masalah.>" << endl;
+            exit(0);
+      }
+
+      int noRekIn;
+      string passIn;
+      inputHandling("\nMasukkan Nomor Rekening (8 Digit)\n>> ", noRekIn);
+      inputHandling("\nMasukkan Password Rekening\n>> ", passIn, 1);
+
+      for (int i = 0; i < jumlahNasabah; i++)
+      {
+            if (noRekIn == dataNasabah[i].noRek && passIn == dataNasabah[i].pass)
+            {
+                  if (dataNasabah[i].noRek == 459777345)
+                  {
+                        adminStat = true;
+                        loginStat = true;
+                        indexNasabah = i;
+                  }
+                  else
+                  {
+                        adminStat = false;
+                        loginStat = true;
+                        indexNasabah = i;
+                  }
+                  cout << "\n<Login berhasil>\n";
+                  Pause();
+                  system("cls");
+                  cout << "\n <= Selamat Datang " << dataNasabah[indexNasabah].nama << " =>\n\n";
+                  cout << "Data Rekening :" << endl;
+                  cout << setw(10) << "A.N." << setw(5) << ": " << dataNasabah[indexNasabah].nama << endl;
+                  cout << setw(10) << "No.Rek" << setw(5) << " : " << dataNasabah[indexNasabah].noRek << endl;
+                  Pause();
+                  cout << "\nSystem is ";
+                  SlowType("processing", 100);
+                  this_thread::sleep_for(chrono::seconds(1));
+                  DeleteText(10, 100);
+                  SlowType("completed", 100);
+                  cout << endl;
+                  this_thread::sleep_for(chrono::seconds(1));
+                  system("cls");
+                  return;
+            }
+      }
+      cout << "\n[Login Gagal] - Kesempatan Anda Tersisa " << (Attempts - 1) << endl;
+      loginAttempt(Attempts - 1);
+}
+// Fungsi Login
+void login()
+{
+      loginAttempt(3);
+}
 // NOTE - Error Handling Funct
 // Overloading Funct untuk Error Handling Pengguna
 void inputHandling(string question, string &var, short lineOr)
@@ -513,62 +570,6 @@ void delNasabah()
       cin.get();
 }
 // >> Main Feature Funct Desc
-// Fungsi Login Rekursif
-void loginAttempt(int Attempts)
-{
-      if (Attempts <= 0)
-      {
-            cout << "<Maaf Kesempatan Anda Habis. Silahkan Hubungi Costumer Service jika ada masalah.>" << endl;
-            exit(0);
-      }
-
-      int noRekIn;
-      string passIn;
-      inputHandling("\nMasukkan Nomor Rekening (8 Digit)\n>> ", noRekIn);
-      inputHandling("\nMasukkan Password Rekening\n>> ", passIn, 1);
-
-      for (int i = 0; i < jumlahNasabah; i++)
-      {
-            if (noRekIn == dataNasabah[i].noRek && passIn == dataNasabah[i].pass)
-            {
-                  if (dataNasabah[i].noRek == 459777345)
-                  {
-                        adminStat = true;
-                        loginStat = true;
-                        indexNasabah = i;
-                  }
-                  else
-                  {
-                        loginStat = true;
-                        indexNasabah = i;
-                  }
-                  cout << "\n<Login berhasil>\n";
-                  Pause();
-                  system("cls");
-                  cout << "\n <= Selamat Datang " << dataNasabah[indexNasabah].nama << " =>\n\n";
-                  cout << "Data Rekening :" << endl;
-                  cout << setw(10) << "A.N." << setw(5) << ": " << dataNasabah[indexNasabah].nama << endl;
-                  cout << setw(10) << "No.Rek" << setw(5) << " : " << dataNasabah[indexNasabah].noRek << endl;
-                  Pause();
-                  cout << "\nSystem is ";
-                  SlowType("processing", 100);
-                  this_thread::sleep_for(chrono::seconds(1));
-                  DeleteText(10, 100);
-                  SlowType("completed", 100);
-                  cout << endl;
-                  this_thread::sleep_for(chrono::seconds(1));
-                  system("cls");
-                  return;
-            }
-      }
-      cout << "\n[Login Gagal] - Kesempatan Anda Tersisa " << (Attempts - 1) << endl;
-      loginAttempt(Attempts - 1);
-}
-// Fungsi Login
-void login()
-{
-      loginAttempt(3);
-}
 // Fungsi Cek Saldo
 void cekSaldo()
 {
@@ -582,6 +583,7 @@ void cekSaldo()
             if (pilihan == 1)
             {
                   Pause();
+                  menuUtama();
                   return;
             }
             else
@@ -694,6 +696,7 @@ void tarikSaldo()
             {
                   cout << "\nTarik Tunai dibatalkan\n";
                   Pause();
+                  menuUtama();
                   return;
             }
             else
