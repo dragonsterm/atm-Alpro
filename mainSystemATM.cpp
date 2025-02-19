@@ -8,8 +8,9 @@
 #ifdef _WIN32
 #include <conio.h>
 #endif
+#include <algorithm> // untuk algoritma sorting
 using namespace std;
-// TODO - Ini Pindah Multifile
+// TODO - {multifile} Struct
 //  >> Struct Init
 //  Struct untuk Histori
 struct histori
@@ -32,8 +33,8 @@ struct nasabah
 // >> Global Var Init
 bool mainMenuLoop = true, loginStat = false, adminStat = false;
 int indexNasabah = -1;
-// TODO - Nanti Di Multifile in
-// NOTE - Ini bagian Snake
+// TODO - {Multifile} Snake Function
+// >> Snake Function
 const int snakeWidth = 20;
 const int snakeHeight = 20;
 int snakeX, snakeY, fruitX, fruitY, snakeScore;
@@ -48,8 +49,7 @@ enum eDirection
       DOWN
 };
 eDirection snakeDir;
-
-// Inisialisasi Global Array (Wajib Ada)
+// >> Inisialisasi Global Array (Wajib Ada)
 nasabah dataNasabah[100]; // menyimpan 100 data 100 nasabah
 int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
 // >> Decklare Funtion
@@ -57,20 +57,20 @@ int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki
 void loopMenu();
 void menuAdmin();
 void menuUtama();
-// TODO - Inputhandling pindah Multifile
+// TODO - {Multifile} Inputhandling
 // Error handling Func (Overload)
 void inputHandling(string question, string &var, short lineOr); // Untuk String
 void inputHandling(string question, int &var);                  // untuk int
 void inputHandling(string question, float &var);                // untuk float
 void inputHandling(string question, short &var);                // untuk short]
-// TODO - Init Data Juga Pindah Multifile
+// TODO - {Multifile} Init Data nasabah
 //  Init Data Nasabah
 void inisialisasiData();
 // CRUD Funct Data Nasabah
 void tampilDataNasabah();
 void inputNasabah();
 void delNasabah();
-// TODO - Pindah Multifile kalau Memungkin kan
+// TODO - {Multifile} Operational Function
 // Main Feature
 void login();
 void loginAttempt(int Attempts); // Login Rekursif
@@ -79,7 +79,7 @@ void setorSaldo();
 void tarikSaldo();
 void transferRekening();
 void riwayatTransaksi();
-// TODO - Animasi Pindah Multifile
+// TODO - {Multifile} Animasi Pindah Multifile
 // Pause Function
 void Pause();
 // Function untuk Pause
@@ -242,12 +242,14 @@ void loginAttempt(int Attempts)
                   }
                   cout << "\n<Login berhasil>\n";
                   Pause();
+                  // REVIEW - Nanti pas udah Deploy tolong ini dimatiin
                   system("cls");
                   cout << "\n <= Selamat Datang " << dataNasabah[indexNasabah].nama << " =>\n\n";
                   cout << "Data Rekening :" << endl;
                   cout << setw(10) << "A.N." << setw(5) << ": " << dataNasabah[indexNasabah].nama << endl;
                   cout << setw(10) << "No.Rek" << setw(5) << " : " << dataNasabah[indexNasabah].noRek << endl;
                   Pause();
+                  // REVIEW - ini juga
                   cout << "\nSystem is ";
                   SlowType("processing", 100);
                   this_thread::sleep_for(chrono::seconds(1));
@@ -267,7 +269,6 @@ void login()
 {
       loginAttempt(3);
 }
-// NOTE - Error Handling Funct
 // Overloading Funct untuk Error Handling Pengguna
 void inputHandling(string question, string &var, short lineOr)
 {
@@ -446,22 +447,51 @@ void inisialisasiData()
           {1, "admin", "Test Empty Set", 0, 0, {
                                                    // biar spasi
                                                }};
-      dataNasabah[jumlahNasabah++] =
-          {23240111, "admin123", "Test Empty Set", 0, 0, {
-                                                             // biar spasi
-                                                         }};
       // Kalau Kurang silahkan di tambah sendiri
-      // yoi
 }
 // CRUD Funct
 // Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
+bool sortByNoRek(nasabah a, nasabah b)
+{
+      return a.noRek < b.noRek;
+}
+
+bool sortBySaldo(nasabah a, nasabah b)
+{
+      return a.saldo > b.saldo;
+}
 void tampilDataNasabah()
 {
       system("cls");
       bool find = false;
       int noRekIn = 0;
+      short pilihanSort;
       cout << "\n\t>- Menu Tampil Data Nasabah -<\n\n";
-      Pause();
+      cout << "Pilih metode pengurutan\n";
+      cout << "1. Berdasarkan Nomor Rekening\n";
+      cout << "Pilihan : ";
+      inputHandling("", pilihanSort);
+      if (pilihanSort == 1)
+      {
+            sort(dataNasabah, dataNasabah + jumlahNasabah, sortByNoRek);
+      }
+      else
+      {
+            cout << "[ERROR INPUT] - Pilihan tidak valid, menampilkan tanpa pengurutan";
+      }
+
+      cout << "\n\t>- Menu Tampil Data Nasabah -<\n\n";
+      cout << "\nDaftar Nasabah:\n";
+      cout << left << "| " << setw(10) << "No Rek" << " | " << setw(25) << "Nama" << " |\n";
+      cout << setfill('-') << setw(41) << "-" << setfill(' ') << endl;
+
+      for (int i = 0; i < jumlahNasabah; i++)
+      {
+            cout << "| " << setw(10) << dataNasabah[i].noRek
+                 << " | " << setw(25) << dataNasabah[i].nama << " |\n";
+      }
+      cout << setfill('-') << setw(41) << "-" << setfill(' ') << endl;
+      // Pause();
       inputHandling("Berapa Nomor Rekeningnya?: ", noRekIn);
       for (int i = 0; i <= jumlahNasabah; i++)
       {
@@ -888,7 +918,6 @@ void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan
             this_thread::sleep_for(chrono::milliseconds(delay)); // memberikan jeda pada penghapusan kata
       }
 }
-// TODO - Ini Nanti Di Multifile in
 // Function Game Ular
 void SetupSnake()
 {
