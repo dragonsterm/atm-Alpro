@@ -113,12 +113,6 @@ int main()
 // Menu Admin dan Menu Utama
 void loopMenu()
 {
-      // Login dan Masuk Main Menu
-      loopMenu();
-}
-// Menu Admin dan Menu Utama
-void loopMenu()
-{
       do
       {
             loginStat = false;
