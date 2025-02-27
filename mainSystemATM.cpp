@@ -8,7 +8,7 @@
 #ifdef _WIN32
 #include <conio.h>
 #endif
-#include <algorithm> // untuk algoritma sorting
+#include <algorithm> // untuk algoritma sorting //FIXME -  Kalau bisa jangan pake ini mas erlan hoy
 using namespace std;
 // TODO - {multifile} Struct
 //  >> Struct Init
@@ -451,11 +451,11 @@ void inisialisasiData()
 }
 // CRUD Funct
 // Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
+// FIXME - Tolong sortnya ini Mas Erlan Astagfirullah
 bool sortByNoRek(nasabah a, nasabah b)
 {
       return a.noRek < b.noRek;
 }
-
 bool sortBySaldo(nasabah a, nasabah b)
 {
       return a.saldo > b.saldo;
