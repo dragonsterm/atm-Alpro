@@ -5,11 +5,10 @@
 #include <ctime>   // untuk mengatur seed pada fungsi rand()
 #include <thread>  // untuk menggunakan fungsi multithreading cnth sleep_for
 #include <chrono>  // untuk menangani waktu dengan tepat sangat penting karena untuk penggunaan sleep_for yang membutuhkan parameter bertipe durasi
+#include <vector>
 #ifdef _WIN32
 #include <conio.h>
 #endif
-#include <algorithm> // untuk algoritma sorting //FIXME -  Kalau bisa jangan pake ini mas erlan hoy
-#include <vector>
 using namespace std;
 // TODO - {multifile} Struct
 //  >> Struct Init
@@ -94,11 +93,9 @@ void InputSnake();
 void LogicSnake();
 void TitleSnake();
 
-
 void sortByNorek();
 void sortBySaldo();
 void sortHistoriTransaksi();
-
 
 // Main Program
 int main()
@@ -466,37 +463,33 @@ void sortByNoRek() // sort norek manual (bubble sort)
       {
             for (int j = 0; j < jumlahNasabah - 1; j++)
             {
-                string rekA = to_string(dataNasabah[j].noRek);
-                string rekB = to_string(dataNasabah[j + 1].noRek);
+                  string rekA = to_string(dataNasabah[j].noRek);
+                  string rekB = to_string(dataNasabah[j + 1].noRek);
 
-                if (rekA.length() > rekB.length() || (rekA.length() == rekB.length() && dataNasabah[j].noRek > dataNasabah[j + 1].noRek))
-                {
-                  swap(dataNasabah[j], dataNasabah[j + 1]);
-                }
-                
+                  if (rekA.length() > rekB.length() || (rekA.length() == rekB.length() && dataNasabah[j].noRek > dataNasabah[j + 1].noRek))
+                  {
+                        swap(dataNasabah[j], dataNasabah[j + 1]);
+                  }
             }
-            
       }
-      
 }
 
 void sortBySaldo() // Selection Sort
 {
-    for (int i = 0; i < jumlahNasabah - 1; i++)
-    {
-        int maxIdx = i;
-        for (int j = i + 1; j < jumlahNasabah; j++) // Perbaikan kondisi loop
-        {
-            if (dataNasabah[j].saldo > dataNasabah[maxIdx].saldo ||
-                (dataNasabah[j].saldo == dataNasabah[maxIdx].saldo && dataNasabah[j].nama < dataNasabah[maxIdx].nama))
+      for (int i = 0; i < jumlahNasabah - 1; i++)
+      {
+            int maxIdx = i;
+            for (int j = i + 1; j < jumlahNasabah; j++) // Perbaikan kondisi loop
             {
-                maxIdx = j;
+                  if (dataNasabah[j].saldo > dataNasabah[maxIdx].saldo ||
+                      (dataNasabah[j].saldo == dataNasabah[maxIdx].saldo && dataNasabah[j].nama < dataNasabah[maxIdx].nama))
+                  {
+                        maxIdx = j;
+                  }
             }
-        }
-        swap(dataNasabah[i], dataNasabah[maxIdx]);
-    }
+            swap(dataNasabah[i], dataNasabah[maxIdx]);
+      }
 }
-
 
 void sortHistoriTransaksi(nasabah &n) // sort manual histori transaksi di satu nasabah (bubble sort)
 {
@@ -512,12 +505,8 @@ void sortHistoriTransaksi(nasabah &n) // sort manual histori transaksi di satu n
                   {
                         swap(n.historiNasabah[j], n.historiNasabah[j + 1]);
                   }
-                  
-                  
             }
-            
       }
-      
 }
 
 void tampilDataNasabah()
@@ -538,7 +527,8 @@ void tampilDataNasabah()
       else if (pilihanSort == 2)
       {
             sortBySaldo();
-      } else 
+      }
+      else
             cout << "[ERROR INPUT] - Pilihan tidak vald, menampilkan tanpa pengurutan\n";
 
       cout << "\n\t>- Menu Tampil Data Nasabah -<\n\n";
