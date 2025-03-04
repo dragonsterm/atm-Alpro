@@ -9,6 +9,7 @@
 #ifdef _WIN32
 #include <conio.h>
 #endif
+#include <map> // untuk menghitung jumlah dan total nilai transaksi berdasarkan tipe/deskripsi
 using namespace std;
 // TODO - {Multifile} Struct
 //  >> Struct Init
@@ -79,6 +80,8 @@ void setorSaldo();
 void tarikSaldo();
 void transferRekening();
 void riwayatTransaksi();
+// Perhitungan
+int TotalTransaksi(int MulaiIndex, int AkhirIndex); // Perhitungan Total Rekursif
 // TODO - {Multifile} Animasi Pindah Multifile
 // Pause Function
 void Pause();
@@ -898,18 +901,27 @@ void riwayatTransaksi()
             system("cls");
             cout << "<= Riwayat Transaksi =>\n";
             cout << "Page (" << halaman + 1 << "/" << totalHal << ")\n";
+            // menghitung total menggunakan rekursif
+            int TotalAll = TotalTransaksi(0, dataNasabah[indexNasabah].jumlahTrans - 1);
+            // menghitung total transaksi pada halaman ini
+            int MulaiIndex = halaman * transHal;
+            int AkhirIndex = min((halaman + 1) * transHal - 1, dataNasabah[indexNasabah].jumlahTrans - 1);
+            int TotalPage = TotalTransaksi(MulaiIndex, AkhirIndex);
             cout << left << "| " << setw(3) << "No." << " | " << setw(15) << "Id Transaksi" << " | " << setw(20) << "Nominal" << " | " << setw(15) << "Rekening Tujuan" << " | " << setw(15) << "Deskripsi" << " |" << endl;
             cout << setfill('+') << setw(84) << "+" << endl
                  << setfill(' ');
-            for (int i = halaman * transHal; i < (halaman * transHal) + transHal; i++)
+            for (int i = halaman * transHal; i < min((halaman * transHal) + transHal, dataNasabah[indexNasabah].jumlahTrans); i++)
             {
                   cout << right << "| " << setw(3) << i + 1 << " | " << setw(15) << dataNasabah[indexNasabah].historiNasabah[i].idTrans << " | Rp" << setw(15) << dataNasabah[indexNasabah].historiNasabah[i].nominal << ",00" << " | " << setw(15) << dataNasabah[indexNasabah].historiNasabah[i].noRektuj << " | " << setw(15) << dataNasabah[indexNasabah].historiNasabah[i].deskripsi << " |" << endl;
             }
             cout << setfill('+') << setw(84) << "+" << endl
                  << setfill(' ') << endl;
-            cout << setw(84) << "Next Page     1<\n";
-            cout << setw(84) << "Previous Page 2<\n";
-            cout << setw(84) << "Kembali        3<\n";
+            cout << "Total semua transaksi: Rp" << TotalAll << ",00" << endl;
+            cout << "Total transaksi halaman ini: Rp" << TotalPage << ",00" << endl << endl;
+            cout << right << setw(75) << "Next Page " << setw(5) << "1<\n"; 
+            cout << right << setw(75) << "Previous Page " << setw(5) << "2<\n"; 
+            cout << right << setw(75) << "Analisis Transaksi " << setw(5) << "3<\n";
+            cout << right << setw(75) << "Kembali " << setw(5) << "4<\n";
             inputHandling("\n>> ", pilihan);
             if (pilihan == 1)
             {
@@ -927,6 +939,41 @@ void riwayatTransaksi()
             }
             else if (pilihan == 3)
             {
+                  // menampilkan analisis transaksi menggunakan metode rekursif
+                  system("cls");
+                  cout << "\n\t<= Analisis Transaksi =>\n\n";
+                  
+                  int TotalPositif = 0, TotalNegatif = 0;
+                  for (int i = 0; i < dataNasabah[indexNasabah].jumlahTrans; i++) {
+                        if (dataNasabah[indexNasabah].historiNasabah[i].nominal > 0) {
+                              TotalPositif += dataNasabah[indexNasabah].historiNasabah[i].nominal;
+                        } else {
+                              TotalNegatif += abs(dataNasabah[indexNasabah].historiNasabah[i].nominal);
+                        }
+                  }
+                  cout << "Total pemasukan: Rp" << TotalPositif << ",00" << endl;
+                  cout << "Total pengeluaran: Rp" << TotalNegatif << ",00" << endl;
+                  // Menghitung jumlah transaksi berdasarkan tipe
+                  map<string, int> TransByType;
+                  map<string, int> AmountByType;
+                  
+                  for (int i = 0; i < dataNasabah[indexNasabah].jumlahTrans; i++) {
+                        string tipe = dataNasabah[indexNasabah].historiNasabah[i].deskripsi;
+                        TransByType[tipe]++;
+                        AmountByType[tipe] += abs(dataNasabah[indexNasabah].historiNasabah[i].nominal);
+                  }
+                  cout << "\nJumlah transaksi berdasarkan tipe:\n";
+                  for (const auto& pair : TransByType) {
+                        cout << pair.first << ": " << pair.second << " transaksi (Rp" 
+                             << AmountByType[pair.first] << ",00)" << endl;
+                  }
+                  cout << "\nTekan Enter untuk kembali ke menu Riwayat Transaksi";
+                  cin.ignore();
+                  cin.get();
+                  Pause();
+            }
+            else if (pilihan == 4)
+            {
                   exit = true;
             }
             else
@@ -936,6 +983,22 @@ void riwayatTransaksi()
             }
       } while (exit == false);
       Pause();
+}
+int TotalTransaksi(int MulaiIndex, int AkhirIndex) 
+{
+      if (MulaiIndex > AkhirIndex) // enggak ada transaksi lagi untuk di sum
+      {
+          return 0;
+      }
+      if (MulaiIndex == AkhirIndex) // Transkasi hanya satu 
+      {
+          return dataNasabah[indexNasabah].historiNasabah[MulaiIndex].nominal;
+      }
+      
+      // Recursive menggunakan metode divide and conquer
+      int IndexTengah = MulaiIndex + (AkhirIndex - MulaiIndex) / 2;
+      return TotalTransaksi(MulaiIndex, IndexTengah) + 
+             TotalTransaksi(IndexTengah + 1, AkhirIndex);
 }
 
 // Function pause dilengkapi cls
