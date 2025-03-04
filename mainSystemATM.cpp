@@ -10,7 +10,7 @@
 #include <conio.h>
 #endif
 using namespace std;
-// TODO - {multifile} Struct
+// TODO - {Multifile} Struct
 //  >> Struct Init
 //  Struct untuk Histori
 struct histori
@@ -455,7 +455,6 @@ void inisialisasiData()
 }
 // CRUD Funct
 // Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
-// FIXME - Tolong sortnya ini Mas Erlan Astagfirullah
 
 void sortByNoRek() // sort norek manual (bubble sort)
 {
