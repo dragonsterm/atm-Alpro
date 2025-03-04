@@ -9,6 +9,7 @@
 #include <conio.h>
 #endif
 #include <algorithm> // untuk algoritma sorting //FIXME -  Kalau bisa jangan pake ini mas erlan hoy
+#include <vector>
 using namespace std;
 // TODO - {multifile} Struct
 //  >> Struct Init
@@ -92,6 +93,12 @@ void DrawSnake();
 void InputSnake();
 void LogicSnake();
 void TitleSnake();
+
+
+void sortByNorek();
+void sortBySaldo();
+void sortHistoriTransaksi();
+
 
 // Main Program
 int main()
@@ -452,14 +459,67 @@ void inisialisasiData()
 // CRUD Funct
 // Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
 // FIXME - Tolong sortnya ini Mas Erlan Astagfirullah
-bool sortByNoRek(nasabah a, nasabah b)
+
+void sortByNoRek() // sort norek manual (bubble sort)
 {
-      return a.noRek < b.noRek;
+      for (int i = 0; i < jumlahNasabah - 1; i++)
+      {
+            for (int j = 0; j < jumlahNasabah - 1; j++)
+            {
+                string rekA = to_string(dataNasabah[j].noRek);
+                string rekB = to_string(dataNasabah[j + 1].noRek);
+
+                if (rekA.length() > rekB.length() || (rekA.length() == rekB.length() && dataNasabah[j].noRek > dataNasabah[j + 1].noRek))
+                {
+                  swap(dataNasabah[j], dataNasabah[j + 1]);
+                }
+                
+            }
+            
+      }
+      
 }
-bool sortBySaldo(nasabah a, nasabah b)
+
+void sortBySaldo() // Selection Sort
 {
-      return a.saldo > b.saldo;
+    for (int i = 0; i < jumlahNasabah - 1; i++)
+    {
+        int maxIdx = i;
+        for (int j = i + 1; j < jumlahNasabah; j++) // Perbaikan kondisi loop
+        {
+            if (dataNasabah[j].saldo > dataNasabah[maxIdx].saldo ||
+                (dataNasabah[j].saldo == dataNasabah[maxIdx].saldo && dataNasabah[j].nama < dataNasabah[maxIdx].nama))
+            {
+                maxIdx = j;
+            }
+        }
+        swap(dataNasabah[i], dataNasabah[maxIdx]);
+    }
 }
+
+
+void sortHistoriTransaksi(nasabah &n) // sort manual histori transaksi di satu nasabah (bubble sort)
+{
+      for (int i = 0; i < n.jumlahTrans - 1; i++)
+      {
+            for (int j = 0; j < n.jumlahTrans - i - 1; j++)
+            {
+                  if (n.historiNasabah[j].nominal < n.historiNasabah[j + 1].nominal)
+                  {
+                        swap(n.historiNasabah[j], n.historiNasabah[j + 1]);
+                  }
+                  else if (n.historiNasabah[j].nominal == n.historiNasabah[j + 1].nominal && n.historiNasabah[j].idTrans < n.historiNasabah[j + 1].idTrans)
+                  {
+                        swap(n.historiNasabah[j], n.historiNasabah[j + 1]);
+                  }
+                  
+                  
+            }
+            
+      }
+      
+}
+
 void tampilDataNasabah()
 {
       system("cls");
@@ -473,12 +533,13 @@ void tampilDataNasabah()
       inputHandling("", pilihanSort);
       if (pilihanSort == 1)
       {
-            sort(dataNasabah, dataNasabah + jumlahNasabah, sortByNoRek);
+            sortByNoRek();
       }
-      else
+      else if (pilihanSort == 2)
       {
-            cout << "[ERROR INPUT] - Pilihan tidak valid, menampilkan tanpa pengurutan";
-      }
+            sortBySaldo();
+      } else 
+            cout << "[ERROR INPUT] - Pilihan tidak vald, menampilkan tanpa pengurutan\n";
 
       cout << "\n\t>- Menu Tampil Data Nasabah -<\n\n";
       cout << "\nDaftar Nasabah:\n";
