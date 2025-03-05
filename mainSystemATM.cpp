@@ -96,9 +96,9 @@ void InputSnake();
 void LogicSnake();
 void TitleSnake();
 
-void sortByNorek();
+void sortByNoRek();
 void sortBySaldo();
-void sortHistoriTransaksi();
+void sortHistoriTransaksi(nasabah &n);
 
 // Main Program
 int main()
@@ -140,7 +140,7 @@ void loopMenu()
 void menuAdmin()
 {
       short opt;
-      system("cls");
+      // system("cls");
       cout << "\t\t <<Menu Admin>>\n\n";
       cout << left << setw(25) << "1> Input Nasabah" << right << setw(25) << "\n\n";
       cout << left << setw(25) << "2> Delete Nasabah" << right << setw(25) << "\n\n";
@@ -220,17 +220,16 @@ void menuUtama()
 // Fungsi Login Rekursif
 void loginAttempt(int Attempts)
 {
+      int noRekIn;
+      string passIn;
       if (Attempts <= 0)
       {
             cout << "<Maaf Kesempatan Anda Habis. Silahkan Hubungi Costumer Service jika ada masalah.>" << endl;
             exit(0);
       }
 
-      int noRekIn;
-      string passIn;
       inputHandling("\nMasukkan Nomor Rekening (8 Digit)\n>> ", noRekIn);
       inputHandling("\nMasukkan Password Rekening\n>> ", passIn, 1);
-
       for (int i = 0; i < jumlahNasabah; i++)
       {
             if (noRekIn == dataNasabah[i].noRek && passIn == dataNasabah[i].pass)
@@ -254,17 +253,8 @@ void loginAttempt(int Attempts)
                   cout << "\n <= Selamat Datang " << dataNasabah[indexNasabah].nama << " =>\n\n";
                   cout << "Data Rekening :" << endl;
                   cout << setw(10) << "A.N." << setw(5) << ": " << dataNasabah[indexNasabah].nama << endl;
-                  cout << setw(10) << "No.Rek" << setw(5) << " : " << dataNasabah[indexNasabah].noRek << endl;
-                  Pause();
-                  // REVIEW - ini juga
-                  cout << "\nSystem is ";
-                  SlowType("processing", 100);
-                  this_thread::sleep_for(chrono::seconds(1));
-                  DeleteText(10, 100);
-                  SlowType("completed", 100);
-                  cout << endl;
-                  this_thread::sleep_for(chrono::seconds(1));
-                  system("cls");
+                  cout << setw(10) << "No.Rek" << setw(5) << " : " << dataNasabah[indexNasabah].noRek << endl
+                       << endl;
                   return;
             }
       }
@@ -520,8 +510,8 @@ void tampilDataNasabah()
       cout << "\n\t>- Menu Tampil Data Nasabah -<\n\n";
       cout << "Pilih metode pengurutan\n";
       cout << "1. Berdasarkan Nomor Rekening\n";
-      cout << "Pilihan : ";
-      inputHandling("", pilihanSort);
+      cout << "2. Berdasarkan Saldo\n";
+      inputHandling("Pilihan : ", pilihanSort);
       if (pilihanSort == 1)
       {
             sortByNoRek();
@@ -917,9 +907,10 @@ void riwayatTransaksi()
             cout << setfill('+') << setw(84) << "+" << endl
                  << setfill(' ') << endl;
             cout << "Total semua transaksi: Rp" << TotalAll << ",00" << endl;
-            cout << "Total transaksi halaman ini: Rp" << TotalPage << ",00" << endl << endl;
-            cout << right << setw(75) << "Next Page " << setw(5) << "1<\n"; 
-            cout << right << setw(75) << "Previous Page " << setw(5) << "2<\n"; 
+            cout << "Total transaksi halaman ini: Rp" << TotalPage << ",00" << endl
+                 << endl;
+            cout << right << setw(75) << "Next Page " << setw(5) << "1<\n";
+            cout << right << setw(75) << "Previous Page " << setw(5) << "2<\n";
             cout << right << setw(75) << "Analisis Transaksi " << setw(5) << "3<\n";
             cout << right << setw(75) << "Kembali " << setw(5) << "4<\n";
             inputHandling("\n>> ", pilihan);
@@ -942,12 +933,16 @@ void riwayatTransaksi()
                   // menampilkan analisis transaksi menggunakan metode rekursif
                   system("cls");
                   cout << "\n\t<= Analisis Transaksi =>\n\n";
-                  
+
                   int TotalPositif = 0, TotalNegatif = 0;
-                  for (int i = 0; i < dataNasabah[indexNasabah].jumlahTrans; i++) {
-                        if (dataNasabah[indexNasabah].historiNasabah[i].nominal > 0) {
+                  for (int i = 0; i < dataNasabah[indexNasabah].jumlahTrans; i++)
+                  {
+                        if (dataNasabah[indexNasabah].historiNasabah[i].nominal > 0)
+                        {
                               TotalPositif += dataNasabah[indexNasabah].historiNasabah[i].nominal;
-                        } else {
+                        }
+                        else
+                        {
                               TotalNegatif += abs(dataNasabah[indexNasabah].historiNasabah[i].nominal);
                         }
                   }
@@ -956,15 +951,17 @@ void riwayatTransaksi()
                   // Menghitung jumlah transaksi berdasarkan tipe
                   map<string, int> TransByType;
                   map<string, int> AmountByType;
-                  
-                  for (int i = 0; i < dataNasabah[indexNasabah].jumlahTrans; i++) {
+
+                  for (int i = 0; i < dataNasabah[indexNasabah].jumlahTrans; i++)
+                  {
                         string tipe = dataNasabah[indexNasabah].historiNasabah[i].deskripsi;
                         TransByType[tipe]++;
                         AmountByType[tipe] += abs(dataNasabah[indexNasabah].historiNasabah[i].nominal);
                   }
                   cout << "\nJumlah transaksi berdasarkan tipe:\n";
-                  for (const auto& pair : TransByType) {
-                        cout << pair.first << ": " << pair.second << " transaksi (Rp" 
+                  for (const auto &pair : TransByType)
+                  {
+                        cout << pair.first << ": " << pair.second << " transaksi (Rp"
                              << AmountByType[pair.first] << ",00)" << endl;
                   }
                   cout << "\nTekan Enter untuk kembali ke menu Riwayat Transaksi";
@@ -984,20 +981,20 @@ void riwayatTransaksi()
       } while (exit == false);
       Pause();
 }
-int TotalTransaksi(int MulaiIndex, int AkhirIndex) 
+int TotalTransaksi(int MulaiIndex, int AkhirIndex)
 {
       if (MulaiIndex > AkhirIndex) // enggak ada transaksi lagi untuk di sum
       {
-          return 0;
+            return 0;
       }
-      if (MulaiIndex == AkhirIndex) // Transkasi hanya satu 
+      if (MulaiIndex == AkhirIndex) // Transkasi hanya satu
       {
-          return dataNasabah[indexNasabah].historiNasabah[MulaiIndex].nominal;
+            return dataNasabah[indexNasabah].historiNasabah[MulaiIndex].nominal;
       }
-      
+
       // Recursive menggunakan metode divide and conquer
       int IndexTengah = MulaiIndex + (AkhirIndex - MulaiIndex) / 2;
-      return TotalTransaksi(MulaiIndex, IndexTengah) + 
+      return TotalTransaksi(MulaiIndex, IndexTengah) +
              TotalTransaksi(IndexTengah + 1, AkhirIndex);
 }
 
@@ -1013,6 +1010,7 @@ void Pause()
       // cout << endl;
       // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
       // system("cls");
+      cout << "{Ini tadi ke Pause}" << endl;
 }
 // Animasi untuk pause
 void SlowType(const string &kata, int delay) // menampilkan kata satu per satu dengan jeda waktu

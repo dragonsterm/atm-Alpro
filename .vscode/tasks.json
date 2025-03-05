@@ -1,0 +1,26 @@
+{
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "{C++} Build Mesin ATM",
+			"command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "Build CPP ciha"
+		}
+	],
+	"version": "2.0.0"
+}
