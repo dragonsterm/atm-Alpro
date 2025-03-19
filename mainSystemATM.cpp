@@ -536,7 +536,7 @@ void tampilDataNasabah()
       cout << setfill('-') << setw(41) << "-" << setfill(' ') << endl;
       // Pause();
       inputHandling("Berapa Nomor Rekeningnya?: ", noRekIn);
-      for (int i = 0; i <= jumlahNasabah; i++)
+      for (int i = 0; i < jumlahNasabah; i++)
       {
             if (noRekIn == dataNasabah[i].noRek)
             {
@@ -582,7 +582,7 @@ void inputNasabah()
 {
       system("cls");
       Pause();
-      jumlahNasabah++;
+      //jumlahNasabah++;
       cout << "\n\n\t>-Menu Input Nasabah Baru-<\n";
       cout << "\n\nHallo Nasabah Baru!!";
       cout << "\n Data Nasabah:" << endl;
@@ -591,6 +591,7 @@ void inputNasabah()
       inputHandling("\nNama    : ", dataNasabah[jumlahNasabah].nama, 2);
       inputHandling("\nSaldo   : ", dataNasabah[jumlahNasabah].saldo);
       dataNasabah[jumlahNasabah].jumlahTrans = 0; // Nasabah Baru Tidak Memiliki Histori Transaksi
+      jumlahNasabah++; 
 }
 // Fungsi untuk delete data nasabah
 void delNasabah()
