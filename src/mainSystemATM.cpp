@@ -20,10 +20,13 @@
 #include <conio.h>
 #endif
 #include <map> // untuk menghitung jumlah dan total nilai transaksi berdasarkan tipe/deskripsi
-// Library JSON Nlohman
-#include "src/include/json.hpp"
-#include "src/include/json_fwd.hpp"
+// Library Untuk Multifile
+#include <fstream>
+#include "include/json.hpp"
+
 using namespace std;
+using json = nlohmann::json;
+
 // TODO - {Multifile} Struct
 //  >> Struct Init
 /**
@@ -50,10 +53,12 @@ struct nasabah
       int jumlahTrans;
       histori historiNasabah[100];
 };
-// >> Global Var Init
+// NOTE -  >> Global Var Init
 bool mainMenuLoop = true, loginStat = false, adminStat = false;
 int indexNasabah = -1;
 nasabah *currentNasabah = nullptr;
+nasabah globalTemp;
+string pathJson;
 // TODO - {Multifile} Snake Function
 // >> Snake Function
 const int snakeWidth = 20;
@@ -85,8 +90,10 @@ void inputHandling(string question, int &var);                  // untuk int
 void inputHandling(string question, float &var);                // untuk float
 void inputHandling(string question, short &var);                // untuk short]
 // TODO - {Multifile} Init Data nasabah
-//  Init Data Nasabah
-void inisialisasiData();
+// Multifile Manajemen System
+bool noRekVal(int noRekIn, string &pathJson);
+void importData(string jsonPathIn, nasabah &importNasabah);
+// void inisialisasiData(); //Resmi Dinonaktifkan
 // CRUD Funct Data Nasabah
 void tampilDataNasabah();
 void inputNasabah();
@@ -120,8 +127,7 @@ void InputSnake();
 void LogicSnake();
 void TitleSnake();
 
-// Main Program
-int main()
+int main(int argc, char const *argv[])
 {
       short opt;
       // Identitas Pembuat
@@ -133,11 +139,24 @@ int main()
            << " \t\n5. Rio Meidi Ataurrahman          (123240175)\n\n";
       system("pause");
       // Inisialisasi Data awal
-      inisialisasiData();
+      // inisialisasiData(); //NOTE - dinonaktifkan dulu
       // Login dan Masuk Main Menu
       loopMenu();
       return 0;
 }
+
+// REVIEW - Main untuk Developing
+int main0(int argc, char const *argv[])
+{
+      nasabah temp;
+      cout << noRekVal(23240175, pathJson) << endl;
+      importData(pathJson, temp);
+      currentNasabah = &temp;
+      cout << currentNasabah->historiNasabah[0].nominal << endl;
+      cout << currentNasabah->saldo << endl;
+      return 0;
+}
+
 // Menu Admin dan Menu Utama
 void loopMenu()
 {
@@ -241,6 +260,102 @@ void menuUtama()
             cout << "[Input Error] - Pilihan yang Anda masukkan salah\n";
       }
 }
+/**
+ * @brief Menverifikasi No Rek Apakah ada didalam DB atau tidak
+ * @return mereturn Boolean True jika ada False jika tidak
+ *
+ * @param noRekIn nomor Rekening Masukan untuk dicek
+ * @param pathJson global variabel yang mengatur path json yang diperlukan
+ */
+bool noRekVal(int noRekIn, string &pathJson)
+{
+      string pathJsonIn;
+      // Make Path for JSON
+      pathJsonIn = "../db/json/" + to_string(noRekIn) + ".json";
+      ifstream validate(pathJsonIn);
+      bool statFile = validate.is_open();
+      if (statFile == 1)
+      {
+            pathJson = pathJsonIn;
+      }
+      validate.close();
+      return statFile;
+}
+/**
+ * @brief Mengimport data nasabah dari json yang sudah di verifikasi noRekVal
+ *
+ * @param jsonPathIn path dari json file
+ * @param importNasabah struct yang ada di global variabel menyimpan data nasabah
+ */
+void importData(string jsonPathIn, nasabah &importNasabah)
+{
+      ifstream importStream(jsonPathIn, ios::in);
+      json dataNasabahJson;
+      importStream >> dataNasabahJson;
+      // cout << "test value : " << dataNasabahJson["saldo"].get<int>() << endl;
+      if (dataNasabahJson.contains("noRek"))
+      {
+            importNasabah.noRek = dataNasabahJson["noRek"].get<int>();
+      }
+      else
+      {
+            cout << "[Err] - No Rek error Not Found" << endl;
+            return;
+      }
+      if (dataNasabahJson.contains("pass"))
+      {
+            importNasabah.pass = dataNasabahJson["pass"].get<string>();
+      }
+      else
+      {
+            cout << "[Err] - Password error Not Found" << endl;
+            return;
+      }
+      if (dataNasabahJson.contains("nama"))
+      {
+            importNasabah.nama = dataNasabahJson["nama"].get<string>();
+      }
+      else
+      {
+            cout << "[Err] - Nama error Not Found" << endl;
+            return;
+      }
+      if (dataNasabahJson.contains("saldo"))
+      {
+            importNasabah.saldo = dataNasabahJson["saldo"].get<int>();
+      }
+      else
+      {
+            cout << "[Err] - Saldo error Not Found" << endl;
+            return;
+      }
+      if (dataNasabahJson.contains("jumlahTrans"))
+      {
+            importNasabah.jumlahTrans = dataNasabahJson["jumlahTrans"].get<int>();
+      }
+      else
+      {
+            cout << "[Err] - Jumlah Transaksi error Not Found" << endl;
+            return;
+      }
+      if (dataNasabahJson.contains("historiTransaksi"))
+      {
+            for (int i = 0; i < dataNasabahJson["jumlahTrans"].get<int>(); ++i)
+            {
+                  importNasabah.historiNasabah[i].idTrans = dataNasabahJson["historiTransaksi"][i]["idTrans"].get<int>();
+                  importNasabah.historiNasabah[i].nominal = dataNasabahJson["historiTransaksi"][i]["nominal"].get<int>();
+                  importNasabah.historiNasabah[i].noRektuj = dataNasabahJson["historiTransaksi"][i]["noRekTuj"].get<int>();
+                  importNasabah.historiNasabah[i].deskripsi = dataNasabahJson["historiTransaksi"][i]["deskripsi"].get<string>();
+            }
+      }
+      else
+      {
+            cout << "[Err] - Histori Nasabah error Not Found" << endl;
+            return;
+      }
+      importStream.close();
+}
+
 // Fungsi Login Rekursif
 void loginAttempt(int Attempts)
 {
@@ -252,39 +367,73 @@ void loginAttempt(int Attempts)
             exit(0);
       }
       inputHandling("\n\n  Masukkan Nomor Rekening (8 Digit)\n>> ", noRekIn);
-      inputHandling("\n  Masukkan Password Rekening\n>> ", passIn, 1);
-      for (int i = 0; i < jumlahNasabah; i++)
+      if (noRekVal(noRekIn, pathJson))
       {
-            if (noRekIn == dataNasabah[i].noRek && passIn == dataNasabah[i].pass)
-            {
-                  if (dataNasabah[i].noRek == 459777345)
-                  {
-                        adminStat = true;
-                        loginStat = true;
-                        // REVIEW - Dev Pointer for current nasabah
-                        indexNasabah = i;
-                        currentNasabah = &dataNasabah[i];
-                  }
-                  else
-                  {
-                        adminStat = false;
-                        loginStat = true;
-                        // REVIEW - Dev Pointer for current nasabah
-                        indexNasabah = i;
-                        currentNasabah = &dataNasabah[i];
-                  }
-                  cout << "\n<Login berhasil>\n";
-                  Pause();
-                  system("cls");
-                  cout << "\n <= Selamat Datang " << currentNasabah->nama << " =>\n\n";
-                  cout << "Data Rekening :" << endl;
-                  cout << setw(10) << "A.N." << setw(5) << ": " << currentNasabah->nama << endl;
-                  cout << setw(10) << "No.Rek" << setw(5) << " : " << currentNasabah->noRek << endl
-                       << endl;
-                  system("pause");
-                  return;
-            }
+            inputHandling("\n  Masukkan Password Rekening\n>> ", passIn, 1);
       }
+      else
+      {
+            cout << "Err - Whoops Rekening Salah" << endl;
+            cout << "\n[Login Gagal] - Kesempatan Anda Tersisa " << (Attempts - 1) << endl;
+            loginAttempt(Attempts - 1);
+      }
+      importData(pathJson, globalTemp);
+      if (globalTemp.pass == passIn)
+      {
+            if (noRekIn == 459777345)
+            {
+                  adminStat = true;
+                  loginStat = true;
+            }
+            else
+            {
+                  adminStat = false;
+                  loginStat = true;
+            }
+            currentNasabah = &globalTemp;
+            // Ucapan Selamat Login
+            cout << "\n<Login berhasil>\n";
+            Pause();
+            system("cls");
+            cout << "\n <= Selamat Datang " << currentNasabah->nama << " =>\n\n";
+            cout << "Data Rekening :" << endl;
+            cout << setw(10) << "A.N." << setw(5) << ": " << currentNasabah->nama << endl;
+            cout << setw(10) << "No.Rek" << setw(5) << " : " << currentNasabah->noRek << endl
+                 << endl;
+            system("pause");
+            return; // Penting ini cah
+      }
+      // REVIEW - ini udah dimigrate
+      // for (int i = 0; i < jumlahNasabah; i++)
+      // {
+      //       if (noRekIn == dataNasabah[i].noRek && passIn == dataNasabah[i].pass)
+      //       {
+      //             if (dataNasabah[i].noRek == 459777345)
+      //             {
+      //                   adminStat = true;
+      //                   loginStat = true;
+      //                   indexNasabah = i;
+      //                   currentNasabah = &dataNasabah[i];
+      //             }
+      //             else
+      //             {
+      //                   adminStat = false;
+      //                   loginStat = true;
+      //                   indexNasabah = i;
+      //                   currentNasabah = &dataNasabah[i];
+      //             }
+      //             cout << "\n<Login berhasil>\n";
+      //             Pause();
+      //             system("cls");
+      //             cout << "\n <= Selamat Datang " << currentNasabah->nama << " =>\n\n";
+      //             cout << "Data Rekening :" << endl;
+      //             cout << setw(10) << "A.N." << setw(5) << ": " << currentNasabah->nama << endl;
+      //             cout << setw(10) << "No.Rek" << setw(5) << " : " << currentNasabah->noRek << endl
+      //                  << endl;
+      //             system("pause");
+      //             return;
+      //       }
+      // }
       cout << "\n[Login Gagal] - Kesempatan Anda Tersisa " << (Attempts - 1) << endl;
       loginAttempt(Attempts - 1);
 }
@@ -388,91 +537,92 @@ void inputHandling(string question, short &var)
       } while (statLoop == true);
 };
 
-void inisialisasiData()
-{
-      dataNasabah[jumlahNasabah++] =
-          {459777345, "admin", "Sosok Asli Admin", 9999999, 0, {}}; // Sosok Asli Admin
-      dataNasabah[jumlahNasabah++] =
-          {23240144, "admin123", "Zaka Ahmad Ghofari", 2500000, 12,
-           {// biar spasi
-            {51, 50000, 87654326, "Qris"},
-            {61, 900000, 87654327, "Top Up Dana"},
-            {71, 200000, 87654318, "Virtual Acc"},
-            {52, 400000, 87654328, "Qris"},
-            {62, 75000, 87654353, "Top UP Dana"},
-            {72, 800000, 87654328, "Virtual Acc"},
-            {73, 960000, 87654330, "Virtual Acc"},
-            {53, 115000, 87654402, "Qris"},
-            {63, 120000, 87654560, "Top Up Dana"},
-            {64, 980000, 87654975, "Top Up Gopay"},
-            {90, 650000, 87650642, "Transfer"},
-            {74, 850000, 87654340, "Transfer Saldo"}}};
-      dataNasabah[jumlahNasabah++] =
-          {23240159, "admin321", "Dimas Hafid Fathoni", 6500000, 12,
-           {// biar spasi
-            {51, 50000, 87654326, "Qris"},
-            {61, 900000, 87654327, "Top Up Dana"},
-            {71, 200000, 87654318, "Virtual Acc"},
-            {52, 400000, 87654328, "Qris"},
-            {62, 75000, 87654353, "Top UP Dana"},
-            {72, 800000, 87654328, "Virtual Acc"},
-            {73, 960000, 87654330, "Virtual Acc"},
-            {53, 115000, 87654402, "Qris"},
-            {63, 120000, 87654560, "Top Up Dana"},
-            {64, 980000, 87654975, "Top Up Gopay"},
-            {90, 650000, 87650642, "Transfer"},
-            {74, 850000, 87654340, "Virtual Acc"}}};
-      dataNasabah[jumlahNasabah++] =
-          {23240173, "admin3221", "Erlan Rifqi Davin D", 5000000, 12,
-           {// biar spasi
-            {51, 50000, 87654326, "Qris"},
-            {61, 900000, 87654327, "Top Up Dana"},
-            {71, 200000, 87654318, "Virtual Acc"},
-            {52, 400000, 87654328, "Qris"},
-            {62, 75000, 87654353, "Top UP Dana"},
-            {72, 800000, 87654328, "Virtual Acc"},
-            {73, 960000, 87654330, "Virtual Acc"},
-            {53, 115000, 87654402, "Qris"},
-            {63, 120000, 87654560, "Top Up Dana"},
-            {64, 980000, 87654975, "Top Up Gopay"},
-            {90, 650000, 87650642, "Transfer"},
-            {74, 850000, 87654340, "Virtual Acc"}}};
-      dataNasabah[jumlahNasabah++] =
-          {23240174, "admin3214", "Jauza Ilham Mahardika P", 10000000, 12,
-           {// biar spasi
-            {51, 50000, 87654326, "Qris"},
-            {61, 900000, 87654327, "Top Up Dana"},
-            {71, 200000, 87654318, "Virtual Acc"},
-            {52, 400000, 87654328, "Qris"},
-            {62, 75000, 87654353, "Top UP Dana"},
-            {72, 800000, 87654328, "Virtual Acc"},
-            {73, 960000, 87654330, "Virtual Acc"},
-            {53, 115000, 87654402, "Qris"},
-            {63, 120000, 87654560, "Top Up Dana"},
-            {64, 980000, 87654975, "Top Up Gopay"},
-            {90, 650000, 87650642, "Transfer"},
-            {74, 850000, 87654340, "Virtual Acc"}}};
-      dataNasabah[jumlahNasabah++] =
-          {23240175, "admin3215", "Rio Meidi A", 9000000, 12,
-           {// biar spasi
-            {51, 50000, 87654326, "Qris"},
-            {61, 900000, 87654327, "Top Up Dana"},
-            {71, 200000, 87654318, "Virtual Acc"},
-            {52, 400000, 87654328, "Qris"},
-            {62, 75000, 87654353, "Top UP Dana"},
-            {72, 800000, 87654328, "Virtual Acc"},
-            {73, 960000, 87654330, "Virtual Acc"},
-            {53, 115000, 87654402, "Qris"},
-            {63, 120000, 87654560, "Top Up Dana"},
-            {64, 980000, 87654975, "Top Up Gopay"},
-            {90, 650000, 87650642, "Transfer"},
-            {74, 850000, 87654340, "Virtual Acc"}}};
-      dataNasabah[jumlahNasabah++] =
-          {1, "admin", "Test Empty Set", 0, 0, {
-                                                   // biar spasi
-                                               }};
-      // Kalau Kurang silahkan di tambah sendiri
-}
+// REVIEW - Resmi ditutup data hardcode ini
+// void inisialisasiData()
+// {
+//       dataNasabah[jumlahNasabah++] =
+//           {459777345, "admin", "Sosok Asli Admin", 9999999, 0, {}}; // Sosok Asli Admin
+//       dataNasabah[jumlahNasabah++] =
+//           {23240144, "admin123", "Zaka Ahmad Ghofari", 2500000, 12,
+//            {// biar spasi
+//             {51, 50000, 87654326, "Qris"},
+//             {61, 900000, 87654327, "Top Up Dana"},
+//             {71, 200000, 87654318, "Virtual Acc"},
+//             {52, 400000, 87654328, "Qris"},
+//             {62, 75000, 87654353, "Top UP Dana"},
+//             {72, 800000, 87654328, "Virtual Acc"},
+//             {73, 960000, 87654330, "Virtual Acc"},
+//             {53, 115000, 87654402, "Qris"},
+//             {63, 120000, 87654560, "Top Up Dana"},
+//             {64, 980000, 87654975, "Top Up Gopay"},
+//             {90, 650000, 87650642, "Transfer"},
+//             {74, 850000, 87654340, "Transfer Saldo"}}};
+//       dataNasabah[jumlahNasabah++] =
+//           {23240159, "admin321", "Dimas Hafid Fathoni", 6500000, 12,
+//            {// biar spasi
+//             {51, 50000, 87654326, "Qris"},
+//             {61, 900000, 87654327, "Top Up Dana"},
+//             {71, 200000, 87654318, "Virtual Acc"},
+//             {52, 400000, 87654328, "Qris"},
+//             {62, 75000, 87654353, "Top UP Dana"},
+//             {72, 800000, 87654328, "Virtual Acc"},
+//             {73, 960000, 87654330, "Virtual Acc"},
+//             {53, 115000, 87654402, "Qris"},
+//             {63, 120000, 87654560, "Top Up Dana"},
+//             {64, 980000, 87654975, "Top Up Gopay"},
+//             {90, 650000, 87650642, "Transfer"},
+//             {74, 850000, 87654340, "Virtual Acc"}}};
+//       dataNasabah[jumlahNasabah++] =
+//           {23240173, "admin3221", "Erlan Rifqi Davin D", 5000000, 12,
+//            {// biar spasi
+//             {51, 50000, 87654326, "Qris"},
+//             {61, 900000, 87654327, "Top Up Dana"},
+//             {71, 200000, 87654318, "Virtual Acc"},
+//             {52, 400000, 87654328, "Qris"},
+//             {62, 75000, 87654353, "Top UP Dana"},
+//             {72, 800000, 87654328, "Virtual Acc"},
+//             {73, 960000, 87654330, "Virtual Acc"},
+//             {53, 115000, 87654402, "Qris"},
+//             {63, 120000, 87654560, "Top Up Dana"},
+//             {64, 980000, 87654975, "Top Up Gopay"},
+//             {90, 650000, 87650642, "Transfer"},
+//             {74, 850000, 87654340, "Virtual Acc"}}};
+//       dataNasabah[jumlahNasabah++] =
+//           {23240174, "admin3214", "Jauza Ilham Mahardika P", 10000000, 12,
+//            {// biar spasi
+//             {51, 50000, 87654326, "Qris"},
+//             {61, 900000, 87654327, "Top Up Dana"},
+//             {71, 200000, 87654318, "Virtual Acc"},
+//             {52, 400000, 87654328, "Qris"},
+//             {62, 75000, 87654353, "Top UP Dana"},
+//             {72, 800000, 87654328, "Virtual Acc"},
+//             {73, 960000, 87654330, "Virtual Acc"},
+//             {53, 115000, 87654402, "Qris"},
+//             {63, 120000, 87654560, "Top Up Dana"},
+//             {64, 980000, 87654975, "Top Up Gopay"},
+//             {90, 650000, 87650642, "Transfer"},
+//             {74, 850000, 87654340, "Virtual Acc"}}};
+//       dataNasabah[jumlahNasabah++] =
+//           {23240175, "admin3215", "Rio Meidi A", 9000000, 12,
+//            {// biar spasi
+//             {51, 50000, 87654326, "Qris"},
+//             {61, 900000, 87654327, "Top Up Dana"},
+//             {71, 200000, 87654318, "Virtual Acc"},
+//             {52, 400000, 87654328, "Qris"},
+//             {62, 75000, 87654353, "Top UP Dana"},
+//             {72, 800000, 87654328, "Virtual Acc"},
+//             {73, 960000, 87654330, "Virtual Acc"},
+//             {53, 115000, 87654402, "Qris"},
+//             {63, 120000, 87654560, "Top Up Dana"},
+//             {64, 980000, 87654975, "Top Up Gopay"},
+//             {90, 650000, 87650642, "Transfer"},
+//             {74, 850000, 87654340, "Virtual Acc"}}};
+//       dataNasabah[jumlahNasabah++] =
+//           {1, "admin", "Test Empty Set", 0, 0, {
+//                                                    // biar spasi
+//                                                }};
+//       // Kalau Kurang silahkan di tambah sendiri
+// }
 // CRUD Funct
 // Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
 void sortByNoRek() // sort norek manual (bubble sort)
@@ -525,6 +675,7 @@ void sortHistoriTransaksi(nasabah &n) // sort manual histori transaksi di satu n
             }
       }
 }
+// TODO - Load Data JSON nasabah
 void tampilDataNasabah()
 {
       system("cls");
