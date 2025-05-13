@@ -1,3 +1,13 @@
+/**
+ * @file mainSystemATM.cpp
+ * @author Zaka, Dhimas, Jauza, Erlan, dan Roi
+ * @brief Sebuah program buatan 6 orang sangar untuk menunjuang Nilai Algoritma Pemrograman
+ * @version 0.1
+ * @date 2025-05-13
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -10,10 +20,16 @@
 #include <conio.h>
 #endif
 #include <map> // untuk menghitung jumlah dan total nilai transaksi berdasarkan tipe/deskripsi
+// Library JSON Nlohman
+#include "src/include/json.hpp"
+#include "src/include/json_fwd.hpp"
 using namespace std;
 // TODO - {Multifile} Struct
 //  >> Struct Init
-//  Struct untuk Histori
+/**
+ * @brief Struct Histori Transaksi Nasabah
+ *
+ */
 struct histori
 {
       int idTrans;
@@ -21,7 +37,10 @@ struct histori
       int noRektuj;
       string deskripsi;
 };
-// Struct Untuk data nasabah
+/**
+ * @brief Struct Untuk Template Data Nasabah
+ *
+ */
 struct nasabah
 {
       int noRek;

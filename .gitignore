@@ -1,4 +1,4 @@
-# Ignore Visual Studio Code settings folder
-
-# Ignore executable files
-*.exe
+# Ignore Archive Folder
+archive/
+# Ignore Doxyfile Config
+Doxyfile
