@@ -1,10 +1,10 @@
 {
 	"configurations": [
 		{
-			"name": "Debug-Mesin ATM Cihaa",
+			"name": "Debug-Mesin ATM Cihaa - Roi",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+			"program": "${workspaceFolder}/build/${fileBasenameNoExtension}.exe",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
