@@ -145,7 +145,7 @@ int main(int argc, char const *argv[])
       return 0;
 }
 
-// REVIEW - Main untuk Developing
+// NOTE - Main untuk Developing
 // int main0(int argc, char const *argv[])
 // {
 //       menuAdmin();
@@ -231,6 +231,7 @@ void menuAdmin()
             break;
       }
 }
+
 void menuUtama()
 {
       short opt;
