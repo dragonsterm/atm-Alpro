@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['nasabah_0',['nasabah',['../structnasabah.html',1,'']]],
-  ['ngapain_20aja_1',['Program Ini Ngapain aja',['../md_docs_2md_2about.html#autotoc_md1',1,'']]],
-  ['norekval_2',['noRekVal',['../main_system_a_t_m_8cpp.html#a18cbd45465bae2408406c64a45f70d14',1,'mainSystemATM.cpp']]]
+  ['loopmenu_0',['loopMenu',['../main_system_a_t_m_8cpp.html#a30d5ccac385bb79cf3e24b0b49c4cb46',1,'mainSystemATM.cpp']]]
 ];

@@ -3,6 +3,5 @@
 	"pass": "admin",
 	"nama": "Sosok Asli Admin",
 	"saldo": 9999999,
-	"jumlahTrans": 0,
-	"historiTransaksi": []
+	"jumlahNasabah": 5
 }

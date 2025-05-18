@@ -163,6 +163,7 @@ $(function(){initNavTree('main_system_a_t_m_8cpp.html',''); initResizable(true);
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &quot;include/json.hpp&quot;</code><br />
+<code>#include &lt;filesystem&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -194,15 +195,6 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a30d5ccac385bb79cf3e24b0b49c4cb46" id="r_a30d5ccac385bb79cf3e24b0b49c4cb46"><td class="memItemLeft" align="right" valign="top"><a id="a30d5ccac385bb79cf3e24b0b49c4cb46" name="a30d5ccac385bb79cf3e24b0b49c4cb46"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loopMenu</b> ()</td></tr>
-<tr class="separator:a30d5ccac385bb79cf3e24b0b49c4cb46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16202881086f36cce6f9d7878b3bb1f9" id="r_a16202881086f36cce6f9d7878b3bb1f9"><td class="memItemLeft" align="right" valign="top"><a id="a16202881086f36cce6f9d7878b3bb1f9" name="a16202881086f36cce6f9d7878b3bb1f9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>menuAdmin</b> ()</td></tr>
-<tr class="separator:a16202881086f36cce6f9d7878b3bb1f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a943e453b28a7f78b59b98d48b69d6875" id="r_a943e453b28a7f78b59b98d48b69d6875"><td class="memItemLeft" align="right" valign="top"><a id="a943e453b28a7f78b59b98d48b69d6875" name="a943e453b28a7f78b59b98d48b69d6875"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>menuUtama</b> ()</td></tr>
-<tr class="separator:a943e453b28a7f78b59b98d48b69d6875"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8e1fdbe30e65d7edc0efaed4d154299" id="r_ae8e1fdbe30e65d7edc0efaed4d154299"><td class="memItemLeft" align="right" valign="top"><a id="ae8e1fdbe30e65d7edc0efaed4d154299" name="ae8e1fdbe30e65d7edc0efaed4d154299"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>inputHandling</b> (string question, string &amp;var, short lineOr)</td></tr>
 <tr class="separator:ae8e1fdbe30e65d7edc0efaed4d154299"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -215,12 +207,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>inputHandling</b> (st
 <tr class="memitem:a54bad6844753400445accfffd1355a96" id="r_a54bad6844753400445accfffd1355a96"><td class="memItemLeft" align="right" valign="top"><a id="a54bad6844753400445accfffd1355a96" name="a54bad6844753400445accfffd1355a96"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>inputHandling</b> (string question, short &amp;var)</td></tr>
 <tr class="separator:a54bad6844753400445accfffd1355a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18cbd45465bae2408406c64a45f70d14" id="r_a18cbd45465bae2408406c64a45f70d14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18cbd45465bae2408406c64a45f70d14">noRekVal</a> (int noRekIn, string &amp;pathJson)</td></tr>
-<tr class="memdesc:a18cbd45465bae2408406c64a45f70d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menverifikasi No Rek Apakah ada didalam DB atau tidak.  <br /></td></tr>
-<tr class="separator:a18cbd45465bae2408406c64a45f70d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e256c7cfa593bf32f7a1c836a70fb9b" id="r_a0e256c7cfa593bf32f7a1c836a70fb9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e256c7cfa593bf32f7a1c836a70fb9b">importData</a> (string jsonPathIn, <a class="el" href="structnasabah.html">nasabah</a> &amp;importNasabah)</td></tr>
-<tr class="memdesc:a0e256c7cfa593bf32f7a1c836a70fb9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mengimport data nasabah dari json yang sudah di verifikasi noRekVal.  <br /></td></tr>
-<tr class="separator:a0e256c7cfa593bf32f7a1c836a70fb9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f7e2889d3beae119b55367b00eae538" id="r_a8f7e2889d3beae119b55367b00eae538"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f7e2889d3beae119b55367b00eae538">noRekVal</a> (int noRekIn, string &amp;pathJsonCurNasabah, bool mode)</td></tr>
+<tr class="memdesc:a8f7e2889d3beae119b55367b00eae538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menverifikasi No Rek Apakah ada didalam DB atau tidak.  <br /></td></tr>
+<tr class="separator:a8f7e2889d3beae119b55367b00eae538"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cc67b74aa369f46b374eeae7576e13c" id="r_a4cc67b74aa369f46b374eeae7576e13c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4cc67b74aa369f46b374eeae7576e13c">importDataJson</a> (string jsonPathIn, <a class="el" href="structnasabah.html">nasabah</a> &amp;nasabahExport)</td></tr>
+<tr class="memdesc:a4cc67b74aa369f46b374eeae7576e13c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mengimport data nasabah dari json yang sudah di verifikasi noRekVal.  <br /></td></tr>
+<tr class="separator:a4cc67b74aa369f46b374eeae7576e13c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c0130a3e76354a03a72527e8ea34b18" id="r_a2c0130a3e76354a03a72527e8ea34b18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c0130a3e76354a03a72527e8ea34b18">exportNasabahJson</a> (string jsonPathOut, <a class="el" href="structnasabah.html">nasabah</a> nasabahExport, bool mode)</td></tr>
+<tr class="memdesc:a2c0130a3e76354a03a72527e8ea34b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fungsi untuk mengexport nasabah kedalam sebuah file JSON.  <br /></td></tr>
+<tr class="separator:a2c0130a3e76354a03a72527e8ea34b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ac02be00f4f0087a7589a6936207a61" id="r_a5ac02be00f4f0087a7589a6936207a61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ac02be00f4f0087a7589a6936207a61">importDb</a> (<a class="el" href="structnasabah.html">nasabah</a> *dataNasabahOut, int &amp;jumlahNasabah)</td></tr>
+<tr class="memdesc:a5ac02be00f4f0087a7589a6936207a61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mengimport seluruh file json yang ada di folder database cwd kedalam struct.  <br /></td></tr>
+<tr class="separator:a5ac02be00f4f0087a7589a6936207a61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2ed7f1c4480f6ac076f8c7b42fb7764" id="r_ad2ed7f1c4480f6ac076f8c7b42fb7764"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad2ed7f1c4480f6ac076f8c7b42fb7764">restoreBackupDb</a> (string dbBackupPath)</td></tr>
+<tr class="memdesc:ad2ed7f1c4480f6ac076f8c7b42fb7764"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menduplikat database yang ada di folder backup kedalam folder json yang ada di workspace cwd.  <br /></td></tr>
+<tr class="separator:ad2ed7f1c4480f6ac076f8c7b42fb7764"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9225aea17a8edd40ffa6981633393076" id="r_a9225aea17a8edd40ffa6981633393076"><td class="memItemLeft" align="right" valign="top"><a id="a9225aea17a8edd40ffa6981633393076" name="a9225aea17a8edd40ffa6981633393076"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>tampilDataNasabah</b> ()</td></tr>
 <tr class="separator:a9225aea17a8edd40ffa6981633393076"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -251,6 +252,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>transferSaldo</b> ()<
 <tr class="memitem:a74c29961130c7d7ca7e14aa252f5c1a7" id="r_a74c29961130c7d7ca7e14aa252f5c1a7"><td class="memItemLeft" align="right" valign="top"><a id="a74c29961130c7d7ca7e14aa252f5c1a7" name="a74c29961130c7d7ca7e14aa252f5c1a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>riwayatTransaksi</b> ()</td></tr>
 <tr class="separator:a74c29961130c7d7ca7e14aa252f5c1a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30d5ccac385bb79cf3e24b0b49c4cb46" id="r_a30d5ccac385bb79cf3e24b0b49c4cb46"><td class="memItemLeft" align="right" valign="top"><a id="a30d5ccac385bb79cf3e24b0b49c4cb46" name="a30d5ccac385bb79cf3e24b0b49c4cb46"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>loopMenu</b> ()</td></tr>
+<tr class="memdesc:a30d5ccac385bb79cf3e24b0b49c4cb46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Melooping Menu dengan terus menerus sampai didapatkan loginStat == true. <br /></td></tr>
+<tr class="separator:a30d5ccac385bb79cf3e24b0b49c4cb46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16202881086f36cce6f9d7878b3bb1f9" id="r_a16202881086f36cce6f9d7878b3bb1f9"><td class="memItemLeft" align="right" valign="top"><a id="a16202881086f36cce6f9d7878b3bb1f9" name="a16202881086f36cce6f9d7878b3bb1f9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>menuAdmin</b> ()</td></tr>
+<tr class="memdesc:a16202881086f36cce6f9d7878b3bb1f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menu Untuk Admin. <br /></td></tr>
+<tr class="separator:a16202881086f36cce6f9d7878b3bb1f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a943e453b28a7f78b59b98d48b69d6875" id="r_a943e453b28a7f78b59b98d48b69d6875"><td class="memItemLeft" align="right" valign="top"><a id="a943e453b28a7f78b59b98d48b69d6875" name="a943e453b28a7f78b59b98d48b69d6875"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>menuUtama</b> ()</td></tr>
+<tr class="separator:a943e453b28a7f78b59b98d48b69d6875"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeceaa727e54730f4ec60c2a68b0242c7" id="r_aeceaa727e54730f4ec60c2a68b0242c7"><td class="memItemLeft" align="right" valign="top"><a id="aeceaa727e54730f4ec60c2a68b0242c7" name="aeceaa727e54730f4ec60c2a68b0242c7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sortByNoRek</b> ()</td></tr>
 <tr class="separator:aeceaa727e54730f4ec60c2a68b0242c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -293,9 +305,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>TitleSnake</b> ()</td
 <tr class="memitem:abf9e6b7e6f15df4b525a2e7705ba3089" id="r_abf9e6b7e6f15df4b525a2e7705ba3089"><td class="memItemLeft" align="right" valign="top"><a id="abf9e6b7e6f15df4b525a2e7705ba3089" name="abf9e6b7e6f15df4b525a2e7705ba3089"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (int argc, char const *argv[])</td></tr>
 <tr class="separator:abf9e6b7e6f15df4b525a2e7705ba3089"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a354ef876c8ed9f7da84773db8e8c78" id="r_a9a354ef876c8ed9f7da84773db8e8c78"><td class="memItemLeft" align="right" valign="top"><a id="a9a354ef876c8ed9f7da84773db8e8c78" name="a9a354ef876c8ed9f7da84773db8e8c78"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>main0</b> (int argc, char const *argv[])</td></tr>
-<tr class="separator:a9a354ef876c8ed9f7da84773db8e8c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -311,15 +320,36 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>adminStat</b> = false
 <tr class="memitem:a3a25b41e77b4e00fb643286b9254564c" id="r_a3a25b41e77b4e00fb643286b9254564c"><td class="memItemLeft" align="right" valign="top"><a id="a3a25b41e77b4e00fb643286b9254564c" name="a3a25b41e77b4e00fb643286b9254564c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>indexNasabah</b> = -1</td></tr>
 <tr class="separator:a3a25b41e77b4e00fb643286b9254564c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93f7b12cac055360c982abc4e5b475af" id="r_a93f7b12cac055360c982abc4e5b475af"><td class="memItemLeft" align="right" valign="top"><a id="a93f7b12cac055360c982abc4e5b475af" name="a93f7b12cac055360c982abc4e5b475af"></a>
-<a class="el" href="structnasabah.html">nasabah</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>currentNasabah</b> = nullptr</td></tr>
-<tr class="separator:a93f7b12cac055360c982abc4e5b475af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cd50ddaec885f3a4dec76a45677fe07" id="r_a2cd50ddaec885f3a4dec76a45677fe07"><td class="memItemLeft" align="right" valign="top"><a id="a2cd50ddaec885f3a4dec76a45677fe07" name="a2cd50ddaec885f3a4dec76a45677fe07"></a>
-<a class="el" href="structnasabah.html">nasabah</a>&#160;</td><td class="memItemRight" valign="bottom"><b>globalTemp</b></td></tr>
-<tr class="separator:a2cd50ddaec885f3a4dec76a45677fe07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09533a0a7ed93eac110f7da12b0b1c94" id="r_a09533a0a7ed93eac110f7da12b0b1c94"><td class="memItemLeft" align="right" valign="top"><a id="a09533a0a7ed93eac110f7da12b0b1c94" name="a09533a0a7ed93eac110f7da12b0b1c94"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><b>pathJson</b></td></tr>
-<tr class="separator:a09533a0a7ed93eac110f7da12b0b1c94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad451c2e08599fe75c8252a295d8f772b" id="r_ad451c2e08599fe75c8252a295d8f772b"><td class="memItemLeft" align="right" valign="top"><a id="ad451c2e08599fe75c8252a295d8f772b" name="ad451c2e08599fe75c8252a295d8f772b"></a>
+<a class="el" href="structnasabah.html">nasabah</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>currentNasabahPtr</b> = nullptr</td></tr>
+<tr class="separator:ad451c2e08599fe75c8252a295d8f772b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12400bf2681b44ca18b67ca8c9a40f20" id="r_a12400bf2681b44ca18b67ca8c9a40f20"><td class="memItemLeft" align="right" valign="top"><a id="a12400bf2681b44ca18b67ca8c9a40f20" name="a12400bf2681b44ca18b67ca8c9a40f20"></a>
+<a class="el" href="structnasabah.html">nasabah</a>&#160;</td><td class="memItemRight" valign="bottom"><b>currentNasabah</b></td></tr>
+<tr class="separator:a12400bf2681b44ca18b67ca8c9a40f20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e8e11d8052260aa73d9eeb78e08e137" id="r_a3e8e11d8052260aa73d9eeb78e08e137"><td class="memItemLeft" align="right" valign="top"><a id="a3e8e11d8052260aa73d9eeb78e08e137" name="a3e8e11d8052260aa73d9eeb78e08e137"></a>
+<a class="el" href="structnasabah.html">nasabah</a>&#160;</td><td class="memItemRight" valign="bottom"><b>anotherNasabah</b></td></tr>
+<tr class="separator:a3e8e11d8052260aa73d9eeb78e08e137"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6621ef52685079014300bff2b57c96a7" id="r_a6621ef52685079014300bff2b57c96a7"><td class="memItemLeft" align="right" valign="top"><a id="a6621ef52685079014300bff2b57c96a7" name="a6621ef52685079014300bff2b57c96a7"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>pathJsonCurNasabah</b></td></tr>
+<tr class="separator:a6621ef52685079014300bff2b57c96a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f64ff977f3c472681e5a57f764aa911" id="r_a3f64ff977f3c472681e5a57f764aa911"><td class="memItemLeft" align="right" valign="top"><a id="a3f64ff977f3c472681e5a57f764aa911" name="a3f64ff977f3c472681e5a57f764aa911"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>pathJsonAnotherNasabah</b></td></tr>
+<tr class="separator:a3f64ff977f3c472681e5a57f764aa911"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa67e95cb77fcbf8e036acad10a727b0e" id="r_aa67e95cb77fcbf8e036acad10a727b0e"><td class="memItemLeft" align="right" valign="top"><a id="aa67e95cb77fcbf8e036acad10a727b0e" name="aa67e95cb77fcbf8e036acad10a727b0e"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>dbPath</b> = &quot;../db/json/&quot;</td></tr>
+<tr class="separator:aa67e95cb77fcbf8e036acad10a727b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a845fe5ab9fb584913fc44f35d0b6ab04" id="r_a845fe5ab9fb584913fc44f35d0b6ab04"><td class="memItemLeft" align="right" valign="top"><a id="a845fe5ab9fb584913fc44f35d0b6ab04" name="a845fe5ab9fb584913fc44f35d0b6ab04"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>dbBackupPath</b> = &quot;../db/backup/json&quot;</td></tr>
+<tr class="separator:a845fe5ab9fb584913fc44f35d0b6ab04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17e5169c90bdfedd7d988041043df140" id="r_a17e5169c90bdfedd7d988041043df140"><td class="memItemLeft" align="right" valign="top"><a id="a17e5169c90bdfedd7d988041043df140" name="a17e5169c90bdfedd7d988041043df140"></a>
+<a class="el" href="structnasabah.html">nasabah</a>&#160;</td><td class="memItemRight" valign="bottom"><b>dataNasabah</b> [100]</td></tr>
+<tr class="separator:a17e5169c90bdfedd7d988041043df140"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44ea6e09fa6c97e36318d952d661bbcd" id="r_a44ea6e09fa6c97e36318d952d661bbcd"><td class="memItemLeft" align="right" valign="top"><a id="a44ea6e09fa6c97e36318d952d661bbcd" name="a44ea6e09fa6c97e36318d952d661bbcd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>jumlahNasabah</b> = 0</td></tr>
+<tr class="separator:a44ea6e09fa6c97e36318d952d661bbcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09b5579ab748deb3265821a13d9e67ca" id="r_a09b5579ab748deb3265821a13d9e67ca"><td class="memItemLeft" align="right" valign="top"><a id="a09b5579ab748deb3265821a13d9e67ca" name="a09b5579ab748deb3265821a13d9e67ca"></a>
+vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pathNasabahJson</b></td></tr>
+<tr class="separator:a09b5579ab748deb3265821a13d9e67ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af76e1efad72d455488e6e778d813ca57" id="r_af76e1efad72d455488e6e778d813ca57"><td class="memItemLeft" align="right" valign="top"><a id="af76e1efad72d455488e6e778d813ca57" name="af76e1efad72d455488e6e778d813ca57"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>snakeWidth</b> = 20</td></tr>
 <tr class="separator:af76e1efad72d455488e6e778d813ca57"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -353,12 +383,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nTail</b> = 0</td></tr
 <tr class="memitem:a271f634244426057586dd5026e585787" id="r_a271f634244426057586dd5026e585787"><td class="memItemLeft" align="right" valign="top"><a id="a271f634244426057586dd5026e585787" name="a271f634244426057586dd5026e585787"></a>
 eDirection&#160;</td><td class="memItemRight" valign="bottom"><b>snakeDir</b></td></tr>
 <tr class="separator:a271f634244426057586dd5026e585787"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17e5169c90bdfedd7d988041043df140" id="r_a17e5169c90bdfedd7d988041043df140"><td class="memItemLeft" align="right" valign="top"><a id="a17e5169c90bdfedd7d988041043df140" name="a17e5169c90bdfedd7d988041043df140"></a>
-<a class="el" href="structnasabah.html">nasabah</a>&#160;</td><td class="memItemRight" valign="bottom"><b>dataNasabah</b> [100]</td></tr>
-<tr class="separator:a17e5169c90bdfedd7d988041043df140"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44ea6e09fa6c97e36318d952d661bbcd" id="r_a44ea6e09fa6c97e36318d952d661bbcd"><td class="memItemLeft" align="right" valign="top"><a id="a44ea6e09fa6c97e36318d952d661bbcd" name="a44ea6e09fa6c97e36318d952d661bbcd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>jumlahNasabah</b> = 0</td></tr>
-<tr class="separator:a44ea6e09fa6c97e36318d952d661bbcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sebuah program buatan 6 orang sangar untuk menunjuang Nilai Algoritma Pemrograman. </p>
@@ -367,21 +391,56 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>jumlahNasabah</b> = 0<
 <dl class="section date"><dt>Date</dt><dd>2025-05-13</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a0e256c7cfa593bf32f7a1c836a70fb9b" name="a0e256c7cfa593bf32f7a1c836a70fb9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e256c7cfa593bf32f7a1c836a70fb9b">&#9670;&#160;</a></span>importData()</h2>
+<a id="a2c0130a3e76354a03a72527e8ea34b18" name="a2c0130a3e76354a03a72527e8ea34b18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c0130a3e76354a03a72527e8ea34b18">&#9670;&#160;</a></span>exportNasabahJson()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void importData </td>
+          <td class="memname">void exportNasabahJson </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>jsonPathOut</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnasabah.html">nasabah</a></td>          <td class="paramname"><span class="paramname"><em>nasabahExport</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fungsi untuk mengexport nasabah kedalam sebuah file JSON. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jsonPathOut</td><td>path json untuk keluar kemana </td></tr>
+    <tr><td class="paramname">nasabahExport</td><td>struct nasabah yang mau di export </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4cc67b74aa369f46b374eeae7576e13c" name="a4cc67b74aa369f46b374eeae7576e13c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cc67b74aa369f46b374eeae7576e13c">&#9670;&#160;</a></span>importDataJson()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void importDataJson </td>
           <td>(</td>
           <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>jsonPathIn</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structnasabah.html">nasabah</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>importNasabah</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="structnasabah.html">nasabah</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>nasabahExport</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -390,15 +449,45 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>jumlahNasabah</b> = 0<
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">jsonPathIn</td><td>path dari json file </td></tr>
-    <tr><td class="paramname">importNasabah</td><td>struct yang ada di global variabel menyimpan data nasabah </td></tr>
+    <tr><td class="paramname">nasabahExport</td><td>struct yang ada di global variabel menyimpan data nasabah </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a18cbd45465bae2408406c64a45f70d14" name="a18cbd45465bae2408406c64a45f70d14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18cbd45465bae2408406c64a45f70d14">&#9670;&#160;</a></span>noRekVal()</h2>
+<a id="a5ac02be00f4f0087a7589a6936207a61" name="a5ac02be00f4f0087a7589a6936207a61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ac02be00f4f0087a7589a6936207a61">&#9670;&#160;</a></span>importDb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void importDb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnasabah.html">nasabah</a> *</td>          <td class="paramname"><span class="paramname"><em>dataNasabahOut</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;</td>          <td class="paramname"><span class="paramname"><em>jumlahNasabah</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mengimport seluruh file json yang ada di folder database cwd kedalam struct. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dataNasabahOut</td><td></td></tr>
+    <tr><td class="paramname">jumlahNasabah</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8f7e2889d3beae119b55367b00eae538" name="a8f7e2889d3beae119b55367b00eae538"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f7e2889d3beae119b55367b00eae538">&#9670;&#160;</a></span>noRekVal()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -411,7 +500,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>jumlahNasabah</b> = 0<
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">string &amp;</td>          <td class="paramname"><span class="paramname"><em>pathJson</em></span>&#160;)</td>
+          <td class="paramtype">string &amp;</td>          <td class="paramname"><span class="paramname"><em>pathJsonCurNasabah</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -421,7 +515,32 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>jumlahNasabah</b> = 0<
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">noRekIn</td><td>nomor Rekening Masukan untuk dicek </td></tr>
-    <tr><td class="paramname">pathJson</td><td>global variabel yang mengatur path json yang diperlukan </td></tr>
+    <tr><td class="paramname">pathJsonCurNasabah</td><td>global variabel yang mengatur path json yang diperlukan </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad2ed7f1c4480f6ac076f8c7b42fb7764" name="ad2ed7f1c4480f6ac076f8c7b42fb7764"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2ed7f1c4480f6ac076f8c7b42fb7764">&#9670;&#160;</a></span>restoreBackupDb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void restoreBackupDb </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>dbBackupPath</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Menduplikat database yang ada di folder backup kedalam folder json yang ada di workspace cwd. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dbBackupPath</td><td></td></tr>
   </table>
   </dd>
 </dl>

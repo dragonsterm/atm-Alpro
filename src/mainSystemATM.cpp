@@ -23,11 +23,11 @@
 // Library Untuk Multifile
 #include <fstream>
 #include "include/json.hpp"
-
+#include <filesystem>
+// Namespace
 using namespace std;
 using json = nlohmann::json;
-
-// TODO - {Multifile} Struct
+namespace fs = std::filesystem;
 //  >> Struct Init
 /**
  * @brief Struct Histori Transaksi Nasabah
@@ -53,14 +53,66 @@ struct nasabah
       int jumlahTrans;
       histori historiNasabah[100];
 };
-// NOTE -  >> Global Var Init
+// SECTION - Global Var Init
 bool mainMenuLoop = true, loginStat = false, adminStat = false;
 int indexNasabah = -1;
 nasabah *currentNasabahPtr = nullptr;
 nasabah currentNasabah, anotherNasabah;
-string pathJsonCurNasabah, pathJsonAnotherNasabah;
-// TODO - {Multifile} Snake Function
-// >> Snake Function
+string pathJsonCurNasabah, pathJsonAnotherNasabah, dbPath = "../db/json/", dbBackupPath = "../db/backup/json";
+// >> Inisialisasi Global Array (Wajib Ada)
+nasabah dataNasabah[100];       // menyimpan 100 data 100 nasabah
+int jumlahNasabah = 0;          // Total Jumlah Data yang dimiliki
+vector<string> pathNasabahJson; // untuk dumping semua file json nasabah
+// !SECTION
+// SECTION - Function Declaration
+// >> Declare Funtion
+// Error handling Func (Overload)
+void inputHandling(string question, string &var, short lineOr); // Untuk String
+void inputHandling(string question, int &var);                  // untuk int
+void inputHandling(string question, float &var);                // untuk float
+void inputHandling(string question, short &var);                // untuk short]
+// Multifile Manajemen System
+bool noRekVal(int noRekIn, string &pathJsonCurNasabah, bool mode);
+void importDataJson(string jsonPathIn, nasabah &nasabahExport);
+void exportNasabahJson(string jsonPathIn, nasabah nasabahExport, bool mode);
+void importDb(nasabah *dataNasabahOut, int &jumlahNasabah);
+void restoreBackupDb(string dbBackupPath);
+// CRUD Funct Data Nasabah
+void tampilDataNasabah();
+void inputNasabah();
+void delNasabah();
+// Main Feature
+void login();
+void loginAttempt(int Attempts); // Login Rekursif
+void cekSaldo();
+void setorSaldo();
+void tarikSaldo();
+void transferSaldo();
+void riwayatTransaksi();
+// >> Menu
+void loopMenu();
+void menuAdmin();
+void menuUtama();
+// Function Sort
+void sortByNoRek();
+void sortBySaldo();
+void sortHistoriTransaksi(nasabah &n);
+// Perhitungan total transaksi
+int TotalTransaksi(int MulaiIndex, int AkhirIndex); // Perhitungan Total Rekursif
+// Pause Function
+void Pause();
+// Function untuk Pause
+void SlowType(const string &kata, int delay);
+void DeleteText(int count, int delay);
+// Function untuk SnakeGame
+void Snake();
+void SetupSnake();
+void DrawSnake();
+void InputSnake();
+void LogicSnake();
+void TitleSnake();
+// !SECTION
+// SECTION - Snake Function
 const int snakeWidth = 20;
 const int snakeHeight = 20;
 int snakeX, snakeY, fruitX, fruitY, snakeScore;
@@ -75,59 +127,8 @@ enum eDirection
       DOWN
 };
 eDirection snakeDir;
-// >> Inisialisasi Global Array (Wajib Ada)
-nasabah dataNasabah[100]; // menyimpan 100 data 100 nasabah
-int jumlahNasabah = 0;    // Total Jumlah Data yang dimiliki //REVIEW - Setelah Di multifile coba dihapus
-// >> Decklare Funtion
-// >> Menu
-void loopMenu();
-void menuAdmin();
-void menuUtama();
-// TODO - {Multifile} Inputhandling
-// Error handling Func (Overload)
-void inputHandling(string question, string &var, short lineOr); // Untuk String
-void inputHandling(string question, int &var);                  // untuk int
-void inputHandling(string question, float &var);                // untuk float
-void inputHandling(string question, short &var);                // untuk short]
-// TODO - {Multifile} Init Data nasabah
-// Multifile Manajemen System
-bool noRekVal(int noRekIn, string &pathJsonCurNasabah);
-void importDataJson(string jsonPathIn, nasabah &nasabahExport);
-void nasabahExportJson(string jsonPathIn, nasabah nasabahExport);
-// void inisialisasiData(); //Resmi Dinonaktifkan
-// CRUD Funct Data Nasabah
-void tampilDataNasabah();
-void inputNasabah();
-void delNasabah();
-// TODO - {Multifile} Operational Function
-// Main Feature
-void login();
-void loginAttempt(int Attempts); // Login Rekursif
-void cekSaldo();
-void setorSaldo();
-void tarikSaldo();
-void transferSaldo();
-void riwayatTransaksi();
-// Funct Sort
-void sortByNoRek();
-void sortBySaldo();
-void sortHistoriTransaksi(nasabah &n);
-// Perhitungan total transaksi
-int TotalTransaksi(int MulaiIndex, int AkhirIndex); // Perhitungan Total Rekursif
-// TODO - {Multifile} Animasi Pindah Multifile
-// Pause Function
-void Pause();
-// Function untuk Pause
-void SlowType(const string &kata, int delay);
-void DeleteText(int count, int delay);
-// Function untuk SnakeGame
-void Snake();
-void SetupSnake();
-void DrawSnake();
-void InputSnake();
-void LogicSnake();
-void TitleSnake();
-
+// !SECTION
+// SECTION - Main Program
 int main(int argc, char const *argv[])
 {
       short opt;
@@ -139,30 +140,23 @@ int main(int argc, char const *argv[])
            << " \t\n4. Jauza Ilham Mahardika Putra    (123240174)"
            << " \t\n5. Rio Meidi Ataurrahman          (123240175)\n\n";
       system("pause");
-      // REVIEW - Ini kalau udah jadi migrate dipindah
-      // Inisialisasi Data awal
-      // inisialisasiData();
       // Login dan Masuk Main Menu
       loopMenu();
       return 0;
 }
 
 // REVIEW - Main untuk Developing
-int main1(int argc, char const *argv[])
-{
-      nasabah dummy;
-      dummy.noRek = 12345678;
-      dummy.pass = "dummy123";
-      dummy.nama = "Dummy User";
-      dummy.saldo = 1000000;
-      dummy.jumlahTrans = 2;
-      dummy.historiNasabah[0] = {1001, 500000, 87654321, "Setor Saldo"};
-      dummy.historiNasabah[1] = {1002, -200000, 87654321, "Tarik Saldo"};
-      nasabahExportJson("../db/json/test/23240144.json", dummy);
-      return 0;
-}
+// int main0(int argc, char const *argv[])
+// {
+//       menuAdmin();
+//       return 0;
+// }
 
 // Menu Admin dan Menu Utama
+/**
+ * @brief Melooping Menu dengan terus menerus sampai didapatkan loginStat == true
+ *
+ */
 void loopMenu()
 {
       do
@@ -170,27 +164,34 @@ void loopMenu()
             loginStat = false;
             system("cls");
             login();
-            do
+            while (mainMenuLoop == true)
             {
                   if (adminStat == true)
                   {
+                        // Load Data all nasabah
+                        importDb(dataNasabah, jumlahNasabah);
+                        cout << "[Completed Load] - Jumlah Nasabah : " << jumlahNasabah << endl;
                         menuAdmin();
                   }
                   else
                   {
                         menuUtama();
                   }
-            } while (mainMenuLoop == true);
+            };
       } while (loginStat == false);
 }
+/**
+ * @brief Menu Untuk Admin
+ *
+ */
 void menuAdmin()
 {
       short opt;
       system("cls");
       cout << "\t\t <<Menu Admin>>\n\n";
-      cout << left << setw(25) << "1> Input Nasabah" << right << setw(25) << "\n\n";
+      cout << left << setw(25) << "1> Input Nasabah" << right << setw(25) << "Backup Data <4\n\n";
       cout << left << setw(25) << "2> Delete Nasabah" << right << setw(25) << "\n\n";
-      cout << left << setw(25) << "3> Tampil Nasabah" << right << setw(25) << "Exit Admin <4\n\n";
+      cout << left << setw(25) << "3> Tampil Nasabah" << right << setw(25) << "Exit Admin <6\n\n";
       inputHandling("\n Admin Mau Yang Mana?: ", opt);
       switch (opt)
       {
@@ -210,14 +211,23 @@ void menuAdmin()
             mainMenuLoop = true;
             break;
       case 4:
+            Pause();
+            restoreBackupDb(dbBackupPath);
+            break;
+      case 6:
             cout << "\nTerima kasih telah menggunakan ATM ini Mas Admin\n";
-            loopMenu();
+            adminStat = false;
             mainMenuLoop = false;
             currentNasabahPtr = nullptr;
+            // Ngosongin Struct Jumlah Nasabah biar ga makan memori dia ini sudah kehapus tapi gamau kehapus
+            for (int i = 0; i < jumlahNasabah; ++i)
+            {
+                  dataNasabah[i] = nasabah{};
+            }
             break;
       default:
             Pause();
-            cout << "[error System] - Jane Ngopo si?" << endl;
+            cout << "[error System] - Jane Ngopo si jenengan niku?" << endl;
             break;
       }
 }
@@ -263,9 +273,7 @@ void menuUtama()
             cout << "\nTerimakasih telah menggunakan ATM ini\n";
             Pause();
             mainMenuLoop = false;
-            loginStat = false;
             currentNasabahPtr = nullptr;
-            return; // for stubborn anythin is that la
             break;
       case 24:
             Pause();
@@ -276,22 +284,77 @@ void menuUtama()
       }
 }
 /**
+ * @brief Menduplikat database yang ada di folder backup kedalam folder json yang ada di workspace cwd
+ *
+ * @param dbBackupPath
+ */
+void restoreBackupDb(string dbBackupPath)
+{
+      try
+      {
+            // Hapus semua file/folder di dbPath
+            if (fs::exists(dbPath))
+            {
+                  for (const auto &entry : fs::directory_iterator(dbPath))
+                  {
+                        fs::remove_all(entry.path());
+                  }
+            }
+            else
+            {
+                  fs::create_directories(dbPath);
+            }
+            // Duplikat seluruh isi folder backup ke dbPath (termasuk subfolder dan file .json)
+            for (const auto &entry : fs::recursive_directory_iterator(dbBackupPath))
+            {
+                  fs::path relativePath = fs::relative(entry.path(), dbBackupPath);
+                  fs::path targetPath = fs::path(dbPath) / relativePath;
+
+                  if (fs::is_directory(entry))
+                  {
+                        fs::create_directories(targetPath);
+                  }
+                  else if (fs::is_regular_file(entry) && entry.path().extension() == ".json")
+                  {
+                        fs::copy_file(entry.path(), targetPath, fs::copy_options::overwrite_existing);
+                  }
+            }
+            cout << "[Completed] - Restore database dari backup selesai.\n";
+            cout << "\nTekan karakter apapun untuk melanjutkan...";
+            cin.get();
+            cin.clear();
+            cin.ignore(1000, '\n');
+      }
+      catch (const std::exception &e)
+      {
+            cout << "[Error] - Gagal restore backup: " << e.what() << endl;
+      }
+}
+/**
  * @brief Menverifikasi No Rek Apakah ada didalam DB atau tidak
  * @return mereturn Boolean True jika ada False jika tidak
  *
  * @param noRekIn nomor Rekening Masukan untuk dicek
  * @param pathJsonCurNasabah global variabel yang mengatur path json yang diperlukan
  */
-bool noRekVal(int noRekIn, string &pathJsonCurNasabah)
+bool noRekVal(int noRekIn, string &pathJsonCurNasabah, bool mode)
 {
-      string pathJsonCurNasabahIn;
+
+      string pathJsonCurNasabahInLoc;
       // Make Path for JSON
-      pathJsonCurNasabahIn = "../db/json/" + to_string(noRekIn) + ".json";
-      ifstream validate(pathJsonCurNasabahIn);
+      pathJsonCurNasabahInLoc = "../db/json/" + to_string(noRekIn) + ".json";
+      ifstream validate(pathJsonCurNasabahInLoc);
       bool statFile = validate.is_open();
-      if (statFile == 1)
+      if (mode == 1)
       {
-            pathJsonCurNasabah = pathJsonCurNasabahIn;
+            if (statFile == 1)
+            {
+                  pathJsonCurNasabah = pathJsonCurNasabahInLoc;
+            }
+      }
+      else
+      {
+            pathJsonCurNasabah = pathJsonCurNasabahInLoc;
       }
       validate.close();
       return statFile;
@@ -356,20 +419,24 @@ void importDataJson(string jsonPathIn, nasabah &nasabahExport)
                   cout << "[Err] - Jumlah Transaksi error Not Found" << endl;
                   return;
             }
-            if (dataNasabahJson.contains("historiTransaksi"))
+            // Admin dikecualikan karena admin tidak memiliki histori transaksi akan membuat error
+            if (nasabahExport.noRek != 459777345)
             {
-                  for (int i = 0; i < dataNasabahJson["jumlahTrans"].get<int>(); ++i)
+                  if (dataNasabahJson.contains("historiTransaksi"))
                   {
-                        nasabahExport.historiNasabah[i].idTrans = dataNasabahJson["historiTransaksi"][i]["idTrans"].get<int>();
-                        nasabahExport.historiNasabah[i].nominal = dataNasabahJson["historiTransaksi"][i]["nominal"].get<int>();
-                        nasabahExport.historiNasabah[i].noRektuj = dataNasabahJson["historiTransaksi"][i]["noRekTuj"].get<int>();
-                        nasabahExport.historiNasabah[i].deskripsi = dataNasabahJson["historiTransaksi"][i]["deskripsi"].get<string>();
+                        for (int i = 0; i < dataNasabahJson["jumlahTrans"].get<int>(); ++i)
+                        {
+                              nasabahExport.historiNasabah[i].idTrans = dataNasabahJson["historiTransaksi"][i]["idTrans"].get<int>();
+                              nasabahExport.historiNasabah[i].nominal = dataNasabahJson["historiTransaksi"][i]["nominal"].get<int>();
+                              nasabahExport.historiNasabah[i].noRektuj = dataNasabahJson["historiTransaksi"][i]["noRekTuj"].get<int>();
+                              nasabahExport.historiNasabah[i].deskripsi = dataNasabahJson["historiTransaksi"][i]["deskripsi"].get<string>();
+                        }
                   }
-            }
-            else
-            {
-                  cout << "[Err] - Histori Nasabah error Not Found" << endl;
-                  return;
+                  else
+                  {
+                        cout << "[Err] - Histori Nasabah error Not Found" << endl;
+                        return;
+                  }
             }
       }
       else
@@ -379,14 +446,58 @@ void importDataJson(string jsonPathIn, nasabah &nasabahExport)
       importStream.close();
 }
 /**
+ * @brief Mengimport seluruh file json yang ada di folder database cwd kedalam struct
+ *
+ * @param dataNasabahOut
+ * @param jumlahNasabah
+ */
+void importDb(nasabah *dataNasabahOut, int &jumlahNasabah)
+{
+      // Untuk memastikan data sebelumnya terhapus dari program
+      pathNasabahJson.clear(); // Hapus dari vector
+      for (int i = jumlahNasabah - 1; i >= 0; --i)
+      {
+            dataNasabah[i] = nasabah{}; // Reset objek
+      }
+      jumlahNasabah = 0;
+      // Loop Buat ngemasukin semua filse json di db
+      for (const auto &inputJsonNasabah : fs::directory_iterator(dbPath))
+      {
+            string filename = inputJsonNasabah.path().filename().string();
+            // hanya memproses dengan format nama tertentu dengan minim nama 4 char
+            if (filename.size() >= 13 && filename.substr(filename.size() - 5) == ".json")
+            {
+                  string norekStr = filename.substr(0, filename.size() - 5);
+                  if ((norekStr.size() == 8 || norekStr.size() == 9) && norekStr != "459777345")
+                  {
+                        pathNasabahJson.push_back(inputJsonNasabah.path().string());
+                  }
+            }
+      }
+      // Akan Mengimport semua ke dalam struct dataNasabah
+      for (const auto &jsonPath : pathNasabahJson)
+      {
+            importDataJson(jsonPath, dataNasabahOut[jumlahNasabah]);
+            jumlahNasabah++;
+      }
+}
+/**
  * @brief Fungsi untuk mengexport nasabah kedalam sebuah file JSON
  *
  * @param jsonPathOut path json untuk keluar kemana
  * @param nasabahExport struct nasabah yang mau di export
  */
-void nasabahExportJson(string jsonPathOut, nasabah nasabahExport)
+void exportNasabahJson(string jsonPathOut, nasabah nasabahExport, bool mode)
 {
-      ofstream exportStream(jsonPathOut, ios::trunc);
+      ofstream exportStream;
+      if (mode == true)
+      {
+            exportStream.open(jsonPathOut, ios::trunc);
+      }
+      else
+      {
+            exportStream.open(jsonPathOut, ios::out);
+      }
       json dataNasabahJson;
       if (exportStream.is_open())
       {
@@ -429,11 +540,13 @@ void loginAttempt(int Attempts)
       // Untuk keluar
       if (noRekIn == 404)
       {
+            loginStat = true;
+            mainMenuLoop = false;
             cout << "\nTerima Kasih Telah Menggunakan ATM Kami:D" << endl;
-            exit(0);
+            return;
       }
       // Untuk Lanjut ke Password
-      else if (noRekVal(noRekIn, pathJsonCurNasabah))
+      else if (noRekVal(noRekIn, pathJsonCurNasabah, 1))
       {
             inputHandling("\n  Masukkan Password Rekening\n>> ", passIn, 1);
       }
@@ -449,12 +562,12 @@ void loginAttempt(int Attempts)
             if (noRekIn == 459777345)
             {
                   adminStat = true;
-                  loginStat = true;
+                  mainMenuLoop = true;
             }
             else // kalau bukan admin
             {
                   adminStat = false;
-                  loginStat = true;
+                  mainMenuLoop = true;
             }
             currentNasabahPtr = &currentNasabah;
             // Ucapan Selamat Login
@@ -469,37 +582,6 @@ void loginAttempt(int Attempts)
             system("pause");
             return; // Penting ini cah
       }
-      // REVIEW - ini udah dimigrate
-      // for (int i = 0; i < jumlahNasabah; i++)
-      // {
-      //       if (noRekIn == dataNasabah[i].noRek && passIn == dataNasabah[i].pass)
-      //       {
-      //             if (dataNasabah[i].noRek == 459777345)
-      //             {
-      //                   adminStat = true;
-      //                   loginStat = true;
-      //                   indexNasabah = i;
-      //                   currentNasabahPtr = &dataNasabah[i];
-      //             }
-      //             else
-      //             {
-      //                   adminStat = false;
-      //                   loginStat = true;
-      //                   indexNasabah = i;
-      //                   currentNasabahPtr = &dataNasabah[i];
-      //             }
-      //             cout << "\n<Login berhasil>\n";
-      //             Pause();
-      //             system("cls");
-      //             cout << "\n <= Selamat Datang " << currentNasabahPtr->nama << " =>\n\n";
-      //             cout << "Data Rekening :" << endl;
-      //             cout << setw(10) << "A.N." << setw(5) << ": " << currentNasabahPtr->nama << endl;
-      //             cout << setw(10) << "No.Rek" << setw(5) << " : " << currentNasabahPtr->noRek << endl
-      //                  << endl;
-      //             system("pause");
-      //             return;
-      //       }
-      // }
       cout << "\n[Login Gagal] - Kesempatan Anda Tersisa " << (Attempts - 1) << endl;
       loginAttempt(Attempts - 1);
 }
@@ -602,93 +684,6 @@ void inputHandling(string question, short &var)
             }
       } while (statLoop == true);
 };
-
-// REVIEW - Resmi ditutup data hardcode ini
-// void inisialisasiData()
-// {
-//       dataNasabah[jumlahNasabah++] =
-//           {459777345, "admin", "Sosok Asli Admin", 9999999, 0, {}}; // Sosok Asli Admin
-//       dataNasabah[jumlahNasabah++] =
-//           {23240144, "admin123", "Zaka Ahmad Ghofari", 2500000, 12,
-//            {// biar spasi
-//             {51, 50000, 87654326, "Qris"},
-//             {61, 900000, 87654327, "Top Up Dana"},
-//             {71, 200000, 87654318, "Virtual Acc"},
-//             {52, 400000, 87654328, "Qris"},
-//             {62, 75000, 87654353, "Top UP Dana"},
-//             {72, 800000, 87654328, "Virtual Acc"},
-//             {73, 960000, 87654330, "Virtual Acc"},
-//             {53, 115000, 87654402, "Qris"},
-//             {63, 120000, 87654560, "Top Up Dana"},
-//             {64, 980000, 87654975, "Top Up Gopay"},
-//             {90, 650000, 87650642, "Transfer"},
-//             {74, 850000, 87654340, "Transfer Saldo"}}};
-//       dataNasabah[jumlahNasabah++] =
-//           {23240159, "admin321", "Dimas Hafid Fathoni", 6500000, 12,
-//            {// biar spasi
-//             {51, 50000, 87654326, "Qris"},
-//             {61, 900000, 87654327, "Top Up Dana"},
-//             {71, 200000, 87654318, "Virtual Acc"},
-//             {52, 400000, 87654328, "Qris"},
-//             {62, 75000, 87654353, "Top UP Dana"},
-//             {72, 800000, 87654328, "Virtual Acc"},
-//             {73, 960000, 87654330, "Virtual Acc"},
-//             {53, 115000, 87654402, "Qris"},
-//             {63, 120000, 87654560, "Top Up Dana"},
-//             {64, 980000, 87654975, "Top Up Gopay"},
-//             {90, 650000, 87650642, "Transfer"},
-//             {74, 850000, 87654340, "Virtual Acc"}}};
-//       dataNasabah[jumlahNasabah++] =
-//           {23240173, "admin3221", "Erlan Rifqi Davin D", 5000000, 12,
-//            {// biar spasi
-//             {51, 50000, 87654326, "Qris"},
-//             {61, 900000, 87654327, "Top Up Dana"},
-//             {71, 200000, 87654318, "Virtual Acc"},
-//             {52, 400000, 87654328, "Qris"},
-//             {62, 75000, 87654353, "Top UP Dana"},
-//             {72, 800000, 87654328, "Virtual Acc"},
-//             {73, 960000, 87654330, "Virtual Acc"},
-//             {53, 115000, 87654402, "Qris"},
-//             {63, 120000, 87654560, "Top Up Dana"},
-//             {64, 980000, 87654975, "Top Up Gopay"},
-//             {90, 650000, 87650642, "Transfer"},
-//             {74, 850000, 87654340, "Virtual Acc"}}};
-//       dataNasabah[jumlahNasabah++] =
-//           {23240174, "admin3214", "Jauza Ilham Mahardika P", 10000000, 12,
-//            {// biar spasi
-//             {51, 50000, 87654326, "Qris"},
-//             {61, 900000, 87654327, "Top Up Dana"},
-//             {71, 200000, 87654318, "Virtual Acc"},
-//             {52, 400000, 87654328, "Qris"},
-//             {62, 75000, 87654353, "Top UP Dana"},
-//             {72, 800000, 87654328, "Virtual Acc"},
-//             {73, 960000, 87654330, "Virtual Acc"},
-//             {53, 115000, 87654402, "Qris"},
-//             {63, 120000, 87654560, "Top Up Dana"},
-//             {64, 980000, 87654975, "Top Up Gopay"},
-//             {90, 650000, 87650642, "Transfer"},
-//             {74, 850000, 87654340, "Virtual Acc"}}};
-//       dataNasabah[jumlahNasabah++] =
-//           {23240175, "admin3215", "Rio Meidi A", 9000000, 12,
-//            {// biar spasi
-//             {51, 50000, 87654326, "Qris"},
-//             {61, 900000, 87654327, "Top Up Dana"},
-//             {71, 200000, 87654318, "Virtual Acc"},
-//             {52, 400000, 87654328, "Qris"},
-//             {62, 75000, 87654353, "Top UP Dana"},
-//             {72, 800000, 87654328, "Virtual Acc"},
-//             {73, 960000, 87654330, "Virtual Acc"},
-//             {53, 115000, 87654402, "Qris"},
-//             {63, 120000, 87654560, "Top Up Dana"},
-//             {64, 980000, 87654975, "Top Up Gopay"},
-//             {90, 650000, 87650642, "Transfer"},
-//             {74, 850000, 87654340, "Virtual Acc"}}};
-//       dataNasabah[jumlahNasabah++] =
-//           {1, "admin", "Test Empty Set", 0, 0, {
-//                                                    // biar spasi
-//                                                }};
-//       // Kalau Kurang silahkan di tambah sendiri
-// }
 // CRUD Funct
 // Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
 void sortByNoRek() // sort norek manual (bubble sort)
@@ -741,7 +736,6 @@ void sortHistoriTransaksi(nasabah &n) // sort manual histori transaksi di satu n
             }
       }
 }
-// TODO - Load Data JSON nasabah
 void tampilDataNasabah()
 {
       system("cls");
@@ -763,18 +757,22 @@ void tampilDataNasabah()
       }
       else
             cout << "[ERROR INPUT] - Pilihan tidak vald, menampilkan tanpa pengurutan\n";
-
       cout << "\n\t>- Menu Tampil Data Nasabah -<\n\n";
       cout << "\nDaftar Nasabah:\n";
       cout << left << "| " << setw(10) << "No Rek" << " | " << setw(25) << "Nama" << " |\n";
       cout << setfill('-') << setw(41) << "-" << setfill(' ') << endl;
+
       for (int i = 0; i < jumlahNasabah; i++)
       {
             cout << "| " << setw(10) << dataNasabah[i].noRek << " | " << setw(25) << dataNasabah[i].nama << " |\n";
       }
       cout << setfill('-') << setw(41) << "-" << setfill(' ') << endl;
-      // Pause();
-      inputHandling("Berapa Nomor Rekeningnya?: ", noRekIn);
+      // Pause(); //FIXME
+      inputHandling("Berapa Nomor Rekeningnya? (exit: 404) \n >> ", noRekIn);
+      if (noRekIn == 404)
+      {
+            return;
+      }
       for (int i = 0; i < jumlahNasabah; i++)
       {
             if (noRekIn == dataNasabah[i].noRek)
@@ -825,11 +823,22 @@ void inputNasabah()
       cout << "\n\nHallo Nasabah Baru!!";
       cout << "\n Data Nasabah:" << endl;
       inputHandling("\nNo Rek  : ", dataNasabah[jumlahNasabah].noRek);
-      inputHandling("\nPass    : ", dataNasabah[jumlahNasabah].pass, 1);
-      inputHandling("\nNama    : ", dataNasabah[jumlahNasabah].nama, 2);
-      inputHandling("\nSaldo   : ", dataNasabah[jumlahNasabah].saldo);
-      dataNasabah[jumlahNasabah].jumlahTrans = 0; // Nasabah Baru Tidak Memiliki Histori Transaksi
-      jumlahNasabah++;
+      if (noRekVal(dataNasabah[jumlahNasabah].noRek, pathJsonAnotherNasabah, 0) == false)
+      {
+            inputHandling("\nPass    : ", dataNasabah[jumlahNasabah].pass, 1);
+            inputHandling("\nNama    : ", dataNasabah[jumlahNasabah].nama, 2);
+            inputHandling("\nSaldo   : ", dataNasabah[jumlahNasabah].saldo);
+            dataNasabah[jumlahNasabah].jumlahTrans = 0; // Nasabah Baru Tidak Memiliki Histori Transaksi
+            jumlahNasabah++;
+            exportNasabahJson(pathJsonAnotherNasabah, dataNasabah[jumlahNasabah - 1], false);
+            cout << "Status Pembuatan :" << noRekVal(dataNasabah[jumlahNasabah - 1].noRek, pathJsonAnotherNasabah, 0) << endl;
+            pathJsonAnotherNasabah = "";
+      }
+      else
+      {
+            pathJsonAnotherNasabah = "";
+            dataNasabah[jumlahNasabah].noRek = 0;
+      }
 }
 // Fungsi untuk delete data nasabah
 void delNasabah()
@@ -843,27 +852,28 @@ void delNasabah()
       do
       {
             inputHandling("Berapa Nomor Rekeningnya?: ", noRekIn);
-            for (int i = 0; i <= jumlahNasabah; i++)
+            if (noRekVal(noRekIn, pathJsonCurNasabah, 1))
             {
-                  if (noRekIn == dataNasabah[i].noRek)
+                  try
                   {
-                        find = true;
-                        cout << "\nSuccess Delete Data user {" << dataNasabah[i].nama << "} ";
-                        dataNasabah[i] = {
-                            0,
-                            "",
-                            "",
-                            0,
-                            0,
-                            {}}; // Code Pengosongan Data Nasabah
-                        break;
+                        if (fs::exists(pathJsonCurNasabah))
+                        {
+                              find = true;
+                              fs::remove(pathJsonCurNasabah);
+                              cout << "\nFile JSON untuk rekening " << noRekIn << " berhasil dihapus.\n";
+                              jumlahNasabah--;
+                        }
+                        else
+                        {
+                              cout << "\n[Warning] - File JSON tidak ditemukan.\n";
+                        }
                   }
-                  else
+                  catch (const std::exception &e)
                   {
-                        find = false;
+                        cout << "\n[Error] - Gagal menghapus file JSON: " << e.what() << endl;
                   }
             }
-            if (find == false)
+            else
             {
                   cout << "\n[Error Tag] - Input Not Found - Wah ini gaada nih gimana dong?\n";
                   inputHandling("\n(1)Ulang or (2)Kembali?: ", opt);
@@ -912,7 +922,6 @@ void setorSaldo()
       srand(time(0)); // mengatur seed pada rand() untuk menggunakan waktu saat ini memastikan tidak membawa seed bawaan ctime
       do
       {
-            cout << "Cek Data nasabah" << currentNasabah.saldo << endl; // REVIEW - Buat ngecek dev
             cout << "\n <= Setor Saldo =>\n\n";
             cout << "Data Rekening :" << endl;
             cout << setw(10) << "A.N." << setw(5) << ": " << currentNasabahPtr->nama << endl;
@@ -932,8 +941,8 @@ void setorSaldo()
                   currentNasabahPtr->historiNasabah[currentNasabahPtr->jumlahTrans].deskripsi = "Setor Saldo";
                   currentNasabahPtr->jumlahTrans++;
                   // Diexport untuk mengupdate data
-                  nasabahExportJson(pathJsonCurNasabah, currentNasabah);
-                  // REVIEW - lagi Dev
+                  exportNasabahJson(pathJsonCurNasabah, currentNasabah, true);
+                  // FIXME - lagi Dev
                   // cout << "\nSystem is ";
                   // SlowType("processing", 100);
                   // this_thread::sleep_for(chrono::seconds(1));
@@ -997,7 +1006,7 @@ void tarikSaldo()
                         currentNasabahPtr->historiNasabah[currentNasabahPtr->jumlahTrans].noRektuj = currentNasabahPtr->noRek;
                         currentNasabahPtr->historiNasabah[currentNasabahPtr->jumlahTrans].deskripsi = "Tarik Saldo";
                         currentNasabahPtr->jumlahTrans++;
-                        nasabahExportJson(pathJsonCurNasabah, currentNasabah);
+                        exportNasabahJson(pathJsonCurNasabah, currentNasabah, true);
                         cout << "\nSystem is ";
                         SlowType("processing", 100);
                         this_thread::sleep_for(chrono::seconds(1));
@@ -1035,7 +1044,7 @@ void transferSaldo()
             do
             {
                   inputHandling("\nMasukkan Nomor Rekening tujuan (8 digit) : ", rekening_tujuan);
-                  if (noRekVal(rekening_tujuan, pathJsonAnotherNasabah))
+                  if (noRekVal(rekening_tujuan, pathJsonAnotherNasabah, 1))
                   {
                         find = true;
                         importDataJson(pathJsonAnotherNasabah, *targetNasabah);
@@ -1085,7 +1094,7 @@ void transferSaldo()
                         currentNasabahPtr->historiNasabah[currentNasabahPtr->jumlahTrans].noRektuj = targetNasabah->noRek;
                         currentNasabahPtr->historiNasabah[currentNasabahPtr->jumlahTrans].deskripsi = "Transfer Saldo";
                         currentNasabahPtr->jumlahTrans++;
-                        nasabahExportJson(pathJsonCurNasabah, currentNasabah);
+                        exportNasabahJson(pathJsonCurNasabah, currentNasabah, true);
                         // Update Data Nasabah - Penerima
                         targetNasabah->saldo += jumlah;
                         targetNasabah->historiNasabah[targetNasabah->jumlahTrans].nominal = jumlah;
@@ -1093,8 +1102,8 @@ void transferSaldo()
                         targetNasabah->historiNasabah[targetNasabah->jumlahTrans].noRektuj = currentNasabahPtr->noRek;
                         targetNasabah->historiNasabah[targetNasabah->jumlahTrans].deskripsi = "Menerima Saldo";
                         targetNasabah->jumlahTrans++;
-                        nasabahExportJson(pathJsonAnotherNasabah, *targetNasabah);
-                        // REVIEW - Dev Mode
+                        exportNasabahJson(pathJsonAnotherNasabah, *targetNasabah, true);
+                        // FIXME - Dev Mode
                         // cout << "\nSystem is ";
                         // SlowType("processing", 100);
                         // this_thread::sleep_for(chrono::seconds(1));
@@ -1249,7 +1258,7 @@ int TotalTransaksi(int MulaiIndex, int AkhirIndex)
 // Function pause dilengkapi cls
 void Pause()
 {
-      // REVIEW - Developing Mode ini di Deactivate dulu yaaa
+      // FIXME - Developing Mode ini di Deactivate dulu yaaa
       // cout << "\nSystem is ";
       // SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
       // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
@@ -1277,6 +1286,7 @@ void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan
             this_thread::sleep_for(chrono::milliseconds(delay)); // memberikan jeda pada penghapusan kata
       }
 }
+// !SECTION
 // Function Game Ular
 void SetupSnake()
 {
