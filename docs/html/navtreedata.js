@@ -25,9 +25,7 @@
 var NAVTREE =
 [
   [ "Project Sistem ATM", "index.html", [
-    [ "📖 Readme", "md_docs_2md_2about.html", [
-      [ "Program Ini Ngapain aja", "md_docs_2md_2about.html#autotoc_md1", null ]
-    ] ],
+    [ "📄 ATM System Program Documentation 🎉", "index.html", "index" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ]

@@ -1,9 +1,8 @@
 /**
  * @file mainSystemATM.cpp
  * @author Zaka, Dhimas, Jauza, Erlan, dan Roi
- * @brief Sebuah program buatan 6 orang sangar untuk menunjuang Nilai Algoritma Pemrograman Lanjut
- * @version 0.1
- * @date 2025-05-13
+ * @brief program utama Sistem ATM
+ * @version 0.2.0
  *
  * @copyright Copyright (c) 2025
  *
@@ -173,7 +172,6 @@ void loopMenu()
                   {
                         // Load Data all nasabah
                         importDb(dataNasabah, jumlahNasabah);
-                        cout << "[Completed Load] - Jumlah Nasabah : " << jumlahNasabah << endl;
                         menuAdmin();
                   }
                   else
@@ -192,7 +190,7 @@ void menuAdmin()
       short opt;
       system("cls");
       cout << "\t\t <<Menu Admin>>\n\n";
-      cout << left << setw(25) << "1> Input Nasabah" << right << setw(25) << "Backup Data <4\n\n";
+      cout << left << setw(25) << "1> Input Nasabah" << right << setw(25) << "Restore Data <4\n\n";
       cout << left << setw(25) << "2> Delete Nasabah" << right << setw(25) << "\n\n";
       cout << left << setw(25) << "3> Tampil Nasabah" << right << setw(25) << "Exit Admin <6\n\n";
       inputHandling("\n Admin Mau Yang Mana?: ", opt);
@@ -425,7 +423,10 @@ void importDataJson(string jsonPathIn, nasabah &nasabahExport)
             }
             else
             {
-                  cout << "[Err] - Jumlah Transaksi error Not Found" << endl;
+                  if (nasabahExport.noRek != 459777345)
+                  {
+                        cout << "[Err] - Jumlah Transaksi error Not Found" << endl;
+                  }
                   return;
             }
             // Admin dikecualikan karena admin tidak memiliki histori transaksi akan membuat error
@@ -544,30 +545,36 @@ void loginAttempt(int Attempts)
 {
       int noRekIn;
       string passIn;
+      bool accStat = false;
       if (Attempts <= 0)
       {
             cout << "<Maaf Kesempatan Anda Habis. Silahkan Hubungi Costumer Service jika ada masalah.>" << endl;
             exit(0);
       }
-      inputHandling("\n\n  Masukkan Nomor Rekening (8 Digit) \texit(404)\n>> ", noRekIn);
-      // Untuk keluar
-      if (noRekIn == 404)
+      while (accStat == false)
       {
-            loginStat = true;
-            mainMenuLoop = false;
-            cout << "\nTerima Kasih Telah Menggunakan ATM Kami:D" << endl;
-            return;
-      }
-      // Untuk Lanjut ke Password
-      else if (noRekVal(noRekIn, pathJsonCurNasabah, 1))
-      {
-            inputHandling("\n  Masukkan Password Rekening\n>> ", passIn, 1);
-      }
-      else
-      {
-            cout << "Err - Whoops Rekening Salah" << endl;
-            cout << "\n[Login Gagal] - Kesempatan Anda Tersisa " << (Attempts - 1) << endl;
-            loginAttempt(Attempts - 1);
+            inputHandling("\n-->\n  Masukkan Nomor Rekening (8 Digit) \texit(404)\n>> ", noRekIn);
+            // Untuk keluar
+            if (noRekIn == 404)
+            {
+                  accStat = true;
+                  loginStat = true;
+                  mainMenuLoop = false;
+                  cout << "\nTerima Kasih Telah Menggunakan ATM Kami:D" << endl;
+                  system("Pause");
+                  return;
+            }
+            // Untuk Lanjut ke Password
+            if (noRekVal(noRekIn, pathJsonCurNasabah, 1))
+            {
+                  accStat = true;
+                  inputHandling("\n  Masukkan Password Rekening\n>> ", passIn, 1);
+            }
+            else
+            {
+                  cout << "Err - Whoops Rekening Salah" << endl;
+                  accStat = false;
+            }
       }
       importDataJson(pathJsonCurNasabah, currentNasabah);
       if (currentNasabah.pass == passIn)
@@ -584,7 +591,7 @@ void loginAttempt(int Attempts)
             }
             currentNasabahPtr = &currentNasabah;
             // Ucapan Selamat Login
-            cout << "\n<Login berhasil>\n";
+            cout << "\t\t\n<Login berhasil>\n";
             Pause();
             system("cls");
             cout << "\n <= Selamat Datang " << currentNasabahPtr->nama << " =>\n\n";
@@ -646,7 +653,6 @@ void inputHandling(string question, string &var, short lineOr)
       } while (statLoop == true);
 };
 
-// Untuk Variabel Integer
 /**
  * @brief fungsi overloading untuk menangani input integer
  * @param question pertanyaan yang ditampilkan
@@ -673,7 +679,6 @@ void inputHandling(string question, int &var)
       } while (statLoop == true);
 };
 
-// Untuk Variabel FLoat
 /**
  * @brief fungsi overloading untuk menangani input float
  * @param question pertanyaan yang ditampilkan
@@ -799,6 +804,7 @@ void tampilDataNasabah()
       int noRekIn = 0;
       short pilihanSort;
       cout << "\n\t>- Menu Tampil Data Nasabah -<\n\n";
+      cout << "[Completed Load] - Jumlah Nasabah : " << jumlahNasabah << endl;
       cout << "Pilih metode pengurutan\n";
       cout << "1. Berdasarkan Nomor Rekening\n";
       cout << "2. Berdasarkan Saldo\n";
@@ -823,8 +829,8 @@ void tampilDataNasabah()
             cout << "| " << setw(10) << dataNasabah[i].noRek << " | " << setw(25) << dataNasabah[i].nama << " |\n";
       }
       cout << setfill('-') << setw(41) << "-" << setfill(' ') << endl;
-      Pause();
       inputHandling("Berapa Nomor Rekeningnya? (exit: 404) \n >> ", noRekIn);
+      Pause();
       if (noRekIn == 404)
       {
             return;
@@ -973,7 +979,6 @@ void cekSaldo()
             if (pilihan == 1)
             {
                   Pause();
-                  menuUtama();
                   return;
             }
             else
@@ -1097,7 +1102,6 @@ void tarikSaldo()
             {
                   cout << "\nTarik Tunai dibatalkan\n";
                   Pause();
-                  menuUtama();
                   return;
             }
             else
