@@ -1,7 +1,7 @@
 /**
  * @file mainSystemATM.cpp
  * @author Zaka, Dhimas, Jauza, Erlan, dan Roi
- * @brief Sebuah program buatan 6 orang sangar untuk menunjuang Nilai Algoritma Pemrograman
+ * @brief Sebuah program buatan 6 orang sangar untuk menunjuang Nilai Algoritma Pemrograman Lanjut
  * @version 0.1
  * @date 2025-05-13
  *
@@ -1347,7 +1347,7 @@ int TotalTransaksi(int MulaiIndex, int AkhirIndex)
 // Function pause dilengkapi cls
 /**
  * @brief fungsi jeda (pause) program dengan  animasi
- * 
+ *
  * Fungsi ini menampilkan animasi teks untuk memberikan kesan sistem sedang memproses,
  * kemudian mengganti teks tersebut menjadi "completed"
  */
@@ -1408,7 +1408,7 @@ void SetupSnake()
 }
 /**
  * @brief menampilkan board permainan ular
- * 
+ *
  * Fungsi ini dipanggil setiap kali permainan perlu memperbaharui tampilan.
  */
 void DrawSnake()
@@ -1454,12 +1454,12 @@ void DrawSnake()
 }
 /**
  * @brief menerima input pengguna untuk arah gerakan ular
- * 
+ *
  * Fungsi ini mendeteksi penekanan tombol keyboard (W, A, S, D) untuk mengubah
- * arah gerakan ular. Mencegah ular bergerak ke arah berlawanan (misalnya dari kanan 
- * ke kiri secara langsung) untuk menghindari tabrakan dengan ekor sendiri. 
+ * arah gerakan ular. Mencegah ular bergerak ke arah berlawanan (misalnya dari kanan
+ * ke kiri secara langsung) untuk menghindari tabrakan dengan ekor sendiri.
  * Input 'X' digunakan untuk keluar dari permainan.
- * 
+ *
  * Fungsi juga mencegah duplikasi input dengan menyimpan tombol terakhir yang ditekan
  * dan membersihkan buffer keyboard setelah input diproses.
  */
@@ -1530,7 +1530,7 @@ void InputSnake()
  * 2. Menggerakkan kepala ular berdasarkan arah yang dipilih (LEFT, RIGHT, UP, DOWN)
  * 3. Mendeteksi tabrakan dengan batas arena atau dengan ekor sendiri
  * 4. Menangani interaksi ketika ular memakan buah (menambah skor dan panjang ekor)
- * 
+ *
  * Permainan berakhir (snakeScore = -1) jika ular menabrak batas atau ekornya sendiri.
  */
 void LogicSnake()
@@ -1591,7 +1591,7 @@ void LogicSnake()
 }
 /**
  * @brief Menjalankan game ular dalam sistem ATM
- * 
+ *
  * Fungsi ini mengelola seluruh alur game Snake, dari menampilkan splash screen
  * pada pertama kali dijalankan hingga loop utama permainan.
  */

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['importdatajson_0',['importDataJson',['../main_system_a_t_m_8cpp.html#a4cc67b74aa369f46b374eeae7576e13c',1,'mainSystemATM.cpp']]],
-  ['importdb_1',['importDb',['../main_system_a_t_m_8cpp.html#a5ac02be00f4f0087a7589a6936207a61',1,'mainSystemATM.cpp']]]
+  ['deletetext_0',['DeleteText',['../main_system_a_t_m_8cpp.html#a1b7ff06f4fa0f1fb69347979c187e3fa',1,'mainSystemATM.cpp']]],
+  ['delnasabah_1',['delNasabah',['../main_system_a_t_m_8cpp.html#aa83ee0c235620741123418d586128543',1,'mainSystemATM.cpp']]],
+  ['drawsnake_2',['DrawSnake',['../main_system_a_t_m_8cpp.html#a56a42acc2c0a67e8577ae70ff3faddae',1,'mainSystemATM.cpp']]]
 ];
