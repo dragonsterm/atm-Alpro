@@ -72,45 +72,45 @@ void inputHandling(string question, int &var);                  // untuk int
 void inputHandling(string question, float &var);                // untuk float
 void inputHandling(string question, short &var);                // untuk short]
 // Multifile Manajemen System
-bool noRekVal(int noRekIn, string &pathJsonCurNasabah, bool mode);                  // pengecekan apakah nomor rekening terdapat dalam database (validasi)
-void importDataJson(string jsonPathIn, nasabah &nasabahExport);                     // membaca data nasabah dari file JSON
-void exportNasabahJson(string jsonPathIn, nasabah nasabahExport, bool mode);        // menyimpan data nasabah ke file JSON
-void importDb(nasabah *dataNasabahOut, int &jumlahNasabah);                         // mengimpor seluruh file JSON dari folder ke array dataNasabah
-void restoreBackupDb(string dbBackupPath);                                          // mengembalikan data dari folder backup ke folder aktif
+bool noRekVal(int noRekIn, string &pathJsonCurNasabah, bool mode);           // pengecekan apakah nomor rekening terdapat dalam database (validasi)
+void importDataJson(string jsonPathIn, nasabah &nasabahExport);              // membaca data nasabah dari file JSON
+void exportNasabahJson(string jsonPathIn, nasabah nasabahExport, bool mode); // menyimpan data nasabah ke file JSON
+void importDb(nasabah *dataNasabahOut, int &jumlahNasabah);                  // mengimpor seluruh file JSON dari folder ke array dataNasabah
+void restoreBackupDb(string dbBackupPath);                                   // mengembalikan data dari folder backup ke folder aktif
 // CRUD Funct Data Nasabah
-void tampilDataNasabah();                                                           // menampilkan seluruh data nasabah dan histori transaksi
-void inputNasabah();                                                                // menambahkan nasabah baru
-void delNasabah();                                                                  // menghapus file JSON nasabah berdasarkan nomor rekening
+void tampilDataNasabah(); // menampilkan seluruh data nasabah dan histori transaksi
+void inputNasabah();      // menambahkan nasabah baru
+void delNasabah();        // menghapus file JSON nasabah berdasarkan nomor rekening
 // Main Feature
-void login();                                   // memulai proses login
-void loginAttempt(int Attempts);                // fungsi rekursif untuk percobaan login (max 3 kali)
-void cekSaldo();                                // menampilkan saldo nasabah
-void setorSaldo();                              // menambah saldo nasabah
-void tarikSaldo();                              // mengurangi saldo nasabah (tarik tunai)
-void transferSaldo();                           // transfer uang antar nasabah (menggunakan nomor rekening)
-void riwayatTransaksi();                        // menampilkan histori transaksi dengan fitur halaman & analisis
+void login();                    // memulai proses login
+void loginAttempt(int Attempts); // fungsi rekursif untuk percobaan login (max 3 kali)
+void cekSaldo();                 // menampilkan saldo nasabah
+void setorSaldo();               // menambah saldo nasabah
+void tarikSaldo();               // mengurangi saldo nasabah (tarik tunai)
+void transferSaldo();            // transfer uang antar nasabah (menggunakan nomor rekening)
+void riwayatTransaksi();         // menampilkan histori transaksi dengan fitur halaman & analisis
 // >> Menu
-void loopMenu();                                // menjalankan menu secara terus menerus
-void menuAdmin();                               // menu khusus admin (input, hapus, tampilkan nasabah, restore backup)
-void menuUtama();                               // menu utama nasabah (cek saldo, setor, tarik, transfer, riwayat)
+void loopMenu();  // menjalankan menu secara terus menerus
+void menuAdmin(); // menu khusus admin (input, hapus, tampilkan nasabah, restore backup)
+void menuUtama(); // menu utama nasabah (cek saldo, setor, tarik, transfer, riwayat)
 // Function Sort
-void sortByNoRek();                             // mengurutkan nasabah berdasarkan rekening (bubble sort)
-void sortBySaldo();                             // mengurutkan berdasarkan saldo (selection sort)
-void sortHistoriTransaksi(nasabah &n);          // mengurutkan histori transaksi nasabah (bubble sort)
+void sortByNoRek();                    // mengurutkan nasabah berdasarkan rekening (bubble sort)
+void sortBySaldo();                    // mengurutkan berdasarkan saldo (selection sort)
+void sortHistoriTransaksi(nasabah &n); // mengurutkan histori transaksi nasabah (bubble sort)
 // Perhitungan total transaksi
 int TotalTransaksi(int MulaiIndex, int AkhirIndex); // menghitung total nominal transaksi secara rekursif
 // Pause Function
-void Pause();                                   // jeda & visual antar menu     
+void Pause(); // jeda & visual antar menu
 // Function untuk Pause
-void SlowType(const string &kata, int delay);   // efek animasi mengetik
-void DeleteText(int count, int delay);          // penghapusan text 
+void SlowType(const string &kata, int delay); // efek animasi mengetik
+void DeleteText(int count, int delay);        // penghapusan text
 // Function untuk SnakeGame
-void Snake();           // game loop
-void SetupSnake();      // inisialisasi posisi awal ular & fruit
-void DrawSnake();       // menggambar ular ke tampilan
-void InputSnake();      // menerima input user
-void LogicSnake();      // logika gerakan ular & tabrakan 
-void TitleSnake();      // tampilan awal game
+void Snake();      // game loop
+void SetupSnake(); // inisialisasi posisi awal ular & fruit
+void DrawSnake();  // menggambar ular ke tampilan
+void InputSnake(); // menerima input user
+void LogicSnake(); // logika gerakan ular & tabrakan
+void TitleSnake(); // tampilan awal game
 // !SECTION
 // SECTION - Snake Function
 const int snakeWidth = 20;
@@ -157,7 +157,7 @@ int main(int argc, char const *argv[])
  * @brief Melooping Menu dengan terus menerus sampai didapatkan loginStat == true
  *
  */
-void loopMenu()  
+void loopMenu()
 {
       do
       {
@@ -532,11 +532,11 @@ void exportNasabahJson(string jsonPathOut, nasabah nasabahExport, bool mode)
             cout << "[Err Exporting File] - Nah im not going to export ts" << endl;
       }
 }
+
 /**
  * @brief fungsi rekursif untuk mencoba login hingga maksimal 3 kali
  * @param Attempts  jumlah kesempatan login yang tersisa
-*/
-
+ */
 void loginAttempt(int Attempts)
 {
       int noRekIn;
@@ -598,8 +598,8 @@ void loginAttempt(int Attempts)
 // Fungsi Login
 /**
  * @brief fungsi utama untuk memulai proses login user
- * 
-*/
+ *
+ */
 void login()
 {
       loginAttempt(3);
@@ -611,7 +611,7 @@ void login()
  * @param question pertanyaan yang ditampilkan
  * @param var variabel untuk meyimpan input string
  * @param lineOr 1 untuk tanpa spasi, 2 untuk input dengan spasi
-*/
+ */
 void inputHandling(string question, string &var, short lineOr)
 {
       bool statLoop = false;
@@ -648,7 +648,7 @@ void inputHandling(string question, string &var, short lineOr)
  * @brief fungsi overloading untuk menangani input integer
  * @param question pertanyaan yang ditampilkan
  * @param var variabel untuk meyimpan input integer
-*/
+ */
 void inputHandling(string question, int &var)
 {
       bool statLoop = false;
@@ -675,7 +675,7 @@ void inputHandling(string question, int &var)
  * @brief fungsi overloading untuk menangani input float
  * @param question pertanyaan yang ditampilkan
  * @param var variabel untuk meyimpan input float
-*/
+ */
 void inputHandling(string question, float &var)
 {
       cout << question;
@@ -702,7 +702,7 @@ void inputHandling(string question, float &var)
  * @brief fungsi overloading untuk menangani input short
  * @param question pertanyaan yang ditampilkan
  * @param var variabel untuk meyimpan input short
-*/
+ */
 void inputHandling(string question, short &var)
 {
       cout << question;
@@ -728,7 +728,7 @@ void inputHandling(string question, short &var)
 /**
  * @brief mengurutkan data nasabah berdasarkan nomor rekening secara bubble sort
  */
-void sortByNoRek() 
+void sortByNoRek()
 {
       for (int i = 0; i < jumlahNasabah - 1; i++)
       {
@@ -748,7 +748,7 @@ void sortByNoRek()
 /**
  * @brief Mengurutkan data nasabah berdasarkan saldo secara selection sort
  */
-void sortBySaldo() 
+void sortBySaldo()
 {
       for (int i = 0; i < jumlahNasabah - 1; i++)
       {
