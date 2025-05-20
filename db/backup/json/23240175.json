@@ -1,81 +1,87 @@
 {
-	"noRek": 23240175,
-	"pass": "admin3215",
-	"nama": "Rio Meidi A",
-	"saldo": 9000000,
-	"jumlahTrans": 12,
-	"historiTransaksi": [
-		{
-			"idTrans": 51,
-			"nominal": 50000,
-			"noRekTuj": 87654326,
-			"deskripsi": "Qris"
-		},
-		{
-			"idTrans": 61,
-			"nominal": 900000,
-			"noRekTuj": 87654327,
-			"deskripsi": "Top Up Dana"
-		},
-		{
-			"idTrans": 71,
-			"nominal": 200000,
-			"noRekTuj": 87654318,
-			"deskripsi": "Virtual Acc"
-		},
-		{
-			"idTrans": 52,
-			"nominal": 400000,
-			"noRekTuj": 87654328,
-			"deskripsi": "Qris"
-		},
-		{
-			"idTrans": 62,
-			"nominal": 75000,
-			"noRekTuj": 87654353,
-			"deskripsi": "Top UP Dana"
-		},
-		{
-			"idTrans": 72,
-			"nominal": 800000,
-			"noRekTuj": 87654328,
-			"deskripsi": "Virtual Acc"
-		},
-		{
-			"idTrans": 73,
-			"nominal": 960000,
-			"noRekTuj": 87654330,
-			"deskripsi": "Virtual Acc"
-		},
-		{
-			"idTrans": 53,
-			"nominal": 115000,
-			"noRekTuj": 87654402,
-			"deskripsi": "Qris"
-		},
-		{
-			"idTrans": 63,
-			"nominal": 120000,
-			"noRekTuj": 87654560,
-			"deskripsi": "Top Up Dana"
-		},
-		{
-			"idTrans": 64,
-			"nominal": 980000,
-			"noRekTuj": 87654975,
-			"deskripsi": "Top Up Gopay"
-		},
-		{
-			"idTrans": 90,
-			"nominal": 650000,
-			"noRekTuj": 87650642,
-			"deskripsi": "Transfer"
-		},
-		{
-			"idTrans": 74,
-			"nominal": 850000,
-			"noRekTuj": 87654340,
-			"deskripsi": "Virtual Acc"
-		}
-	]
+    "historiTransaksi": [
+        {
+            "deskripsi": "Qris",
+            "idTrans": 51,
+            "noRekTuj": 87654326,
+            "nominal": 50000
+        },
+        {
+            "deskripsi": "Top Up Dana",
+            "idTrans": 61,
+            "noRekTuj": 87654327,
+            "nominal": 900000
+        },
+        {
+            "deskripsi": "Virtual Acc",
+            "idTrans": 71,
+            "noRekTuj": 87654318,
+            "nominal": 200000
+        },
+        {
+            "deskripsi": "Qris",
+            "idTrans": 52,
+            "noRekTuj": 87654328,
+            "nominal": 400000
+        },
+        {
+            "deskripsi": "Top UP Dana",
+            "idTrans": 62,
+            "noRekTuj": 87654353,
+            "nominal": 75000
+        },
+        {
+            "deskripsi": "Virtual Acc",
+            "idTrans": 72,
+            "noRekTuj": 87654328,
+            "nominal": 800000
+        },
+        {
+            "deskripsi": "Virtual Acc",
+            "idTrans": 73,
+            "noRekTuj": 87654330,
+            "nominal": 960000
+        },
+        {
+            "deskripsi": "Qris",
+            "idTrans": 53,
+            "noRekTuj": 87654402,
+            "nominal": 115000
+        },
+        {
+            "deskripsi": "Top Up Dana",
+            "idTrans": 63,
+            "noRekTuj": 87654560,
+            "nominal": 120000
+        },
+        {
+            "deskripsi": "Top Up Gopay",
+            "idTrans": 64,
+            "noRekTuj": 87654975,
+            "nominal": 980000
+        },
+        {
+            "deskripsi": "Transfer",
+            "idTrans": 90,
+            "noRekTuj": 87650642,
+            "nominal": 650000
+        },
+        {
+            "deskripsi": "Virtual Acc",
+            "idTrans": 74,
+            "noRekTuj": 87654340,
+            "nominal": 850000
+        },
+        {
+            "deskripsi": "Setor Saldo",
+            "idTrans": 10017986,
+            "noRekTuj": 23240175,
+            "nominal": 2000000
+        }
+    ],
+    "jumlahTrans": 13,
+    "nama": "Rio Meidi A",
+    "noRek": 23240175,
+    "pass": "dewaMatahariadalahSaya",
+    "saldo": 8100000
 }

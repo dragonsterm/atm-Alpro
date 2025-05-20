@@ -1,81 +1,99 @@
 {
-	"noRek": 23240174,
-	"pass": "admin3214",
-	"nama": "Jauza Ilham Mahardika P",
-	"saldo": 10000000,
-	"jumlahTrans": 12,
 	"historiTransaksi": [
 		{
-			"idTrans": 51,
-			"nominal": 50000,
+			"deskripsi": "Deposit Awal",
+			"idTrans": 1,
+			"noRekTuj": 23240174,
+			"nominal": 6300000
+		},
+		{
+			"deskripsi": "Qris",
+			"idTrans": 2,
 			"noRekTuj": 87654326,
-			"deskripsi": "Qris"
+			"nominal": -50000
 		},
 		{
-			"idTrans": 61,
-			"nominal": 900000,
+			"deskripsi": "Top Up Dana",
+			"idTrans": 3,
 			"noRekTuj": 87654327,
-			"deskripsi": "Top Up Dana"
+			"nominal": -900000
 		},
 		{
-			"idTrans": 71,
-			"nominal": 200000,
+			"deskripsi": "Virtual Acc",
+			"idTrans": 4,
 			"noRekTuj": 87654318,
-			"deskripsi": "Virtual Acc"
+			"nominal": -200000
 		},
 		{
-			"idTrans": 52,
-			"nominal": 400000,
+			"deskripsi": "Qris",
+			"idTrans": 5,
 			"noRekTuj": 87654328,
-			"deskripsi": "Qris"
+			"nominal": -400000
 		},
 		{
-			"idTrans": 62,
-			"nominal": 75000,
+			"deskripsi": "Top UP Dana",
+			"idTrans": 6,
 			"noRekTuj": 87654353,
-			"deskripsi": "Top UP Dana"
+			"nominal": -75000
 		},
 		{
-			"idTrans": 72,
-			"nominal": 800000,
+			"deskripsi": "Virtual Acc",
+			"idTrans": 7,
 			"noRekTuj": 87654328,
-			"deskripsi": "Virtual Acc"
+			"nominal": -800000
 		},
 		{
-			"idTrans": 73,
-			"nominal": 960000,
+			"deskripsi": "Virtual Acc",
+			"idTrans": 8,
 			"noRekTuj": 87654330,
-			"deskripsi": "Virtual Acc"
+			"nominal": -960000
 		},
 		{
-			"idTrans": 53,
-			"nominal": 115000,
+			"deskripsi": "Qris",
+			"idTrans": 9,
 			"noRekTuj": 87654402,
-			"deskripsi": "Qris"
+			"nominal": -115000
 		},
 		{
-			"idTrans": 63,
-			"nominal": 120000,
+			"deskripsi": "Top Up Dana",
+			"idTrans": 10,
 			"noRekTuj": 87654560,
-			"deskripsi": "Top Up Dana"
+			"nominal": -120000
 		},
 		{
-			"idTrans": 64,
-			"nominal": 980000,
+			"deskripsi": "Top Up Gopay",
+			"idTrans": 11,
 			"noRekTuj": 87654975,
-			"deskripsi": "Top Up Gopay"
+			"nominal": -980000
 		},
 		{
-			"idTrans": 90,
-			"nominal": 650000,
+			"deskripsi": "Transfer",
+			"idTrans": 12,
 			"noRekTuj": 87650642,
-			"deskripsi": "Transfer"
+			"nominal": -650000
 		},
 		{
-			"idTrans": 74,
-			"nominal": 850000,
+			"deskripsi": "Virtual Acc",
+			"idTrans": 13,
 			"noRekTuj": 87654340,
-			"deskripsi": "Virtual Acc"
+			"nominal": -850000
+		},
+		{
+			"deskripsi": "Setor Saldo",
+			"idTrans": 10015821,
+			"noRekTuj": 23240174,
+			"nominal": 5000000
+		},
+		{
+			"deskripsi": "Transfer Saldo",
+			"idTrans": 10014384,
+			"noRekTuj": 23240174,
+			"nominal": 200000
 		}
-	]
+	],
+	"jumlahTrans": 15,
+	"nama": "Jauza Ilham Mahardika P",
+	"noRek": 23240174,
+	"pass": "admin3214",
+	"saldo": 5400000
 }

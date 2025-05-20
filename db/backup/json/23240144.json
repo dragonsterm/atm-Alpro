@@ -1,81 +1,135 @@
 {
-	"noRek": 23240144,
-	"pass": "admin123",
-	"nama": "Zaka Ahmad Ghofari",
-	"saldo": 2500000,
-	"jumlahTrans": 12,
 	"historiTransaksi": [
 		{
-			"idTrans": 51,
-			"nominal": 50000,
+			"deskripsi": "Deposit Gaji",
+			"idTrans": 1,
+			"noRekTuj": 23240144,
+			"nominal": 600000
+		},
+		{
+			"deskripsi": "Tagihan PLN",
+			"idTrans": 2,
 			"noRekTuj": 87654326,
-			"deskripsi": "Qris"
+			"nominal": -100000
 		},
 		{
-			"idTrans": 61,
-			"nominal": 900000,
+			"deskripsi": "Top Up Bonus",
+			"idTrans": 3,
+			"noRekTuj": 23240144,
+			"nominal": 600000
+		},
+		{
+			"deskripsi": "Tagihan Air",
+			"idTrans": 4,
 			"noRekTuj": 87654327,
-			"deskripsi": "Top Up Dana"
+			"nominal": -150000
 		},
 		{
-			"idTrans": 71,
-			"nominal": 200000,
-			"noRekTuj": 87654318,
-			"deskripsi": "Virtual Acc"
+			"deskripsi": "Deposit Proyek",
+			"idTrans": 5,
+			"noRekTuj": 23240144,
+			"nominal": 450000
 		},
 		{
-			"idTrans": 52,
-			"nominal": 400000,
+			"deskripsi": "Belanja Bulanan",
+			"idTrans": 6,
 			"noRekTuj": 87654328,
-			"deskripsi": "Qris"
+			"nominal": -200000
 		},
 		{
-			"idTrans": 62,
-			"nominal": 75000,
-			"noRekTuj": 87654353,
-			"deskripsi": "Top UP Dana"
+			"deskripsi": "Refund Belanja",
+			"idTrans": 7,
+			"noRekTuj": 23240144,
+			"nominal": 400000
 		},
 		{
-			"idTrans": 72,
-			"nominal": 800000,
-			"noRekTuj": 87654328,
-			"deskripsi": "Virtual Acc"
+			"deskripsi": "Internet",
+			"idTrans": 8,
+			"noRekTuj": 87654329,
+			"nominal": -100000
 		},
 		{
-			"idTrans": 73,
-			"nominal": 960000,
+			"deskripsi": "Cashback Promo",
+			"idTrans": 9,
+			"noRekTuj": 23240144,
+			"nominal": 350000
+		},
+		{
+			"deskripsi": "Transportasi",
+			"idTrans": 10,
 			"noRekTuj": 87654330,
-			"deskripsi": "Virtual Acc"
+			"nominal": -100000
 		},
 		{
-			"idTrans": 53,
-			"nominal": 115000,
-			"noRekTuj": 87654402,
-			"deskripsi": "Qris"
+			"deskripsi": "Transfer Masuk",
+			"idTrans": 11,
+			"noRekTuj": 23240144,
+			"nominal": 300000
 		},
 		{
-			"idTrans": 63,
-			"nominal": 120000,
-			"noRekTuj": 87654560,
-			"deskripsi": "Top Up Dana"
+			"deskripsi": "Makan Siang",
+			"idTrans": 12,
+			"noRekTuj": 87654331,
+			"nominal": -150000
 		},
 		{
-			"idTrans": 64,
-			"nominal": 980000,
-			"noRekTuj": 87654975,
-			"deskripsi": "Top Up Gopay"
+			"deskripsi": "Top Up GoPay",
+			"idTrans": 13,
+			"noRekTuj": 23240144,
+			"nominal": 300000
 		},
 		{
-			"idTrans": 90,
-			"nominal": 650000,
-			"noRekTuj": 87650642,
-			"deskripsi": "Transfer"
+			"deskripsi": "Belanja Online",
+			"idTrans": 14,
+			"noRekTuj": 87654332,
+			"nominal": -200000
 		},
 		{
-			"idTrans": 74,
-			"nominal": 850000,
-			"noRekTuj": 87654340,
-			"deskripsi": "Transfer Saldo"
+			"deskripsi": "Gaji Freelance",
+			"idTrans": 15,
+			"noRekTuj": 23240144,
+			"nominal": 300000
+		},
+		{
+			"deskripsi": "Parkir",
+			"idTrans": 16,
+			"noRekTuj": 87654333,
+			"nominal": -100000
+		},
+		{
+			"deskripsi": "Depo Investasi",
+			"idTrans": 17,
+			"noRekTuj": 23240144,
+			"nominal": 450000
+		},
+		{
+			"deskripsi": "Donasi",
+			"idTrans": 18,
+			"noRekTuj": 87654334,
+			"nominal": -100000
+		},
+		{
+			"deskripsi": "Cashback Kecil",
+			"idTrans": 19,
+			"noRekTuj": 23240144,
+			"nominal": 250000
+		},
+		{
+			"deskripsi": "Tagihan Kredit",
+			"idTrans": 20,
+			"noRekTuj": 87654335,
+			"nominal": -300000
+		},
+		{
+			"deskripsi": "Transfer Saldo",
+			"idTrans": 10014384,
+			"noRekTuj": 23240174,
+			"nominal": -200000
 		}
-	]
+	],
+	"jumlahTrans": 21,
+	"nama": "Zaka Ahmad Ghofari",
+	"noRek": 23240144,
+	"pass": "admin123",
+	"saldo": 2300000
 }
