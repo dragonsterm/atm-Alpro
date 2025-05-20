@@ -1,0 +1,87 @@
+{
+    "historiTransaksi": [
+        {
+            "deskripsi": "Deposit Awal",
+            "idTrans": 1,
+            "noRekTuj": 23240173,
+            "nominal": 5000000
+        },
+        {
+            "deskripsi": "Qris",
+            "idTrans": 2,
+            "noRekTuj": 87654326,
+            "nominal": -50000
+        },
+        {
+            "deskripsi": "Top Up Dana",
+            "idTrans": 3,
+            "noRekTuj": 87654327,
+            "nominal": -500000
+        },
+        {
+            "deskripsi": "Virtual Acc",
+            "idTrans": 4,
+            "noRekTuj": 87654318,
+            "nominal": -200000
+        },
+        {
+            "deskripsi": "Deposit Masuk",
+            "idTrans": 5,
+            "noRekTuj": 23240173,
+            "nominal": 250000
+        },
+        {
+            "deskripsi": "Qris",
+            "idTrans": 6,
+            "noRekTuj": 87654328,
+            "nominal": -100000
+        },
+        {
+            "deskripsi": "Top Up Dana",
+            "idTrans": 7,
+            "noRekTuj": 87654353,
+            "nominal": -500000
+        },
+        {
+            "deskripsi": "Deposit Masuk",
+            "idTrans": 8,
+            "noRekTuj": 23240173,
+            "nominal": 300000
+        },
+        {
+            "deskripsi": "Top Up Dana",
+            "idTrans": 9,
+            "noRekTuj": 87654402,
+            "nominal": -150000
+        },
+        {
+            "deskripsi": "Deposit Masuk",
+            "idTrans": 10,
+            "noRekTuj": 23240173,
+            "nominal": 200000
+        },
+        {
+            "deskripsi": "Top Up Gopay",
+            "idTrans": 11,
+            "noRekTuj": 87654975,
+            "nominal": -300000
+        },
+        {
+            "deskripsi": "Transfer",
+            "idTrans": 12,
+            "noRekTuj": 87650642,
+            "nominal": -250000
+        },
+        {
+            "deskripsi": "Setor Saldo",
+            "idTrans": 10017444,
+            "noRekTuj": 23240173,
+            "nominal": 300000
+        }
+    ],
+    "jumlahTrans": 13,
+    "nama": "Erlan Rifqi Davin D",
+    "noRek": 23240173,
+    "pass": "admin3221",
+    "saldo": 4000000
+}

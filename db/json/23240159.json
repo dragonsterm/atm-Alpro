@@ -1,0 +1,87 @@
+{
+    "historiTransaksi": [
+        {
+            "deskripsi": "Qris",
+            "idTrans": 51,
+            "noRekTuj": 87654326,
+            "nominal": 50000
+        },
+        {
+            "deskripsi": "Top Up Dana",
+            "idTrans": 61,
+            "noRekTuj": 87654327,
+            "nominal": 900000
+        },
+        {
+            "deskripsi": "Virtual Acc",
+            "idTrans": 71,
+            "noRekTuj": 87654318,
+            "nominal": 200000
+        },
+        {
+            "deskripsi": "Qris",
+            "idTrans": 52,
+            "noRekTuj": 87654328,
+            "nominal": 400000
+        },
+        {
+            "deskripsi": "Top UP Dana",
+            "idTrans": 62,
+            "noRekTuj": 87654353,
+            "nominal": 75000
+        },
+        {
+            "deskripsi": "Virtual Acc",
+            "idTrans": 72,
+            "noRekTuj": 87654328,
+            "nominal": 800000
+        },
+        {
+            "deskripsi": "Virtual Acc",
+            "idTrans": 73,
+            "noRekTuj": 87654330,
+            "nominal": 960000
+        },
+        {
+            "deskripsi": "Qris",
+            "idTrans": 53,
+            "noRekTuj": 87654402,
+            "nominal": 115000
+        },
+        {
+            "deskripsi": "Top Up Dana",
+            "idTrans": 63,
+            "noRekTuj": 87654560,
+            "nominal": 120000
+        },
+        {
+            "deskripsi": "Top Up Gopay",
+            "idTrans": 64,
+            "noRekTuj": 87654975,
+            "nominal": 980000
+        },
+        {
+            "deskripsi": "Transfer",
+            "idTrans": 90,
+            "noRekTuj": 87650642,
+            "nominal": 650000
+        },
+        {
+            "deskripsi": "Virtual Acc",
+            "idTrans": 74,
+            "noRekTuj": 87654340,
+            "nominal": 850000
+        },
+        {
+            "deskripsi": "Setor Saldo",
+            "idTrans": 10017267,
+            "noRekTuj": 23240159,
+            "nominal": 1000000
+        }
+    ],
+    "jumlahTrans": 13,
+    "nama": "Dimas Hafid Fathoni",
+    "noRek": 23240159,
+    "pass": "admin321",
+    "saldo": 7100000
+}

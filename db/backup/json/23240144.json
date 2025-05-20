@@ -1,0 +1,135 @@
+{
+	"historiTransaksi": [
+		{
+			"deskripsi": "Deposit Gaji",
+			"idTrans": 1,
+			"noRekTuj": 23240144,
+			"nominal": 600000
+		},
+		{
+			"deskripsi": "Tagihan PLN",
+			"idTrans": 2,
+			"noRekTuj": 87654326,
+			"nominal": -100000
+		},
+		{
+			"deskripsi": "Top Up Bonus",
+			"idTrans": 3,
+			"noRekTuj": 23240144,
+			"nominal": 600000
+		},
+		{
+			"deskripsi": "Tagihan Air",
+			"idTrans": 4,
+			"noRekTuj": 87654327,
+			"nominal": -150000
+		},
+		{
+			"deskripsi": "Deposit Proyek",
+			"idTrans": 5,
+			"noRekTuj": 23240144,
+			"nominal": 450000
+		},
+		{
+			"deskripsi": "Belanja Bulanan",
+			"idTrans": 6,
+			"noRekTuj": 87654328,
+			"nominal": -200000
+		},
+		{
+			"deskripsi": "Refund Belanja",
+			"idTrans": 7,
+			"noRekTuj": 23240144,
+			"nominal": 400000
+		},
+		{
+			"deskripsi": "Internet",
+			"idTrans": 8,
+			"noRekTuj": 87654329,
+			"nominal": -100000
+		},
+		{
+			"deskripsi": "Cashback Promo",
+			"idTrans": 9,
+			"noRekTuj": 23240144,
+			"nominal": 350000
+		},
+		{
+			"deskripsi": "Transportasi",
+			"idTrans": 10,
+			"noRekTuj": 87654330,
+			"nominal": -100000
+		},
+		{
+			"deskripsi": "Transfer Masuk",
+			"idTrans": 11,
+			"noRekTuj": 23240144,
+			"nominal": 300000
+		},
+		{
+			"deskripsi": "Makan Siang",
+			"idTrans": 12,
+			"noRekTuj": 87654331,
+			"nominal": -150000
+		},
+		{
+			"deskripsi": "Top Up GoPay",
+			"idTrans": 13,
+			"noRekTuj": 23240144,
+			"nominal": 300000
+		},
+		{
+			"deskripsi": "Belanja Online",
+			"idTrans": 14,
+			"noRekTuj": 87654332,
+			"nominal": -200000
+		},
+		{
+			"deskripsi": "Gaji Freelance",
+			"idTrans": 15,
+			"noRekTuj": 23240144,
+			"nominal": 300000
+		},
+		{
+			"deskripsi": "Parkir",
+			"idTrans": 16,
+			"noRekTuj": 87654333,
+			"nominal": -100000
+		},
+		{
+			"deskripsi": "Depo Investasi",
+			"idTrans": 17,
+			"noRekTuj": 23240144,
+			"nominal": 450000
+		},
+		{
+			"deskripsi": "Donasi",
+			"idTrans": 18,
+			"noRekTuj": 87654334,
+			"nominal": -100000
+		},
+		{
+			"deskripsi": "Cashback Kecil",
+			"idTrans": 19,
+			"noRekTuj": 23240144,
+			"nominal": 250000
+		},
+		{
+			"deskripsi": "Tagihan Kredit",
+			"idTrans": 20,
+			"noRekTuj": 87654335,
+			"nominal": -300000
+		},
+		{
+			"deskripsi": "Transfer Saldo",
+			"idTrans": 10014384,
+			"noRekTuj": 23240174,
+			"nominal": -200000
+		}
+	],
+	"jumlahTrans": 21,
+	"nama": "Zaka Ahmad Ghofari",
+	"noRek": 23240144,
+	"pass": "admin123",
+	"saldo": 2300000
+}
