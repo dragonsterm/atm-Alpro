@@ -72,45 +72,45 @@ void inputHandling(string question, int &var);                  // untuk int
 void inputHandling(string question, float &var);                // untuk float
 void inputHandling(string question, short &var);                // untuk short]
 // Multifile Manajemen System
-bool noRekVal(int noRekIn, string &pathJsonCurNasabah, bool mode);
-void importDataJson(string jsonPathIn, nasabah &nasabahExport);
-void exportNasabahJson(string jsonPathIn, nasabah nasabahExport, bool mode);
-void importDb(nasabah *dataNasabahOut, int &jumlahNasabah);
-void restoreBackupDb(string dbBackupPath);
+bool noRekVal(int noRekIn, string &pathJsonCurNasabah, bool mode);                  // pengecekan apakah nomor rekening terdapat dalam database (validasi)
+void importDataJson(string jsonPathIn, nasabah &nasabahExport);                     // membaca data nasabah dari file JSON
+void exportNasabahJson(string jsonPathIn, nasabah nasabahExport, bool mode);        // menyimpan data nasabah ke file JSON
+void importDb(nasabah *dataNasabahOut, int &jumlahNasabah);                         // mengimpor seluruh file JSON dari folder ke array dataNasabah
+void restoreBackupDb(string dbBackupPath);                                          // mengembalikan data dari folder backup ke folder aktif
 // CRUD Funct Data Nasabah
-void tampilDataNasabah();
-void inputNasabah();
-void delNasabah();
+void tampilDataNasabah();                                                           // menampilkan seluruh data nasabah dan histori transaksi
+void inputNasabah();                                                                // menambahkan nasabah baru
+void delNasabah();                                                                  // menghapus file JSON nasabah berdasarkan nomor rekening
 // Main Feature
-void login();
-void loginAttempt(int Attempts); // Login Rekursif
-void cekSaldo();
-void setorSaldo();
-void tarikSaldo();
-void transferSaldo();
-void riwayatTransaksi();
+void login();                                   // memulai proses login
+void loginAttempt(int Attempts);                // fungsi rekursif untuk percobaan login (max 3 kali)
+void cekSaldo();                                // menampilkan saldo nasabah
+void setorSaldo();                              // menambah saldo nasabah
+void tarikSaldo();                              // mengurangi saldo nasabah (tarik tunai)
+void transferSaldo();                           // transfer uang antar nasabah (menggunakan nomor rekening)
+void riwayatTransaksi();                        // menampilkan histori transaksi dengan fitur halaman & analisis
 // >> Menu
-void loopMenu();
-void menuAdmin();
-void menuUtama();
+void loopMenu();                                // menjalankan menu secara terus menerus
+void menuAdmin();                               // menu khusus admin (input, hapus, tampilkan nasabah, restore backup)
+void menuUtama();                               // menu utama nasabah (cek saldo, setor, tarik, transfer, riwayat)
 // Function Sort
-void sortByNoRek();
-void sortBySaldo();
-void sortHistoriTransaksi(nasabah &n);
+void sortByNoRek();                             // mengurutkan nasabah berdasarkan rekening (bubble sort)
+void sortBySaldo();                             // mengurutkan berdasarkan saldo (selection sort)
+void sortHistoriTransaksi(nasabah &n);          // mengurutkan histori transaksi nasabah (bubble sort)
 // Perhitungan total transaksi
-int TotalTransaksi(int MulaiIndex, int AkhirIndex); // Perhitungan Total Rekursif
+int TotalTransaksi(int MulaiIndex, int AkhirIndex); // menghitung total nominal transaksi secara rekursif
 // Pause Function
-void Pause();
+void Pause();                                   // jeda & visual antar menu     
 // Function untuk Pause
-void SlowType(const string &kata, int delay);
-void DeleteText(int count, int delay);
+void SlowType(const string &kata, int delay);   // efek animasi mengetik
+void DeleteText(int count, int delay);          // penghapusan text 
 // Function untuk SnakeGame
-void Snake();
-void SetupSnake();
-void DrawSnake();
-void InputSnake();
-void LogicSnake();
-void TitleSnake();
+void Snake();           // game loop
+void SetupSnake();      // inisialisasi posisi awal ular & fruit
+void DrawSnake();       // menggambar ular ke tampilan
+void InputSnake();      // menerima input user
+void LogicSnake();      // logika gerakan ular & tabrakan 
+void TitleSnake();      // tampilan awal game
 // !SECTION
 // SECTION - Snake Function
 const int snakeWidth = 20;
@@ -527,6 +527,9 @@ void exportNasabahJson(string jsonPathOut, nasabah nasabahExport, bool mode)
             cout << "[Err Exporting File] - Nah im not going to export ts" << endl;
       }
 }
+/**
+ * @brief buat login
+ */
 // Fungsi Login Rekursif
 void loginAttempt(int Attempts)
 {
