@@ -157,7 +157,7 @@ int main(int argc, char const *argv[])
  * @brief Melooping Menu dengan terus menerus sampai didapatkan loginStat == true
  *
  */
-void loopMenu()
+void loopMenu()  
 {
       do
       {
@@ -232,6 +232,11 @@ void menuAdmin()
       }
 }
 
+//  Menu Utama
+/**
+ * @brief Menampilkan menu utama
+ *
+ */
 void menuUtama()
 {
       short opt;
@@ -528,9 +533,10 @@ void exportNasabahJson(string jsonPathOut, nasabah nasabahExport, bool mode)
       }
 }
 /**
- * @brief buat login
- */
-// Fungsi Login Rekursif
+ * @brief fungsi rekursif untuk mencoba login hingga maksimal 3 kali
+ * @param Attempts  jumlah kesempatan login yang tersisa
+*/
+
 void loginAttempt(int Attempts)
 {
       int noRekIn;
@@ -590,11 +596,22 @@ void loginAttempt(int Attempts)
       loginAttempt(Attempts - 1);
 }
 // Fungsi Login
+/**
+ * @brief fungsi utama untuk memulai proses login user
+ * 
+*/
 void login()
 {
       loginAttempt(3);
 }
+
 // Overloading Funct untuk Error Handling Pengguna
+/**
+ * @brief fungsi overloading untuk menangani input streing
+ * @param question pertanyaan yang ditampilkan
+ * @param var variabel untuk meyimpan input string
+ * @param lineOr 1 untuk tanpa spasi, 2 untuk input dengan spasi
+*/
 void inputHandling(string question, string &var, short lineOr)
 {
       bool statLoop = false;
@@ -625,7 +642,13 @@ void inputHandling(string question, string &var, short lineOr)
             }
       } while (statLoop == true);
 };
+
 // Untuk Variabel Integer
+/**
+ * @brief fungsi overloading untuk menangani input integer
+ * @param question pertanyaan yang ditampilkan
+ * @param var variabel untuk meyimpan input integer
+*/
 void inputHandling(string question, int &var)
 {
       bool statLoop = false;
@@ -646,7 +669,13 @@ void inputHandling(string question, int &var)
             }
       } while (statLoop == true);
 };
+
 // Untuk Variabel FLoat
+/**
+ * @brief fungsi overloading untuk menangani input float
+ * @param question pertanyaan yang ditampilkan
+ * @param var variabel untuk meyimpan input float
+*/
 void inputHandling(string question, float &var)
 {
       cout << question;
@@ -667,7 +696,13 @@ void inputHandling(string question, float &var)
             }
       } while (statLoop == true);
 };
+
 // Untuk Short Short
+/**
+ * @brief fungsi overloading untuk menangani input short
+ * @param question pertanyaan yang ditampilkan
+ * @param var variabel untuk meyimpan input short
+*/
 void inputHandling(string question, short &var)
 {
       cout << question;
@@ -688,9 +723,12 @@ void inputHandling(string question, short &var)
             }
       } while (statLoop == true);
 };
+
 // CRUD Funct
-// Fungsi Untuk Menampilkan Data Nasabah dengan parameter nomor rekening
-void sortByNoRek() // sort norek manual (bubble sort)
+/**
+ * @brief mengurutkan data nasabah berdasarkan nomor rekening secara bubble sort
+ */
+void sortByNoRek() 
 {
       for (int i = 0; i < jumlahNasabah - 1; i++)
       {
@@ -707,7 +745,10 @@ void sortByNoRek() // sort norek manual (bubble sort)
       }
 }
 
-void sortBySaldo() // Selection Sort
+/**
+ * @brief Mengurutkan data nasabah berdasarkan saldo secara selection sort
+ */
+void sortBySaldo() 
 {
       for (int i = 0; i < jumlahNasabah - 1; i++)
       {
@@ -723,6 +764,10 @@ void sortBySaldo() // Selection Sort
             swap(dataNasabah[i], dataNasabah[maxIdx]);
       }
 }
+/**
+ * @brief mengurutkan histori transaksi berdasarkan nominal dan id transaksi
+ * @param n struct nasabah yang akan diurutkan histori transaksinya
+ */
 void sortHistoriTransaksi(nasabah &n) // sort manual histori transaksi di satu nasabah (bubble sort)
 {
       for (int i = 0; i < n.jumlahTrans - 1; i++)
@@ -740,6 +785,10 @@ void sortHistoriTransaksi(nasabah &n) // sort manual histori transaksi di satu n
             }
       }
 }
+
+/**
+ * @brief menampilkan daftar semua nasabah dan detail transaksinya
+ */
 void tampilDataNasabah()
 {
       system("cls");
@@ -818,7 +867,11 @@ void tampilDataNasabah()
       cin.ignore(1000, '\n');
       cin.get();
 }
+
 // Funct Untuk Input Nasabah
+/**
+ * @brief menambahkan nasabah baru ke database
+ */
 void inputNasabah()
 {
       system("cls");
@@ -844,7 +897,11 @@ void inputNasabah()
             dataNasabah[jumlahNasabah].noRek = 0;
       }
 }
+
 // Fungsi untuk delete data nasabah
+/**
+ * @brief menghapus data nasabah dari sistem berdasarkan nomor rekening
+ */
 void delNasabah()
 {
       cout << "\n\n\t>-Menu Delete Data Nasabah-<\n";
@@ -895,8 +952,12 @@ void delNasabah()
       cin.ignore(1000, '\n');
       cin.get();
 }
+
 // >> Fungsi Menu Utama (nasabah)
 // Fungsi Cek Saldo
+/**
+ * @brief menampilkan saldo nasabah yang sedang login
+ */
 void cekSaldo()
 {
       short pilihan;
@@ -918,7 +979,11 @@ void cekSaldo()
             }
       } while (pilihan != 1);
 }
+
 // Function Setor Saldo
+/**
+ * @brief melakukan penyetoran saldo ke rekening nasabah
+ */
 void setorSaldo()
 {
       int jumlah;
@@ -969,7 +1034,11 @@ void setorSaldo()
             }
       } while (pilihan != 1 && pilihan != 2);
 }
+
 // Function Tarik Saldo
+/**
+ * @brief melakukan penarikan tunai dari saldo nasabah
+ */
 void tarikSaldo()
 {
       int jumlah;
@@ -1035,7 +1104,11 @@ void tarikSaldo()
             }
       } while (pilihan != 1 && pilihan != 2);
 }
+
 // Function Transfer Saldo
+/**
+ * @brief melakukan transfer saldo dari satu nasabah ke nasabah lain
+ */
 void transferSaldo()
 {
       int rekening_tujuan, jumlah;
@@ -1133,7 +1206,11 @@ void transferSaldo()
       } while (pilihan != 1 && pilihan != 2);
       targetNasabah = nullptr;
 }
+
 // Function Riwayat Transaksi
+/**
+ * @brief Menampilkan riwayat transaksi nasabah dan analisis data
+ */
 void riwayatTransaksi()
 {
       const int transHal = 5;
@@ -1242,6 +1319,13 @@ void riwayatTransaksi()
       } while (exit == false);
       Pause();
 }
+
+/**
+ * @brief menghitung total nominal transaksi secara rekursif
+ * @param MulaiIndex indeks awal transaksi
+ * @param AkhirIndex indeks akhir transaksi
+ * @return total nominal transaksi dari range tersebut
+ */
 int TotalTransaksi(int MulaiIndex, int AkhirIndex)
 {
       if (MulaiIndex > AkhirIndex) // enggak ada transaksi lagi untuk di sum
@@ -1260,6 +1344,9 @@ int TotalTransaksi(int MulaiIndex, int AkhirIndex)
 }
 
 // Function pause dilengkapi cls
+/**
+ * @brief fungsi jeda (pause) program dengan  animasi
+ */
 void Pause()
 {
       // FIXME - Developing Mode ini di Deactivate dulu yaaa
@@ -1274,6 +1361,11 @@ void Pause()
       cout << "{Ini tadi ke Pause}" << endl;
 }
 // Animasi untuk pause
+/**
+ * @brief menampilkan teks satu per satu dengan jeda untuk efek mengetik
+ * @param kata teks yang akan ditampilkan
+ * @param delay delay per karakter dalam milidetik
+ */
 void SlowType(const string &kata, int delay) // menampilkan kata satu per satu dengan jeda waktu
 {
       for (char c : kata) // membaca setiap karakter yang diinginkan
@@ -1282,6 +1374,11 @@ void SlowType(const string &kata, int delay) // menampilkan kata satu per satu d
             this_thread::sleep_for(chrono::milliseconds(delay));
       }
 }
+/**
+ * @brief menghapus karakter dari layar dengan efek animasi
+ * @param count jumlah karakter yang dihapus
+ * @param delay delay per karakter dalam milidetik
+ */
 void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan jeda waktu
 {
       for (int i = 0; i < count; ++i)
@@ -1292,6 +1389,9 @@ void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan
 }
 // !SECTION
 // Function Game Ular
+/**
+ * @brief inisialisasi posisi ular dan buah dalam game
+ */
 void SetupSnake()
 {
       snakeDir = STOP;
@@ -1302,6 +1402,9 @@ void SetupSnake()
       snakeScore = 0;
       nTail = 0;
 }
+/**
+ * @brief menampilkan board permainan ular
+ */
 void DrawSnake()
 {
       system("cls");
@@ -1343,7 +1446,9 @@ void DrawSnake()
       cout << "\nScore: " << snakeScore << "\n";
       cout << "Use WASD to move. Press 'x' to exit game.\n";
 }
-
+/**
+ * @brief menerima input pengguna untuk arah gerakan ular
+ */
 void InputSnake()
 {
       static char lastkey = '\0';
@@ -1404,7 +1509,9 @@ void InputSnake()
             }
       }
 }
-
+/**
+ * @brief logika pergerakan ular dan penanganan tabrakan
+ */
 void LogicSnake()
 {
       int prevX = tailX[0];
@@ -1461,6 +1568,9 @@ void LogicSnake()
             nTail++;
       }
 }
+/**
+ * @brief menjalankan game ular dengan skor
+ */
 void Snake()
 {
       int pilihan;
@@ -1488,6 +1598,9 @@ void Snake()
             cin >> pilihan;
       } while (pilihan == 1);
 }
+/**
+ * @brief menampilkan splash screen sebelum game dimulai
+ */
 void TitleSnake()
 {
       system("cls");
