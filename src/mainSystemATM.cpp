@@ -147,13 +147,6 @@ int main(int argc, char const *argv[])
       return 0;
 }
 
-// NOTE - Main untuk Developing
-// int main0(int argc, char const *argv[])
-// {
-//       menuAdmin();
-//       return 0;
-// }
-
 // Menu Admin dan Menu Utama
 /**
  * @brief Melooping Menu dengan terus menerus sampai didapatkan loginStat == true
