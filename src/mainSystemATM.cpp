@@ -118,6 +118,9 @@ const int snakeHeight = 20;
 int snakeX, snakeY, fruitX, fruitY, snakeScore;
 int tailX[100], tailY[100];
 int nTail = 0;
+/**
+ * @brief Mendefinisikan arah pergerakan ular dalam permainan Snake
+ */
 enum eDirection
 {
       STOP = 0,
@@ -820,7 +823,7 @@ void tampilDataNasabah()
             cout << "| " << setw(10) << dataNasabah[i].noRek << " | " << setw(25) << dataNasabah[i].nama << " |\n";
       }
       cout << setfill('-') << setw(41) << "-" << setfill(' ') << endl;
-      // Pause(); //FIXME
+      Pause();
       inputHandling("Berapa Nomor Rekeningnya? (exit: 404) \n >> ", noRekIn);
       if (noRekIn == 404)
       {
@@ -1011,14 +1014,13 @@ void setorSaldo()
                   currentNasabahPtr->jumlahTrans++;
                   // Diexport untuk mengupdate data
                   exportNasabahJson(pathJsonCurNasabah, currentNasabah, true);
-                  // FIXME - lagi Dev
-                  // cout << "\nSystem is ";
-                  // SlowType("processing", 100);
-                  // this_thread::sleep_for(chrono::seconds(1));
-                  // DeleteText(20, 100);
-                  // SlowType("Setor Tunai berhasil", 100);
-                  // cout << endl;
-                  // this_thread::sleep_for(chrono::seconds(1));
+                  cout << "\nSystem is ";
+                  SlowType("processing", 100);
+                  this_thread::sleep_for(chrono::seconds(1));
+                  DeleteText(20, 100);
+                  SlowType("Setor Tunai berhasil", 100);
+                  cout << endl;
+                  this_thread::sleep_for(chrono::seconds(1));
                   system("cls");
                   return;
             }
@@ -1180,14 +1182,13 @@ void transferSaldo()
                         targetNasabah->historiNasabah[targetNasabah->jumlahTrans].deskripsi = "Menerima Saldo";
                         targetNasabah->jumlahTrans++;
                         exportNasabahJson(pathJsonAnotherNasabah, *targetNasabah, true);
-                        // FIXME - Dev Mode
-                        // cout << "\nSystem is ";
-                        // SlowType("processing", 100);
-                        // this_thread::sleep_for(chrono::seconds(1));
-                        // DeleteText(20, 100);
-                        // SlowType("Trasnfer berhasil", 100);
-                        // cout << endl;
-                        // this_thread::sleep_for(chrono::seconds(1));
+                        cout << "\nSystem is ";
+                        SlowType("processing", 100);
+                        this_thread::sleep_for(chrono::seconds(1));
+                        DeleteText(20, 100);
+                        SlowType("Trasnfer berhasil", 100);
+                        cout << endl;
+                        this_thread::sleep_for(chrono::seconds(1));
                         system("cls");
                         return;
                   }
@@ -1346,19 +1347,20 @@ int TotalTransaksi(int MulaiIndex, int AkhirIndex)
 // Function pause dilengkapi cls
 /**
  * @brief fungsi jeda (pause) program dengan  animasi
+ * 
+ * Fungsi ini menampilkan animasi teks untuk memberikan kesan sistem sedang memproses,
+ * kemudian mengganti teks tersebut menjadi "completed"
  */
 void Pause()
 {
-      // FIXME - Developing Mode ini di Deactivate dulu yaaa
-      // cout << "\nSystem is ";
-      // SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
-      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-      // DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
-      // SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
-      // cout << endl;
-      // this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
-      // system("cls");
-      cout << "{Ini tadi ke Pause}" << endl;
+      cout << "\nSystem is ";
+      SlowType("processing", 100);                // menggunakan fungsi slowtype() mengetik dengan delay 100 milidetik setiap karakter
+      this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
+      DeleteText(10, 100);                        // menghapus 10 karakter dengan delay 100 milidetik
+      SlowType("completed", 100);                 // mengetik dengan delay 100 milidetik setiap karakter
+      cout << endl;
+      this_thread::sleep_for(chrono::seconds(1)); // memberikan jeda selama 1 detik menggunakan sleep_for dari library thread
+      system("cls");
 }
 // Animasi untuk pause
 /**
@@ -1390,7 +1392,9 @@ void DeleteText(int count, int delay) // menghapus karakter satu per satu dengan
 // !SECTION
 // Function Game Ular
 /**
- * @brief inisialisasi posisi ular dan buah dalam game
+ * @brief Menginisialisasi posisi awal ular dan makanan dalam permainan Snake
+ * Ular akan tetap diam sampai pemain memberikan input arah pergerakan.
+ * Posisi makanan yang acak memastikan setiap permainan memiliki pengalaman yang berbeda.
  */
 void SetupSnake()
 {
@@ -1404,6 +1408,8 @@ void SetupSnake()
 }
 /**
  * @brief menampilkan board permainan ular
+ * 
+ * Fungsi ini dipanggil setiap kali permainan perlu memperbaharui tampilan.
  */
 void DrawSnake()
 {
@@ -1448,6 +1454,14 @@ void DrawSnake()
 }
 /**
  * @brief menerima input pengguna untuk arah gerakan ular
+ * 
+ * Fungsi ini mendeteksi penekanan tombol keyboard (W, A, S, D) untuk mengubah
+ * arah gerakan ular. Mencegah ular bergerak ke arah berlawanan (misalnya dari kanan 
+ * ke kiri secara langsung) untuk menghindari tabrakan dengan ekor sendiri. 
+ * Input 'X' digunakan untuk keluar dari permainan.
+ * 
+ * Fungsi juga mencegah duplikasi input dengan menyimpan tombol terakhir yang ditekan
+ * dan membersihkan buffer keyboard setelah input diproses.
  */
 void InputSnake()
 {
@@ -1511,6 +1525,13 @@ void InputSnake()
 }
 /**
  * @brief logika pergerakan ular dan penanganan tabrakan
+ * Fungsi ini mengatur gerakan ular dengan cara:
+ * 1. Memperbarui posisi ekor ular, dengan menggeser setiap segmen ke posisi segmen sebelumnya
+ * 2. Menggerakkan kepala ular berdasarkan arah yang dipilih (LEFT, RIGHT, UP, DOWN)
+ * 3. Mendeteksi tabrakan dengan batas arena atau dengan ekor sendiri
+ * 4. Menangani interaksi ketika ular memakan buah (menambah skor dan panjang ekor)
+ * 
+ * Permainan berakhir (snakeScore = -1) jika ular menabrak batas atau ekornya sendiri.
  */
 void LogicSnake()
 {
@@ -1569,7 +1590,10 @@ void LogicSnake()
       }
 }
 /**
- * @brief menjalankan game ular dengan skor
+ * @brief Menjalankan game ular dalam sistem ATM
+ * 
+ * Fungsi ini mengelola seluruh alur game Snake, dari menampilkan splash screen
+ * pada pertama kali dijalankan hingga loop utama permainan.
  */
 void Snake()
 {
