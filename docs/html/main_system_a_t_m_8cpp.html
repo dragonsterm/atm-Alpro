@@ -20,7 +20,7 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-		<title>ATM Algoritma Pemrograman lanjut: src/mainSystemATM.cpp File Reference</title>
+		<title>Project Sistem ATM: src/mainSystemATM.cpp File Reference</title>
 		<link href="tabs.css" rel="stylesheet" type="text/css" />
 		<link rel="icon" type="image/svg+xml" href="logo.drawio.svg" />
 		<script type="text/javascript" src="jquery.js"></script>
@@ -70,9 +70,10 @@
 						<tr style="height: 56px">
 							<td id="projectalign" style="padding-left: 0.5em">
 								<div id="projectname">
-									ATM Algoritma Pemrograman lanjut
-									&#160;<span id="projectnumber">0.1.0</span>
+									Project Sistem ATM
+									&#160;<span id="projectnumber">0.2.0</span>
 								</div>
+								<div id="projectbrief">by Kelompok 3</div>
 							</td>
 						</tr>
 					</tbody>
@@ -150,7 +151,7 @@ $(function(){initNavTree('main_system_a_t_m_8cpp.html',''); initResizable(true);
 </div><!--header-->
 <div class="contents">
 
-<p>Sebuah program buatan 6 orang sangar untuk menunjuang Nilai Algoritma Pemrograman.  
+<p>Sebuah program buatan 6 orang sangar untuk menunjuang Nilai Algoritma Pemrograman Lanjut.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;iomanip&gt;</code><br />
@@ -182,7 +183,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>json</b> = nlohmann:
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a31793e4efbb182e74f29154fb352f2a5" id="r_a31793e4efbb182e74f29154fb352f2a5"><td class="memItemLeft" align="right" valign="top"><a id="a31793e4efbb182e74f29154fb352f2a5" name="a31793e4efbb182e74f29154fb352f2a5"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>eDirection</b> { <br />
+<tr class="memitem:a31793e4efbb182e74f29154fb352f2a5" id="r_a31793e4efbb182e74f29154fb352f2a5"><td class="memItemLeft" align="right" valign="top"><a id="a31793e4efbb182e74f29154fb352f2a5" name="a31793e4efbb182e74f29154fb352f2a5"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31793e4efbb182e74f29154fb352f2a5">eDirection</a> { <br />
 &#160;&#160;<b>STOP</b> = 0
 , <b>LEFT</b>
 , <b>RIGHT</b>
@@ -191,21 +192,22 @@ Enumerations</h2></td></tr>
 &#160;&#160;<b>DOWN</b>
 <br />
  }</td></tr>
+<tr class="memdesc:a31793e4efbb182e74f29154fb352f2a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mendefinisikan arah pergerakan ular dalam permainan Snake. <br /></td></tr>
 <tr class="separator:a31793e4efbb182e74f29154fb352f2a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae8e1fdbe30e65d7edc0efaed4d154299" id="r_ae8e1fdbe30e65d7edc0efaed4d154299"><td class="memItemLeft" align="right" valign="top"><a id="ae8e1fdbe30e65d7edc0efaed4d154299" name="ae8e1fdbe30e65d7edc0efaed4d154299"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>inputHandling</b> (string question, string &amp;var, short lineOr)</td></tr>
+<tr class="memitem:ae8e1fdbe30e65d7edc0efaed4d154299" id="r_ae8e1fdbe30e65d7edc0efaed4d154299"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8e1fdbe30e65d7edc0efaed4d154299">inputHandling</a> (string question, string &amp;var, short lineOr)</td></tr>
+<tr class="memdesc:ae8e1fdbe30e65d7edc0efaed4d154299"><td class="mdescLeft">&#160;</td><td class="mdescRight">fungsi overloading untuk menangani input streing  <br /></td></tr>
 <tr class="separator:ae8e1fdbe30e65d7edc0efaed4d154299"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a493b3779ab6090c21e2ab9e1e12d3e1c" id="r_a493b3779ab6090c21e2ab9e1e12d3e1c"><td class="memItemLeft" align="right" valign="top"><a id="a493b3779ab6090c21e2ab9e1e12d3e1c" name="a493b3779ab6090c21e2ab9e1e12d3e1c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>inputHandling</b> (string question, int &amp;var)</td></tr>
+<tr class="memitem:a493b3779ab6090c21e2ab9e1e12d3e1c" id="r_a493b3779ab6090c21e2ab9e1e12d3e1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a493b3779ab6090c21e2ab9e1e12d3e1c">inputHandling</a> (string question, int &amp;var)</td></tr>
+<tr class="memdesc:a493b3779ab6090c21e2ab9e1e12d3e1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">fungsi overloading untuk menangani input integer  <br /></td></tr>
 <tr class="separator:a493b3779ab6090c21e2ab9e1e12d3e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a346997f4152d78c571c9ff7c3b804da1" id="r_a346997f4152d78c571c9ff7c3b804da1"><td class="memItemLeft" align="right" valign="top"><a id="a346997f4152d78c571c9ff7c3b804da1" name="a346997f4152d78c571c9ff7c3b804da1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>inputHandling</b> (string question, float &amp;var)</td></tr>
+<tr class="memitem:a346997f4152d78c571c9ff7c3b804da1" id="r_a346997f4152d78c571c9ff7c3b804da1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a346997f4152d78c571c9ff7c3b804da1">inputHandling</a> (string question, float &amp;var)</td></tr>
+<tr class="memdesc:a346997f4152d78c571c9ff7c3b804da1"><td class="mdescLeft">&#160;</td><td class="mdescRight">fungsi overloading untuk menangani input float  <br /></td></tr>
 <tr class="separator:a346997f4152d78c571c9ff7c3b804da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54bad6844753400445accfffd1355a96" id="r_a54bad6844753400445accfffd1355a96"><td class="memItemLeft" align="right" valign="top"><a id="a54bad6844753400445accfffd1355a96" name="a54bad6844753400445accfffd1355a96"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>inputHandling</b> (string question, short &amp;var)</td></tr>
+<tr class="memitem:a54bad6844753400445accfffd1355a96" id="r_a54bad6844753400445accfffd1355a96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54bad6844753400445accfffd1355a96">inputHandling</a> (string question, short &amp;var)</td></tr>
+<tr class="memdesc:a54bad6844753400445accfffd1355a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">fungsi overloading untuk menangani input short  <br /></td></tr>
 <tr class="separator:a54bad6844753400445accfffd1355a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f7e2889d3beae119b55367b00eae538" id="r_a8f7e2889d3beae119b55367b00eae538"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f7e2889d3beae119b55367b00eae538">noRekVal</a> (int noRekIn, string &amp;pathJsonCurNasabah, bool mode)</td></tr>
 <tr class="memdesc:a8f7e2889d3beae119b55367b00eae538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menverifikasi No Rek Apakah ada didalam DB atau tidak.  <br /></td></tr>
@@ -224,33 +226,42 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>inputHandling</b> (st
 <tr class="separator:ad2ed7f1c4480f6ac076f8c7b42fb7764"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9225aea17a8edd40ffa6981633393076" id="r_a9225aea17a8edd40ffa6981633393076"><td class="memItemLeft" align="right" valign="top"><a id="a9225aea17a8edd40ffa6981633393076" name="a9225aea17a8edd40ffa6981633393076"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>tampilDataNasabah</b> ()</td></tr>
+<tr class="memdesc:a9225aea17a8edd40ffa6981633393076"><td class="mdescLeft">&#160;</td><td class="mdescRight">menampilkan daftar semua nasabah dan detail transaksinya <br /></td></tr>
 <tr class="separator:a9225aea17a8edd40ffa6981633393076"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbeffd27dcfa8d5b65409169367d4948" id="r_abbeffd27dcfa8d5b65409169367d4948"><td class="memItemLeft" align="right" valign="top"><a id="abbeffd27dcfa8d5b65409169367d4948" name="abbeffd27dcfa8d5b65409169367d4948"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>inputNasabah</b> ()</td></tr>
+<tr class="memdesc:abbeffd27dcfa8d5b65409169367d4948"><td class="mdescLeft">&#160;</td><td class="mdescRight">menambahkan nasabah baru ke database <br /></td></tr>
 <tr class="separator:abbeffd27dcfa8d5b65409169367d4948"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa83ee0c235620741123418d586128543" id="r_aa83ee0c235620741123418d586128543"><td class="memItemLeft" align="right" valign="top"><a id="aa83ee0c235620741123418d586128543" name="aa83ee0c235620741123418d586128543"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>delNasabah</b> ()</td></tr>
+<tr class="memdesc:aa83ee0c235620741123418d586128543"><td class="mdescLeft">&#160;</td><td class="mdescRight">menghapus data nasabah dari sistem berdasarkan nomor rekening <br /></td></tr>
 <tr class="separator:aa83ee0c235620741123418d586128543"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af76b7b46958dabf5e4ee9a492f0ec3fa" id="r_af76b7b46958dabf5e4ee9a492f0ec3fa"><td class="memItemLeft" align="right" valign="top"><a id="af76b7b46958dabf5e4ee9a492f0ec3fa" name="af76b7b46958dabf5e4ee9a492f0ec3fa"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>login</b> ()</td></tr>
+<tr class="memdesc:af76b7b46958dabf5e4ee9a492f0ec3fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">fungsi utama untuk memulai proses login user <br /></td></tr>
 <tr class="separator:af76b7b46958dabf5e4ee9a492f0ec3fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c5f1adde6d7bdb97420fb3fc4d5f594" id="r_a4c5f1adde6d7bdb97420fb3fc4d5f594"><td class="memItemLeft" align="right" valign="top"><a id="a4c5f1adde6d7bdb97420fb3fc4d5f594" name="a4c5f1adde6d7bdb97420fb3fc4d5f594"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loginAttempt</b> (int Attempts)</td></tr>
+<tr class="memitem:a4c5f1adde6d7bdb97420fb3fc4d5f594" id="r_a4c5f1adde6d7bdb97420fb3fc4d5f594"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c5f1adde6d7bdb97420fb3fc4d5f594">loginAttempt</a> (int Attempts)</td></tr>
+<tr class="memdesc:a4c5f1adde6d7bdb97420fb3fc4d5f594"><td class="mdescLeft">&#160;</td><td class="mdescRight">fungsi rekursif untuk mencoba login hingga maksimal 3 kali  <br /></td></tr>
 <tr class="separator:a4c5f1adde6d7bdb97420fb3fc4d5f594"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ef5e960b646a45cf6bbc429cc680386" id="r_a6ef5e960b646a45cf6bbc429cc680386"><td class="memItemLeft" align="right" valign="top"><a id="a6ef5e960b646a45cf6bbc429cc680386" name="a6ef5e960b646a45cf6bbc429cc680386"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>cekSaldo</b> ()</td></tr>
+<tr class="memdesc:a6ef5e960b646a45cf6bbc429cc680386"><td class="mdescLeft">&#160;</td><td class="mdescRight">menampilkan saldo nasabah yang sedang login <br /></td></tr>
 <tr class="separator:a6ef5e960b646a45cf6bbc429cc680386"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c9ad35a30a2d3f2d73abcff93f67530" id="r_a5c9ad35a30a2d3f2d73abcff93f67530"><td class="memItemLeft" align="right" valign="top"><a id="a5c9ad35a30a2d3f2d73abcff93f67530" name="a5c9ad35a30a2d3f2d73abcff93f67530"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setorSaldo</b> ()</td></tr>
+<tr class="memdesc:a5c9ad35a30a2d3f2d73abcff93f67530"><td class="mdescLeft">&#160;</td><td class="mdescRight">melakukan penyetoran saldo ke rekening nasabah <br /></td></tr>
 <tr class="separator:a5c9ad35a30a2d3f2d73abcff93f67530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac45404b094080438d642ee8d337a7227" id="r_ac45404b094080438d642ee8d337a7227"><td class="memItemLeft" align="right" valign="top"><a id="ac45404b094080438d642ee8d337a7227" name="ac45404b094080438d642ee8d337a7227"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>tarikSaldo</b> ()</td></tr>
+<tr class="memdesc:ac45404b094080438d642ee8d337a7227"><td class="mdescLeft">&#160;</td><td class="mdescRight">melakukan penarikan tunai dari saldo nasabah <br /></td></tr>
 <tr class="separator:ac45404b094080438d642ee8d337a7227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7694955a7a7acdd68f1c8647746d43d6" id="r_a7694955a7a7acdd68f1c8647746d43d6"><td class="memItemLeft" align="right" valign="top"><a id="a7694955a7a7acdd68f1c8647746d43d6" name="a7694955a7a7acdd68f1c8647746d43d6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>transferSaldo</b> ()</td></tr>
+<tr class="memdesc:a7694955a7a7acdd68f1c8647746d43d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">melakukan transfer saldo dari satu nasabah ke nasabah lain <br /></td></tr>
 <tr class="separator:a7694955a7a7acdd68f1c8647746d43d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74c29961130c7d7ca7e14aa252f5c1a7" id="r_a74c29961130c7d7ca7e14aa252f5c1a7"><td class="memItemLeft" align="right" valign="top"><a id="a74c29961130c7d7ca7e14aa252f5c1a7" name="a74c29961130c7d7ca7e14aa252f5c1a7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>riwayatTransaksi</b> ()</td></tr>
+<tr class="memdesc:a74c29961130c7d7ca7e14aa252f5c1a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menampilkan riwayat transaksi nasabah dan analisis data. <br /></td></tr>
 <tr class="separator:a74c29961130c7d7ca7e14aa252f5c1a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30d5ccac385bb79cf3e24b0b49c4cb46" id="r_a30d5ccac385bb79cf3e24b0b49c4cb46"><td class="memItemLeft" align="right" valign="top"><a id="a30d5ccac385bb79cf3e24b0b49c4cb46" name="a30d5ccac385bb79cf3e24b0b49c4cb46"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>loopMenu</b> ()</td></tr>
@@ -262,45 +273,50 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>menuAdmin</b> ()</td>
 <tr class="separator:a16202881086f36cce6f9d7878b3bb1f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a943e453b28a7f78b59b98d48b69d6875" id="r_a943e453b28a7f78b59b98d48b69d6875"><td class="memItemLeft" align="right" valign="top"><a id="a943e453b28a7f78b59b98d48b69d6875" name="a943e453b28a7f78b59b98d48b69d6875"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>menuUtama</b> ()</td></tr>
+<tr class="memdesc:a943e453b28a7f78b59b98d48b69d6875"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menampilkan menu utama. <br /></td></tr>
 <tr class="separator:a943e453b28a7f78b59b98d48b69d6875"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeceaa727e54730f4ec60c2a68b0242c7" id="r_aeceaa727e54730f4ec60c2a68b0242c7"><td class="memItemLeft" align="right" valign="top"><a id="aeceaa727e54730f4ec60c2a68b0242c7" name="aeceaa727e54730f4ec60c2a68b0242c7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sortByNoRek</b> ()</td></tr>
+<tr class="memdesc:aeceaa727e54730f4ec60c2a68b0242c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">mengurutkan data nasabah berdasarkan nomor rekening secara bubble sort <br /></td></tr>
 <tr class="separator:aeceaa727e54730f4ec60c2a68b0242c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac45d2798a9a10b8d13cdf7c090dbcabc" id="r_ac45d2798a9a10b8d13cdf7c090dbcabc"><td class="memItemLeft" align="right" valign="top"><a id="ac45d2798a9a10b8d13cdf7c090dbcabc" name="ac45d2798a9a10b8d13cdf7c090dbcabc"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sortBySaldo</b> ()</td></tr>
+<tr class="memdesc:ac45d2798a9a10b8d13cdf7c090dbcabc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mengurutkan data nasabah berdasarkan saldo secara selection sort. <br /></td></tr>
 <tr class="separator:ac45d2798a9a10b8d13cdf7c090dbcabc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafcf3a451a563e5a6fd69290e9a51e6c" id="r_aafcf3a451a563e5a6fd69290e9a51e6c"><td class="memItemLeft" align="right" valign="top"><a id="aafcf3a451a563e5a6fd69290e9a51e6c" name="aafcf3a451a563e5a6fd69290e9a51e6c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>sortHistoriTransaksi</b> (<a class="el" href="structnasabah.html">nasabah</a> &amp;n)</td></tr>
+<tr class="memitem:aafcf3a451a563e5a6fd69290e9a51e6c" id="r_aafcf3a451a563e5a6fd69290e9a51e6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aafcf3a451a563e5a6fd69290e9a51e6c">sortHistoriTransaksi</a> (<a class="el" href="structnasabah.html">nasabah</a> &amp;n)</td></tr>
+<tr class="memdesc:aafcf3a451a563e5a6fd69290e9a51e6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">mengurutkan histori transaksi berdasarkan nominal dan id transaksi  <br /></td></tr>
 <tr class="separator:aafcf3a451a563e5a6fd69290e9a51e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d1d9b4286735af2bc03a60b66a0a163" id="r_a3d1d9b4286735af2bc03a60b66a0a163"><td class="memItemLeft" align="right" valign="top"><a id="a3d1d9b4286735af2bc03a60b66a0a163" name="a3d1d9b4286735af2bc03a60b66a0a163"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>TotalTransaksi</b> (int MulaiIndex, int AkhirIndex)</td></tr>
+<tr class="memitem:a3d1d9b4286735af2bc03a60b66a0a163" id="r_a3d1d9b4286735af2bc03a60b66a0a163"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d1d9b4286735af2bc03a60b66a0a163">TotalTransaksi</a> (int MulaiIndex, int AkhirIndex)</td></tr>
+<tr class="memdesc:a3d1d9b4286735af2bc03a60b66a0a163"><td class="mdescLeft">&#160;</td><td class="mdescRight">menghitung total nominal transaksi secara rekursif  <br /></td></tr>
 <tr class="separator:a3d1d9b4286735af2bc03a60b66a0a163"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70babc5227ddd16ca31dccc6cec0bb22" id="r_a70babc5227ddd16ca31dccc6cec0bb22"><td class="memItemLeft" align="right" valign="top"><a id="a70babc5227ddd16ca31dccc6cec0bb22" name="a70babc5227ddd16ca31dccc6cec0bb22"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Pause</b> ()</td></tr>
+<tr class="memitem:a70babc5227ddd16ca31dccc6cec0bb22" id="r_a70babc5227ddd16ca31dccc6cec0bb22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70babc5227ddd16ca31dccc6cec0bb22">Pause</a> ()</td></tr>
+<tr class="memdesc:a70babc5227ddd16ca31dccc6cec0bb22"><td class="mdescLeft">&#160;</td><td class="mdescRight">fungsi jeda (pause) program dengan animasi  <br /></td></tr>
 <tr class="separator:a70babc5227ddd16ca31dccc6cec0bb22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51ab95b27b55e7ed491d1b73274a3998" id="r_a51ab95b27b55e7ed491d1b73274a3998"><td class="memItemLeft" align="right" valign="top"><a id="a51ab95b27b55e7ed491d1b73274a3998" name="a51ab95b27b55e7ed491d1b73274a3998"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SlowType</b> (const string &amp;kata, int delay)</td></tr>
+<tr class="memitem:a51ab95b27b55e7ed491d1b73274a3998" id="r_a51ab95b27b55e7ed491d1b73274a3998"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51ab95b27b55e7ed491d1b73274a3998">SlowType</a> (const string &amp;kata, int delay)</td></tr>
+<tr class="memdesc:a51ab95b27b55e7ed491d1b73274a3998"><td class="mdescLeft">&#160;</td><td class="mdescRight">menampilkan teks satu per satu dengan jeda untuk efek mengetik  <br /></td></tr>
 <tr class="separator:a51ab95b27b55e7ed491d1b73274a3998"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b7ff06f4fa0f1fb69347979c187e3fa" id="r_a1b7ff06f4fa0f1fb69347979c187e3fa"><td class="memItemLeft" align="right" valign="top"><a id="a1b7ff06f4fa0f1fb69347979c187e3fa" name="a1b7ff06f4fa0f1fb69347979c187e3fa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>DeleteText</b> (int count, int delay)</td></tr>
+<tr class="memitem:a1b7ff06f4fa0f1fb69347979c187e3fa" id="r_a1b7ff06f4fa0f1fb69347979c187e3fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b7ff06f4fa0f1fb69347979c187e3fa">DeleteText</a> (int count, int delay)</td></tr>
+<tr class="memdesc:a1b7ff06f4fa0f1fb69347979c187e3fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">menghapus karakter dari layar dengan efek animasi  <br /></td></tr>
 <tr class="separator:a1b7ff06f4fa0f1fb69347979c187e3fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95a0f9d3afc6a9cb08aff451ec27b2e1" id="r_a95a0f9d3afc6a9cb08aff451ec27b2e1"><td class="memItemLeft" align="right" valign="top"><a id="a95a0f9d3afc6a9cb08aff451ec27b2e1" name="a95a0f9d3afc6a9cb08aff451ec27b2e1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Snake</b> ()</td></tr>
+<tr class="memitem:a95a0f9d3afc6a9cb08aff451ec27b2e1" id="r_a95a0f9d3afc6a9cb08aff451ec27b2e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95a0f9d3afc6a9cb08aff451ec27b2e1">Snake</a> ()</td></tr>
+<tr class="memdesc:a95a0f9d3afc6a9cb08aff451ec27b2e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menjalankan game ular dalam sistem ATM.  <br /></td></tr>
 <tr class="separator:a95a0f9d3afc6a9cb08aff451ec27b2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda104f7e756b350fc794569cc40ea7c" id="r_adda104f7e756b350fc794569cc40ea7c"><td class="memItemLeft" align="right" valign="top"><a id="adda104f7e756b350fc794569cc40ea7c" name="adda104f7e756b350fc794569cc40ea7c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetupSnake</b> ()</td></tr>
+<tr class="memdesc:adda104f7e756b350fc794569cc40ea7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menginisialisasi posisi awal ular dan makanan dalam permainan Snake Ular akan tetap diam sampai pemain memberikan input arah pergerakan. Posisi makanan yang acak memastikan setiap permainan memiliki pengalaman yang berbeda. <br /></td></tr>
 <tr class="separator:adda104f7e756b350fc794569cc40ea7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56a42acc2c0a67e8577ae70ff3faddae" id="r_a56a42acc2c0a67e8577ae70ff3faddae"><td class="memItemLeft" align="right" valign="top"><a id="a56a42acc2c0a67e8577ae70ff3faddae" name="a56a42acc2c0a67e8577ae70ff3faddae"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawSnake</b> ()</td></tr>
+<tr class="memitem:a56a42acc2c0a67e8577ae70ff3faddae" id="r_a56a42acc2c0a67e8577ae70ff3faddae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a56a42acc2c0a67e8577ae70ff3faddae">DrawSnake</a> ()</td></tr>
+<tr class="memdesc:a56a42acc2c0a67e8577ae70ff3faddae"><td class="mdescLeft">&#160;</td><td class="mdescRight">menampilkan board permainan ular  <br /></td></tr>
 <tr class="separator:a56a42acc2c0a67e8577ae70ff3faddae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2479ed5a74032582251c4e5bec073614" id="r_a2479ed5a74032582251c4e5bec073614"><td class="memItemLeft" align="right" valign="top"><a id="a2479ed5a74032582251c4e5bec073614" name="a2479ed5a74032582251c4e5bec073614"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>InputSnake</b> ()</td></tr>
+<tr class="memitem:a2479ed5a74032582251c4e5bec073614" id="r_a2479ed5a74032582251c4e5bec073614"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2479ed5a74032582251c4e5bec073614">InputSnake</a> ()</td></tr>
+<tr class="memdesc:a2479ed5a74032582251c4e5bec073614"><td class="mdescLeft">&#160;</td><td class="mdescRight">menerima input pengguna untuk arah gerakan ular  <br /></td></tr>
 <tr class="separator:a2479ed5a74032582251c4e5bec073614"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e370bbf8719cdced6a87e122e3e0466" id="r_a5e370bbf8719cdced6a87e122e3e0466"><td class="memItemLeft" align="right" valign="top"><a id="a5e370bbf8719cdced6a87e122e3e0466" name="a5e370bbf8719cdced6a87e122e3e0466"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>LogicSnake</b> ()</td></tr>
+<tr class="memitem:a5e370bbf8719cdced6a87e122e3e0466" id="r_a5e370bbf8719cdced6a87e122e3e0466"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e370bbf8719cdced6a87e122e3e0466">LogicSnake</a> ()</td></tr>
+<tr class="memdesc:a5e370bbf8719cdced6a87e122e3e0466"><td class="mdescLeft">&#160;</td><td class="mdescRight">logika pergerakan ular dan penanganan tabrakan Fungsi ini mengatur gerakan ular dengan cara:  <br /></td></tr>
 <tr class="separator:a5e370bbf8719cdced6a87e122e3e0466"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26c7b647e2238f9441fedc9c6c84b8c4" id="r_a26c7b647e2238f9441fedc9c6c84b8c4"><td class="memItemLeft" align="right" valign="top"><a id="a26c7b647e2238f9441fedc9c6c84b8c4" name="a26c7b647e2238f9441fedc9c6c84b8c4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>TitleSnake</b> ()</td></tr>
+<tr class="memdesc:a26c7b647e2238f9441fedc9c6c84b8c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">menampilkan splash screen sebelum game dimulai <br /></td></tr>
 <tr class="separator:a26c7b647e2238f9441fedc9c6c84b8c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf9e6b7e6f15df4b525a2e7705ba3089" id="r_abf9e6b7e6f15df4b525a2e7705ba3089"><td class="memItemLeft" align="right" valign="top"><a id="abf9e6b7e6f15df4b525a2e7705ba3089" name="abf9e6b7e6f15df4b525a2e7705ba3089"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (int argc, char const *argv[])</td></tr>
@@ -381,105 +397,136 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>tailY</b> [100]</td></
 int&#160;</td><td class="memItemRight" valign="bottom"><b>nTail</b> = 0</td></tr>
 <tr class="separator:aa713ed417a9c1f98b71236eec6fd8dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a271f634244426057586dd5026e585787" id="r_a271f634244426057586dd5026e585787"><td class="memItemLeft" align="right" valign="top"><a id="a271f634244426057586dd5026e585787" name="a271f634244426057586dd5026e585787"></a>
-eDirection&#160;</td><td class="memItemRight" valign="bottom"><b>snakeDir</b></td></tr>
+<a class="el" href="#a31793e4efbb182e74f29154fb352f2a5">eDirection</a>&#160;</td><td class="memItemRight" valign="bottom"><b>snakeDir</b></td></tr>
 <tr class="separator:a271f634244426057586dd5026e585787"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Sebuah program buatan 6 orang sangar untuk menunjuang Nilai Algoritma Pemrograman. </p>
+<div class="textblock"><p>Sebuah program buatan 6 orang sangar untuk menunjuang Nilai Algoritma Pemrograman Lanjut. </p>
 <dl class="section author"><dt>Author</dt><dd>Zaka, Dhimas, Jauza, Erlan, dan Roi </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2025-05-13</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a2c0130a3e76354a03a72527e8ea34b18" name="a2c0130a3e76354a03a72527e8ea34b18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c0130a3e76354a03a72527e8ea34b18">&#9670;&#160;</a></span>exportNasabahJson()</h2>
+<a id="ae8e1fdbe30e65d7edc0efaed4d154299" name="ae8e1fdbe30e65d7edc0efaed4d154299"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8e1fdbe30e65d7edc0efaed4d154299">&#9670;&#160;</a></span>inputHandling() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void exportNasabahJson </td>
+          <td class="memname">void inputHandling </td>
           <td>(</td>
-          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>jsonPathOut</em></span>, </td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>question</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structnasabah.html">nasabah</a></td>          <td class="paramname"><span class="paramname"><em>nasabahExport</em></span>, </td>
+          <td class="paramtype">string &amp;</td>          <td class="paramname"><span class="paramname"><em>var</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
+          <td class="paramtype">short</td>          <td class="paramname"><span class="paramname"><em>lineOr</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fungsi untuk mengexport nasabah kedalam sebuah file JSON. </p>
+<p>fungsi overloading untuk menangani input streing </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">jsonPathOut</td><td>path json untuk keluar kemana </td></tr>
-    <tr><td class="paramname">nasabahExport</td><td>struct nasabah yang mau di export </td></tr>
+    <tr><td class="paramname">question</td><td>pertanyaan yang ditampilkan </td></tr>
+    <tr><td class="paramname">var</td><td>variabel untuk meyimpan input string </td></tr>
+    <tr><td class="paramname">lineOr</td><td>1 untuk tanpa spasi, 2 untuk input dengan spasi </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a4cc67b74aa369f46b374eeae7576e13c" name="a4cc67b74aa369f46b374eeae7576e13c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cc67b74aa369f46b374eeae7576e13c">&#9670;&#160;</a></span>importDataJson()</h2>
+<a id="a493b3779ab6090c21e2ab9e1e12d3e1c" name="a493b3779ab6090c21e2ab9e1e12d3e1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a493b3779ab6090c21e2ab9e1e12d3e1c">&#9670;&#160;</a></span>inputHandling() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void importDataJson </td>
+          <td class="memname">void inputHandling </td>
           <td>(</td>
-          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>jsonPathIn</em></span>, </td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>question</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structnasabah.html">nasabah</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>nasabahExport</em></span>&#160;)</td>
+          <td class="paramtype">int &amp;</td>          <td class="paramname"><span class="paramname"><em>var</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Mengimport data nasabah dari json yang sudah di verifikasi noRekVal. </p>
+<p>fungsi overloading untuk menangani input integer </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">jsonPathIn</td><td>path dari json file </td></tr>
-    <tr><td class="paramname">nasabahExport</td><td>struct yang ada di global variabel menyimpan data nasabah </td></tr>
+    <tr><td class="paramname">question</td><td>pertanyaan yang ditampilkan </td></tr>
+    <tr><td class="paramname">var</td><td>variabel untuk meyimpan input integer </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a5ac02be00f4f0087a7589a6936207a61" name="a5ac02be00f4f0087a7589a6936207a61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ac02be00f4f0087a7589a6936207a61">&#9670;&#160;</a></span>importDb()</h2>
+<a id="a346997f4152d78c571c9ff7c3b804da1" name="a346997f4152d78c571c9ff7c3b804da1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a346997f4152d78c571c9ff7c3b804da1">&#9670;&#160;</a></span>inputHandling() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void importDb </td>
+          <td class="memname">void inputHandling </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structnasabah.html">nasabah</a> *</td>          <td class="paramname"><span class="paramname"><em>dataNasabahOut</em></span>, </td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>question</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int &amp;</td>          <td class="paramname"><span class="paramname"><em>jumlahNasabah</em></span>&#160;)</td>
+          <td class="paramtype">float &amp;</td>          <td class="paramname"><span class="paramname"><em>var</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Mengimport seluruh file json yang ada di folder database cwd kedalam struct. </p>
+<p>fungsi overloading untuk menangani input float </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dataNasabahOut</td><td></td></tr>
-    <tr><td class="paramname">jumlahNasabah</td><td></td></tr>
+    <tr><td class="paramname">question</td><td>pertanyaan yang ditampilkan </td></tr>
+    <tr><td class="paramname">var</td><td>variabel untuk meyimpan input float </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a54bad6844753400445accfffd1355a96" name="a54bad6844753400445accfffd1355a96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54bad6844753400445accfffd1355a96">&#9670;&#160;</a></span>inputHandling() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void inputHandling </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>question</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">short &amp;</td>          <td class="paramname"><span class="paramname"><em>var</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>fungsi overloading untuk menangani input short </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">question</td><td>pertanyaan yang ditampilkan </td></tr>
+    <tr><td class="paramname">var</td><td>variabel untuk meyimpan input short </td></tr>
   </table>
   </dd>
 </dl>
@@ -522,6 +569,101 @@ eDirection&#160;</td><td class="memItemRight" valign="bottom"><b>snakeDir</b></t
 
 </div>
 </div>
+<a id="a4cc67b74aa369f46b374eeae7576e13c" name="a4cc67b74aa369f46b374eeae7576e13c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cc67b74aa369f46b374eeae7576e13c">&#9670;&#160;</a></span>importDataJson()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void importDataJson </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>jsonPathIn</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnasabah.html">nasabah</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>nasabahExport</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mengimport data nasabah dari json yang sudah di verifikasi noRekVal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jsonPathIn</td><td>path dari json file </td></tr>
+    <tr><td class="paramname">nasabahExport</td><td>struct yang ada di global variabel menyimpan data nasabah </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2c0130a3e76354a03a72527e8ea34b18" name="a2c0130a3e76354a03a72527e8ea34b18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c0130a3e76354a03a72527e8ea34b18">&#9670;&#160;</a></span>exportNasabahJson()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void exportNasabahJson </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>jsonPathOut</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnasabah.html">nasabah</a></td>          <td class="paramname"><span class="paramname"><em>nasabahExport</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fungsi untuk mengexport nasabah kedalam sebuah file JSON. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jsonPathOut</td><td>path json untuk keluar kemana </td></tr>
+    <tr><td class="paramname">nasabahExport</td><td>struct nasabah yang mau di export </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5ac02be00f4f0087a7589a6936207a61" name="a5ac02be00f4f0087a7589a6936207a61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ac02be00f4f0087a7589a6936207a61">&#9670;&#160;</a></span>importDb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void importDb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnasabah.html">nasabah</a> *</td>          <td class="paramname"><span class="paramname"><em>dataNasabahOut</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;</td>          <td class="paramname"><span class="paramname"><em>jumlahNasabah</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mengimport seluruh file json yang ada di folder database cwd kedalam struct. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dataNasabahOut</td><td></td></tr>
+    <tr><td class="paramname">jumlahNasabah</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad2ed7f1c4480f6ac076f8c7b42fb7764" name="ad2ed7f1c4480f6ac076f8c7b42fb7764"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad2ed7f1c4480f6ac076f8c7b42fb7764">&#9670;&#160;</a></span>restoreBackupDb()</h2>
 
@@ -544,6 +686,254 @@ eDirection&#160;</td><td class="memItemRight" valign="bottom"><b>snakeDir</b></t
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a4c5f1adde6d7bdb97420fb3fc4d5f594" name="a4c5f1adde6d7bdb97420fb3fc4d5f594"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c5f1adde6d7bdb97420fb3fc4d5f594">&#9670;&#160;</a></span>loginAttempt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void loginAttempt </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>Attempts</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>fungsi rekursif untuk mencoba login hingga maksimal 3 kali </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Attempts</td><td>jumlah kesempatan login yang tersisa </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aafcf3a451a563e5a6fd69290e9a51e6c" name="aafcf3a451a563e5a6fd69290e9a51e6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafcf3a451a563e5a6fd69290e9a51e6c">&#9670;&#160;</a></span>sortHistoriTransaksi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sortHistoriTransaksi </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnasabah.html">nasabah</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>mengurutkan histori transaksi berdasarkan nominal dan id transaksi </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>struct nasabah yang akan diurutkan histori transaksinya </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3d1d9b4286735af2bc03a60b66a0a163" name="a3d1d9b4286735af2bc03a60b66a0a163"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d1d9b4286735af2bc03a60b66a0a163">&#9670;&#160;</a></span>TotalTransaksi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int TotalTransaksi </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>MulaiIndex</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>AkhirIndex</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>menghitung total nominal transaksi secara rekursif </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">MulaiIndex</td><td>indeks awal transaksi </td></tr>
+    <tr><td class="paramname">AkhirIndex</td><td>indeks akhir transaksi </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>total nominal transaksi dari range tersebut </dd></dl>
+
+</div>
+</div>
+<a id="a70babc5227ddd16ca31dccc6cec0bb22" name="a70babc5227ddd16ca31dccc6cec0bb22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70babc5227ddd16ca31dccc6cec0bb22">&#9670;&#160;</a></span>Pause()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Pause </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>fungsi jeda (pause) program dengan animasi </p>
+<p>Fungsi ini menampilkan animasi teks untuk memberikan kesan sistem sedang memproses, kemudian mengganti teks tersebut menjadi "completed" </p>
+
+</div>
+</div>
+<a id="a51ab95b27b55e7ed491d1b73274a3998" name="a51ab95b27b55e7ed491d1b73274a3998"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51ab95b27b55e7ed491d1b73274a3998">&#9670;&#160;</a></span>SlowType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlowType </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;</td>          <td class="paramname"><span class="paramname"><em>kata</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>delay</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>menampilkan teks satu per satu dengan jeda untuk efek mengetik </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">kata</td><td>teks yang akan ditampilkan </td></tr>
+    <tr><td class="paramname">delay</td><td>delay per karakter dalam milidetik </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1b7ff06f4fa0f1fb69347979c187e3fa" name="a1b7ff06f4fa0f1fb69347979c187e3fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b7ff06f4fa0f1fb69347979c187e3fa">&#9670;&#160;</a></span>DeleteText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DeleteText </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>delay</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>menghapus karakter dari layar dengan efek animasi </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>jumlah karakter yang dihapus </td></tr>
+    <tr><td class="paramname">delay</td><td>delay per karakter dalam milidetik </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a95a0f9d3afc6a9cb08aff451ec27b2e1" name="a95a0f9d3afc6a9cb08aff451ec27b2e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95a0f9d3afc6a9cb08aff451ec27b2e1">&#9670;&#160;</a></span>Snake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Snake </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Menjalankan game ular dalam sistem ATM. </p>
+<p>Fungsi ini mengelola seluruh alur game Snake, dari menampilkan splash screen pada pertama kali dijalankan hingga loop utama permainan. </p>
+
+</div>
+</div>
+<a id="a56a42acc2c0a67e8577ae70ff3faddae" name="a56a42acc2c0a67e8577ae70ff3faddae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56a42acc2c0a67e8577ae70ff3faddae">&#9670;&#160;</a></span>DrawSnake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawSnake </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>menampilkan board permainan ular </p>
+<p>Fungsi ini dipanggil setiap kali permainan perlu memperbaharui tampilan. </p>
+
+</div>
+</div>
+<a id="a2479ed5a74032582251c4e5bec073614" name="a2479ed5a74032582251c4e5bec073614"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2479ed5a74032582251c4e5bec073614">&#9670;&#160;</a></span>InputSnake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InputSnake </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>menerima input pengguna untuk arah gerakan ular </p>
+<p>Fungsi ini mendeteksi penekanan tombol keyboard (W, A, S, D) untuk mengubah arah gerakan ular. Mencegah ular bergerak ke arah berlawanan (misalnya dari kanan ke kiri secara langsung) untuk menghindari tabrakan dengan ekor sendiri. Input 'X' digunakan untuk keluar dari permainan.</p>
+<p>Fungsi juga mencegah duplikasi input dengan menyimpan tombol terakhir yang ditekan dan membersihkan buffer keyboard setelah input diproses. </p>
+
+</div>
+</div>
+<a id="a5e370bbf8719cdced6a87e122e3e0466" name="a5e370bbf8719cdced6a87e122e3e0466"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e370bbf8719cdced6a87e122e3e0466">&#9670;&#160;</a></span>LogicSnake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LogicSnake </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>logika pergerakan ular dan penanganan tabrakan Fungsi ini mengatur gerakan ular dengan cara: </p>
+<ol type="1">
+<li>Memperbarui posisi ekor ular, dengan menggeser setiap segmen ke posisi segmen sebelumnya</li>
+<li>Menggerakkan kepala ular berdasarkan arah yang dipilih (LEFT, RIGHT, UP, DOWN)</li>
+<li>Mendeteksi tabrakan dengan batas arena atau dengan ekor sendiri</li>
+<li>Menangani interaksi ketika ular memakan buah (menambah skor dan panjang ekor)</li>
+</ol>
+<p>Permainan berakhir (snakeScore = -1) jika ular menabrak batas atau ekornya sendiri. </p>
 
 </div>
 </div>

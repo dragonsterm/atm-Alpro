@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "ATM Algoritma Pemrograman lanjut", "index.html", [
+  [ "Project Sistem ATM", "index.html", [
     [ "📖 Readme", "md_docs_2md_2about.html", [
       [ "Program Ini Ngapain aja", "md_docs_2md_2about.html#autotoc_md1", null ]
     ] ],
@@ -36,7 +36,8 @@ var NAVTREE =
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ]
+        [ "Functions", "globals_func.html", null ],
+        [ "Enumerations", "globals_enum.html", null ]
       ] ]
     ] ]
   ] ]
