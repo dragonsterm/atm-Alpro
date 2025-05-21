@@ -180,7 +180,7 @@ Global:
 }
 ```
 
-- Backup: `../db/backup/json` 📂
+- Backup Data: `../db/backup/json` 📂
 
 ## 🐍 Snake Game
 
