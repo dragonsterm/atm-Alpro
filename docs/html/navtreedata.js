@@ -25,7 +25,6 @@
 var NAVTREE =
 [
   [ "Project Sistem ATM", "index.html", [
-    [ "📄 ATM System Program Documentation 🎉", "index.html", "index" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ]
