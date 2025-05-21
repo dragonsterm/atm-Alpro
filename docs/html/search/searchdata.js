@@ -1,11 +1,10 @@
 var indexSectionsWithContent =
 {
-  0: "acdefghilmnoprstu▶⚙✨🎉🐍💾📄📖📜📝📦🔢🚧🧩",
+  0: "cdehilmnprst",
   1: "hn",
   2: "m",
   3: "cdeilmnprst",
-  4: "e",
-  5: "adps🎉📄"
+  4: "e"
 };
 
 var indexSectionNames =
@@ -14,8 +13,7 @@ var indexSectionNames =
   1: "classes",
   2: "files",
   3: "functions",
-  4: "enums",
-  5: "pages"
+  4: "enums"
 };
 
 var indexSectionLabels =
@@ -24,7 +22,6 @@ var indexSectionLabels =
   1: "Classes",
   2: "Files",
   3: "Functions",
-  4: "Enumerations",
-  5: "Pages"
+  4: "Enumerations"
 };
 
